@@ -70,9 +70,32 @@ texto vertical como recurso · full-bleed para render/imagen · mockups para mos
 
 ## Referencias vistas
 - Contemporary Type (@contemporarytype) — behance.net/gallery/221204131
+- ICONYC (disquera) — layout editorial: nº grande, tipo fina, ficha mono, texto vertical,
+  gradiente rasgado + grano, protagonista camaleónico (foto/geometría/luz), color por pieza.
+- Trend/color books: WGSN + C2 (Pantone AW 26/27), catálogo japonés retro-tech (serif fina
+  + kanji), trend book Avatar/Cyberspace (mind map, 3D persona, manifiesto).
 - Trend boards: CONNECTION / MERGER / MATERIALS / TRANSFORMATION / ТРАНСФОРМАЦИЯ
 - @nplusj_studio — presentación web de renders (ver reporte 2026-07-21)
 - Branding *ésse* (Stefani Both, arquitecta)
+
+## POC / prototipo (2026-07-24)
+`poc/color-adaptativo.html` — tarjeta de proyecto (AR Studio · Casa Umbral 028) con el
+sistema funcionando: **dos mundos** (modo oscuro ICONYC + modo claro trend card) y el
+**color adaptativo real** (presets de mood + subir render → extrae color dominante y tiñe
+toda la UI). Fuentes del sistema (placeholder), imagen y grano generados por código.
+Validado con Alexander: "va por ahí".
+
+## Planos y fachadas (CAD) — enfoque
+Un plano/elevación de CAD es **línea monocromática** (no tiene color que extraer). Entonces
+NO se extrae color de él: se le **aplica** el color del proyecto (tomado del render hero, de
+una muestra de material, o elegido a mano) → se **tiñe el trazo** (como el grabado azul de
+arquitectura de ICONYC que le gustó). Un proyecto = un color, coherente entre render y plano.
+- **Formato ideal:** exportar de CAD a **SVG** (vector) → se recolorea el trazo por CSS.
+  PDF/PNG también sirven (tinte por blend mode, menos limpio).
+- **Dos tratamientos:** técnico claro (papel blanco, trazo tinta/tinte, cotas + escala + norte
+  + nº de lámina) · blueprint oscuro (fondo negro, trazo en acento/hueso, dramático).
+- **Ficha de lámina:** `PL-01 PLANTA BAJA` / `EL-02 FACHADA NORTE`, escala, nivel, área.
+- Pendiente: prototipar un "modo plano/técnico" en el POC.
 
 ## Decidido
 - [x] **Concepto de marca:** arquitectura + tecnología.
