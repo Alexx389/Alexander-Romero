@@ -9,32 +9,44 @@
 
 ---
 
+## Concepto de marca
+**Arquitectura + tecnología.** El concepto es el trabajo (renders, proyectos, obra); el
+estilo es el vestido. La marca NO es un color: es el sistema.
+
 ## Resumen en una línea
-Tipografía protagonista sobre alto contraste (negro inmersivo / blanco editorial), un único
-acento naranja, atmósfera aurora holográfica en momentos hero, motion suave con un "wow" por
-pantalla, y estructura editorial numerada. Materia + tecnología como concepto.
+Tipografía protagonista sobre alto contraste (negro inmersivo / blanco editorial), **color
+adaptativo que se transforma según el render/contenido mostrado** (sin paleta fija), atmósfera
+aurora holográfica en momentos hero, motion suave con un "wow" por pantalla, y estructura
+editorial numerada.
 
 ## Lo que SÍ le gusta (patrón)
 1. **Tipografía como protagonista.** Grotesca bold, grande, segura. Versales para impacto,
    itálica de acento. Le gusta cuando la tipo *se mueve* (variable, reveal, desenfoque, rotación).
 2. **Alto contraste puro.** Negro o blanco de base; nada de grises tibios como fondo.
-3. **Un solo acento cálido: naranja.** Para todo lo interactivo (hover, CTA, números).
-4. **Aurora / holográfico.** Gradientes fluor (rosa-azul, lila, lima, durazno) que brillan
-   detrás de la tipo. Con criterio, en momentos hero — no en todo.
+3. **Color adaptativo (NO paleta fija).** El color se extrae del render/imagen que está en
+   pantalla y tiñe la UI (acento, gradiente, detalles). Cada proyecto trae su propio color;
+   la estructura no cambia. Ese "cambio de color" ES el concepto (transformation).
+4. **Aurora / holográfico.** Gradientes fluor que brillan detrás de la tipo, alimentados por
+   el color del contenido mostrado. Con criterio, en momentos hero — no en todo.
 5. **Motion suave, un "wow" por pantalla.** Blur→foco, parallax, sliders de peso, repetición.
 6. **Estructura editorial.** Slides numeradas, subtítulo fino con guiones, texto vertical,
    full-bleed para imagen, mockups de dispositivos para presentar.
 7. **Breaks de energía.** Collage pop de color plano con grano, puntual.
 8. **Branding minimalista.** Logo grotesca pesado, papel/soporte crudo, cero adorno.
 
-## Paleta de trabajo
-| Rol | Hex | Nota |
-|-----|-----|------|
+## Color — sistema adaptativo (sin paleta fija)
+Base neutra fija + acento que se transforma según el contenido:
+| Rol | Valor | Nota |
+|-----|-------|------|
 | Negro base | `#0A0A0B` | mundo hero / renders / posters de tipo |
 | Blanco base | `#F5F4F1` | boards de concepto / material |
-| Naranja acento | `#E85D2A` | interacción, CTA, números |
-| Aurora | gradientes fluor | rosa/azul/lila/lima/durazno, solo hero |
 | Tinta | `#141514` | texto sobre blanco |
+| **Acento** | *dinámico* | extraído del render mostrado (Vibrant.js / Color Thief) |
+| **Aurora** | *dinámico* | gradiente alimentado por el color del contenido |
+
+**Receta del color adaptativo:** mostrar render → extraer color dominante (Vibrant.js /
+Color Thief) → setear variables CSS (`--acento`, colores del gradiente) → la UI y el aurora
+se tiñen solos con el color del proyecto.
 
 ## Tipografía
 - **Display / hero:** grotesca bold (referencia: Art Grotesk / Helvetica), versales.
@@ -62,9 +74,12 @@ texto vertical como recurso · full-bleed para render/imagen · mockups para mos
 - @nplusj_studio — presentación web de renders (ver reporte 2026-07-21)
 - Branding *ésse* (Stefani Both, arquitecta)
 
+## Decidido
+- [x] **Concepto de marca:** arquitectura + tecnología.
+- [x] **Color:** adaptativo, se transforma según el contenido (sin paleta fija).
+
 ## Pendiente de confirmar
-- [ ] Concepto de marca: ¿arquitectura + tecnología/renders, o formato deck de transformación
-      con concepto propio?
-- [ ] ¿Naranja único acento, o aurora como segundo recurso de color?
 - [ ] Fuente hero definitiva: grotesca tipo Art Grotesk/Helvetica vs. variable propia.
+- [ ] Camino de producción: Framer (rápido) vs HTML a medida (color adaptativo sin límites).
+- [ ] Uso #1 a atacar: presentación web de renders vs marca/IG.
 - [ ] ¿Rebautizar la Vía 04 del moodboard con este sistema consolidado?
