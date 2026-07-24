@@ -1,0 +1,247 @@
+<title>PL-01 · Edificio Olmedo — lámina branded</title>
+<style>
+  :root{ --acc:#4f7fb0; }
+  *{box-sizing:border-box;} html,body{margin:0;height:100%;}
+  .sheet{ position:relative; min-height:100svh; padding:clamp(14px,3vw,30px);
+    font-family:'Helvetica Neue',Helvetica,Arial,system-ui,sans-serif;
+    --sheet:#0d0e10; --ink:#ECE8E0; --muted:#8A867C;
+    background:var(--sheet); color:var(--ink); transition:background .4s,color .4s; }
+  .sheet[data-mode="light"]{ --sheet:#F4F2EC; --ink:#1A1918; --muted:#7C766B; }
+  .wrap{ max-width:1100px; margin:0 auto; }
+  .plan{ width:100%; height:auto; display:block; }
+  .plan text.rlabel{ font-size:230px; letter-spacing:6px; fill:var(--ink); opacity:.85;
+    font-family:'Helvetica Neue',Arial,sans-serif; }
+  .plan text.dim{ font-size:200px; fill:var(--muted); font-family:ui-monospace,Menlo,monospace; }
+
+  .head{ display:flex; align-items:baseline; justify-content:space-between; gap:16px;
+    border-bottom:2px solid var(--ink); padding-bottom:10px; margin-bottom:6px; flex-wrap:wrap; }
+  .head h1{ margin:0; font-size:clamp(20px,3.2vw,30px); font-weight:800; letter-spacing:-.01em; text-transform:uppercase; }
+  .head .sub{ font-family:ui-monospace,Menlo,monospace; font-size:12px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--muted); }
+
+  .foot{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    border-top:1px solid var(--muted); margin-top:6px; padding-top:12px;
+    font-family:ui-monospace,Menlo,monospace; font-size:12px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--muted); }
+  .foot b{ color:var(--ink); font-weight:600; }
+  .scalebar{ display:flex; align-items:center; gap:8px; }
+  .scalebar i{ display:inline-block; width:90px; height:8px; background:var(--ink);
+    border-left:2px solid var(--ink); border-right:2px solid var(--ink); }
+
+  .ctl{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:16px 0 10px; }
+  .chip{ font-family:ui-monospace,Menlo,monospace; font-size:11px; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--ink); background:transparent;
+    border:1px solid var(--muted); padding:7px 12px; border-radius:999px; cursor:pointer; transition:.2s; }
+  .chip[aria-pressed="true"]{ background:var(--acc); border-color:var(--acc); color:#0d0e10; font-weight:700; }
+  .chip:hover{ border-color:var(--acc); }
+  .sp{ flex:1; }
+  .north{ text-align:center; }
+</style>
+
+<div class="sheet" data-mode="dark" id="sheet">
+ <div class="wrap">
+
+  <div class="ctl">
+    <span class="sub" style="font-family:ui-monospace,Menlo,monospace;color:var(--muted)">COLOR DEL PROYECTO:</span>
+    <button class="chip" data-c="#4f7fb0" aria-pressed="true">Hormigón</button>
+    <button class="chip" data-c="#e0863a" aria-pressed="false">Atardecer</button>
+    <button class="chip" data-c="#8caf3f" aria-pressed="false">Vegetación</button>
+    <button class="chip" data-c="#a45cc9" aria-pressed="false">Noche</button>
+    <button class="chip" data-c="#d8433a" aria-pressed="false">Brasa</button>
+    <span class="sp"></span>
+    <button class="chip" id="mode">Modo claro</button>
+  </div>
+
+  <div class="head">
+    <h1>Edificio Olmedo</h1>
+    <span class="sub">PL-01 · Planta tipo (depto) · ESC 1:75 aprox</span>
+  </div>
+
+  <svg class="plan" viewBox="0 0 8100 10600" style="color:var(--acc)">
+    <defs><symbol id="b_bed" viewBox="0 0 1400 2000" overflow="visible">
+  <!-- Frame -->
+  <rect x="0" y="0" width="1400" height="2000" fill="none" stroke="currentColor" stroke-width="24"/>
+  <!-- Headboard -->
+  <rect x="0" y="0" width="1400" height="120" fill="none" stroke="currentColor" stroke-width="24"/>
+  <!-- Left pillow -->
+  <rect x="80" y="200" width="540" height="360" rx="40" fill="none" stroke="currentColor" stroke-width="15"/>
+  <!-- Right pillow -->
+  <rect x="780" y="200" width="540" height="360" rx="40" fill="none" stroke="currentColor" stroke-width="15"/>
+  <!-- Blanket fold line -->
+  <line x1="80" y1="900" x2="1320" y2="900" stroke="currentColor" stroke-width="12" stroke-dasharray="20,10"/>
+</symbol>
+<symbol id="b_chair" viewBox="0 0 450 450" overflow="visible">
+  <!-- Seat -->
+  <rect x="25" y="80" width="400" height="370" rx="20" fill="none" stroke="currentColor" stroke-width="18"/>
+  <!-- Backrest -->
+  <rect x="25" y="0" width="400" height="100" rx="20" fill="none" stroke="currentColor" stroke-width="18"/>
+</symbol>
+<symbol id="b_coffee_table" viewBox="0 0 1200 600" overflow="visible">
+  <!-- Table top -->
+  <rect x="0" y="0" width="1200" height="600" rx="30" fill="none" stroke="currentColor" stroke-width="18"/>
+  <!-- Lower shelf -->
+  <rect x="80" y="80" width="1040" height="440" rx="20" fill="none" stroke="currentColor" stroke-width="9"/>
+</symbol>
+<symbol id="b_counter" viewBox="0 0 3000 600" overflow="visible">
+  <!-- Counter body -->
+  <rect x="0" y="0" width="3000" height="600" fill="none" stroke="currentColor" stroke-width="24"/>
+  <!-- Sink basin -->
+  <rect x="1200" y="100" width="600" height="400" rx="30" fill="none" stroke="currentColor" stroke-width="15"/>
+  <!-- Faucet -->
+  <circle cx="1500" cy="150" r="25" fill="none" stroke="currentColor" stroke-width="9"/>
+  <!-- Cabinet dividers -->
+  <line x1="750" y1="20" x2="750" y2="580" stroke="currentColor" stroke-width="9"/>
+  <line x1="2250" y1="20" x2="2250" y2="580" stroke="currentColor" stroke-width="9"/>
+</symbol>
+<symbol id="b_fridge" viewBox="0 0 700 700" overflow="visible">
+  <!-- Body -->
+  <rect x="0" y="0" width="700" height="700" fill="none" stroke="currentColor" stroke-width="24"/>
+  <!-- Door divider (freezer/fridge) -->
+  <line x1="0" y1="220" x2="700" y2="220" stroke="currentColor" stroke-width="15"/>
+  <!-- Top handle (freezer) -->
+  <line x1="620" y1="80" x2="620" y2="180" stroke="currentColor" stroke-width="15"/>
+  <!-- Bottom handle (fridge) -->
+  <line x1="620" y1="280" x2="620" y2="420" stroke="currentColor" stroke-width="15"/>
+</symbol>
+<symbol id="b_shower" viewBox="0 0 900 900" overflow="visible">
+  <!-- Shower tray -->
+  <rect x="0" y="0" width="900" height="900" fill="none" stroke="currentColor" stroke-width="24"/>
+  <!-- Drain -->
+  <circle cx="450" cy="450" r="40" fill="none" stroke="currentColor" stroke-width="12"/>
+  <!-- Drain grate pattern -->
+  <line x1="420" y1="450" x2="480" y2="450" stroke="currentColor" stroke-width="9"/>
+  <line x1="450" y1="420" x2="450" y2="480" stroke="currentColor" stroke-width="9"/>
+  <!-- Shower head position -->
+  <circle cx="150" cy="150" r="60" fill="none" stroke="currentColor" stroke-width="12" stroke-dasharray="12,8"/>
+  <!-- Glass door arc -->
+  <path d="M 0 900 A 900 900 0 0 1 900 0" fill="none" stroke="currentColor" stroke-width="12" stroke-dasharray="15,10"/>
+</symbol>
+<symbol id="b_sink" viewBox="0 0 500 400" overflow="visible">
+  <!-- Counter/vanity -->
+  <rect x="0" y="0" width="500" height="400" fill="none" stroke="currentColor" stroke-width="18"/>
+  <!-- Basin -->
+  <ellipse cx="250" cy="220" rx="170" ry="130" fill="none" stroke="currentColor" stroke-width="15"/>
+  <!-- Drain -->
+  <circle cx="250" cy="240" r="20" fill="none" stroke="currentColor" stroke-width="9"/>
+  <!-- Faucet -->
+  <circle cx="250" cy="60" r="22" fill="none" stroke="currentColor" stroke-width="9"/>
+  <line x1="250" y1="82" x2="250" y2="120" stroke="currentColor" stroke-width="12"/>
+</symbol>
+<symbol id="b_sofa" viewBox="0 0 2000 900" overflow="visible">
+  <!-- Back -->
+  <rect x="0" y="0" width="2000" height="200" fill="none" stroke="currentColor" stroke-width="24"/>
+  <!-- Seat -->
+  <rect x="0" y="200" width="2000" height="700" fill="none" stroke="currentColor" stroke-width="24"/>
+  <!-- Left arm -->
+  <rect x="0" y="200" width="150" height="700" fill="none" stroke="currentColor" stroke-width="18"/>
+  <!-- Right arm -->
+  <rect x="1850" y="200" width="150" height="700" fill="none" stroke="currentColor" stroke-width="18"/>
+  <!-- Cushion dividers -->
+  <line x1="667" y1="250" x2="667" y2="850" stroke="currentColor" stroke-width="12"/>
+  <line x1="1333" y1="250" x2="1333" y2="850" stroke="currentColor" stroke-width="12"/>
+</symbol>
+<symbol id="b_stove" viewBox="0 0 600 600" overflow="visible">
+  <!-- Body -->
+  <rect x="0" y="0" width="600" height="600" fill="none" stroke="currentColor" stroke-width="24"/>
+  <!-- Top-left burner -->
+  <circle cx="180" cy="180" r="80" fill="none" stroke="currentColor" stroke-width="15"/>
+  <circle cx="180" cy="180" r="40" fill="none" stroke="currentColor" stroke-width="9"/>
+  <!-- Top-right burner -->
+  <circle cx="420" cy="180" r="80" fill="none" stroke="currentColor" stroke-width="15"/>
+  <circle cx="420" cy="180" r="40" fill="none" stroke="currentColor" stroke-width="9"/>
+  <!-- Bottom-left burner -->
+  <circle cx="180" cy="420" r="80" fill="none" stroke="currentColor" stroke-width="15"/>
+  <circle cx="180" cy="420" r="40" fill="none" stroke="currentColor" stroke-width="9"/>
+  <!-- Bottom-right burner -->
+  <circle cx="420" cy="420" r="80" fill="none" stroke="currentColor" stroke-width="15"/>
+  <circle cx="420" cy="420" r="40" fill="none" stroke="currentColor" stroke-width="9"/>
+</symbol>
+<symbol id="b_table" viewBox="0 0 1200 800" overflow="visible">
+  <!-- Table top -->
+  <rect x="0" y="0" width="1200" height="800" fill="none" stroke="currentColor" stroke-width="24"/>
+  <!-- Legs -->
+  <rect x="40" y="40" width="60" height="60" fill="none" stroke="currentColor" stroke-width="12"/>
+  <rect x="1100" y="40" width="60" height="60" fill="none" stroke="currentColor" stroke-width="12"/>
+  <rect x="40" y="700" width="60" height="60" fill="none" stroke="currentColor" stroke-width="12"/>
+  <rect x="1100" y="700" width="60" height="60" fill="none" stroke="currentColor" stroke-width="12"/>
+</symbol>
+<symbol id="b_toilet" viewBox="0 0 400 700" overflow="visible">
+  <!-- Tank -->
+  <rect x="50" y="0" width="300" height="180" rx="20" fill="none" stroke="currentColor" stroke-width="18"/>
+  <!-- Bowl -->
+  <ellipse cx="200" cy="450" rx="180" ry="230" fill="none" stroke="currentColor" stroke-width="18"/>
+  <!-- Seat opening -->
+  <ellipse cx="200" cy="480" rx="120" ry="160" fill="none" stroke="currentColor" stroke-width="12"/>
+</symbol>
+<symbol id="b_wardrobe" viewBox="0 0 1000 500" overflow="visible">
+  <!-- Body -->
+  <rect x="0" y="0" width="1000" height="500" fill="none" stroke="currentColor" stroke-width="24"/>
+  <!-- Door divider -->
+  <line x1="500" y1="0" x2="500" y2="500" stroke="currentColor" stroke-width="18"/>
+  <!-- Left door handle -->
+  <line x1="460" y1="220" x2="460" y2="280" stroke="currentColor" stroke-width="15"/>
+  <!-- Right door handle -->
+  <line x1="540" y1="220" x2="540" y2="280" stroke="currentColor" stroke-width="15"/>
+</symbol></defs>
+    <g transform="translate(900 760)">
+      
+<!-- cota total ancho -->
+<text x="3000.0" y="-260" text-anchor="middle" class="dim">6.00</text>
+<line x1="0" y1="-180" x2="6000" y2="-180" stroke="var(--ink)" stroke-width="6"/>
+<!-- cota total alto -->
+<text x="-320" y="4500.0" text-anchor="middle" class="dim" transform="rotate(-90 -320 4500.0)">9.00</text>
+<line x1="-220" y1="0" x2="-220" y2="9000" stroke="var(--ink)" stroke-width="6"/>
+
+      <rect x="0" y="0" width="6000" height="9000" fill="none" stroke="currentColor" stroke-width="150"/><line x1="2200" y1="0" x2="2200" y2="5600" stroke="currentColor" stroke-width="105" stroke-linecap="square"/><line x1="0" y1="2600" x2="2200" y2="2600" stroke="currentColor" stroke-width="105" stroke-linecap="square"/><line x1="0" y1="3800" x2="2200" y2="3800" stroke="currentColor" stroke-width="105" stroke-linecap="square"/><line x1="0" y1="5600" x2="6000" y2="5600" stroke="currentColor" stroke-width="105" stroke-linecap="square"/><line x1="3000" y1="5600" x2="3000" y2="9000" stroke="currentColor" stroke-width="105" stroke-linecap="square"/>
+      <rect x="3200" y="-80" width="900" height="160" fill="var(--sheet)"/><path d="M3200 0 A900 900 0 0 1 4100 0" fill="none" stroke="currentColor" stroke-width="30" opacity=".7"/><rect x="2120" y="900" width="160" height="800" fill="var(--sheet)"/><path d="M2200 900 A800 800 0 0 1 2200 1700" fill="none" stroke="currentColor" stroke-width="30" opacity=".7"/><rect x="2120" y="4300" width="160" height="800" fill="var(--sheet)"/><rect x="900" y="5520" width="800" height="160" fill="var(--sheet)"/><rect x="4200" y="5520" width="800" height="160" fill="var(--sheet)"/>
+      <use href="#b_counter" x="0" y="0" width="1900" height="560" transform="translate(120 120)"/>
+<use href="#b_stove" x="0" y="0" width="520" height="520" transform="translate(1250 150)"/>
+<use href="#b_fridge" x="0" y="0" width="640" height="640" transform="translate(140 900)"/>
+<use href="#b_toilet" x="0" y="0" width="380" height="660" transform="translate(180 3980)"/>
+<use href="#b_sink" x="0" y="0" width="480" height="380" transform="translate(760 4000)"/>
+<use href="#b_shower" x="0" y="0" width="880" height="880" transform="translate(1180 4560)"/>
+<use href="#b_table" x="0" y="0" width="1200" height="800" transform="translate(3550 780)"/>
+<use href="#b_chair" x="0" y="0" width="420" height="420" transform="translate(3680 250)"/>
+<use href="#b_chair" x="0" y="0" width="420" height="420" transform="translate(4200 250)"/>
+<use href="#b_chair" x="0" y="0" width="420" height="420" transform="translate(3680 1650)"/>
+<use href="#b_chair" x="0" y="0" width="420" height="420" transform="translate(4200 1650)"/>
+<use href="#b_chair" x="0" y="0" width="420" height="420" transform="translate(3150 950) rotate(90 210.0 210.0)"/>
+<use href="#b_chair" x="0" y="0" width="420" height="420" transform="translate(4850 950) rotate(90 210.0 210.0)"/>
+<use href="#b_sofa" x="0" y="0" width="2000" height="880" transform="translate(3200 4650)"/>
+<use href="#b_coffee_table" x="0" y="0" width="1200" height="600" transform="translate(3600 3820)"/>
+<use href="#b_bed" x="0" y="0" width="1400" height="2000" transform="translate(360 6100)"/>
+<use href="#b_wardrobe" x="0" y="0" width="1000" height="480" transform="translate(2000 5820)"/>
+<use href="#b_bed" x="0" y="0" width="1400" height="2000" transform="translate(3400 6100)"/>
+<use href="#b_wardrobe" x="0" y="0" width="1000" height="480" transform="translate(5000 5820)"/>
+    </g>
+    <g transform="translate(900 760)">
+      <text x="1100" y="1500" text-anchor="middle" class="rlabel">cocina</text><text x="1100" y="3300" text-anchor="middle" class="rlabel">lavadero</text><text x="1100" y="4750" text-anchor="middle" class="rlabel">baño</text><text x="4300" y="2050" text-anchor="middle" class="rlabel">comedor</text><text x="4900" y="5050" text-anchor="middle" class="rlabel">sala</text><text x="1500" y="7650" text-anchor="middle" class="rlabel">dormitorio 2</text><text x="4500" y="7650" text-anchor="middle" class="rlabel">dormitorio 1</text>
+    </g>
+    <!-- norte -->
+    <g transform="translate(7580 360)" style="color:var(--acc)">
+      <line x1="0" y1="220" x2="0" y2="-40" stroke="currentColor" stroke-width="26"/>
+      <path d="M0 -90 L60 30 L-60 30 Z" fill="currentColor"/>
+      <text x="0" y="-140" text-anchor="middle" class="dim" style="fill:var(--ink)">N</text>
+    </g>
+  </svg>
+
+  <div class="foot">
+    <div class="scalebar"><i></i><span>5 m</span></div>
+    <div>AR STUDIO · アイコン · 2026</div>
+    <div>COLOR · <b id="hex">#4F7FB0</b></div>
+  </div>
+
+ </div>
+</div>
+
+<script>
+  const sheet=document.getElementById('sheet');
+  const chips=[...document.querySelectorAll('.chip[data-c]')];
+  function setC(hex){ document.documentElement.style.setProperty('--acc',hex);
+    document.getElementById('hex').textContent=hex.toUpperCase(); }
+  chips.forEach(c=>c.onclick=()=>{ chips.forEach(x=>x.setAttribute('aria-pressed','false'));
+    c.setAttribute('aria-pressed','true'); setC(c.dataset.c); });
+  const mb=document.getElementById('mode');
+  mb.onclick=()=>{ const m=sheet.getAttribute('data-mode')==='dark'?'light':'dark';
+    sheet.setAttribute('data-mode',m); mb.textContent = m==='dark'?'Modo claro':'Modo oscuro'; };
+</script>
