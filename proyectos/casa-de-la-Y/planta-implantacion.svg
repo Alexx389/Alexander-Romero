@@ -6,8 +6,9 @@
 
   <!-- ============ QUINCHO (back, full lot width) ============ -->
   <rect x="110" y="90" width="289" height="175" fill="#efe7d4" stroke="#b79a5e" stroke-width="2"/>
-  <text x="254" y="172" text-anchor="middle" font-size="16" font-weight="bold" fill="#8a6d2e">QUINCHO</text>
-  <text x="254" y="192" text-anchor="middle" font-size="12" fill="#8a6d2e">7.00 × 11.57</text>
+  <text x="254" y="166" text-anchor="middle" font-size="16" font-weight="bold" fill="#8a6d2e">QUINCHO</text>
+  <text x="254" y="184" text-anchor="middle" font-size="12" fill="#8a6d2e">7.00 × 11.57</text>
+  <text x="254" y="200" text-anchor="middle" font-size="9" fill="#a58a52">semicubierto · estructura metálica · piso cerámico rojo</text>
 
   <!-- ============ SIDE PASSAGES ============ -->
   <rect x="110" y="265" width="65" height="214" fill="#eef2ee" stroke="#bcccbc" stroke-width="1.5"/>
