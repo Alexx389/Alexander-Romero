@@ -29,11 +29,12 @@ Elementos identificados en las fotos (pendiente de acotar):
 - **Garage + entrada derecha al quincho:** franja del **lado derecho**, ancho **2.50 m**
   (sirve de garage y de paso al quincho).
 
-### ⚠️ A confirmar: "la casa empieza en 7.25 m"
-Dos lecturas posibles (cambian la planta):
-- **(A)** Retiro frontal: 7.25 m desde el frente del terreno hasta donde arranca la
-  casa → falta aún el **fondo** de la casa.
-- **(B)** Fondo/largo de la casa = 7.25 m de profundidad → ya tengo la huella.
+### Huella / planta
+- **Frente de la casa:** 6.25 m (vol. izq. 3.40 + galería 2.85).
+- **Fondo (largo) de la casa:** **8.55 m**.
+- **Retiro frontal:** **7.25 m** (frente del terreno → donde arranca la casa).
+- **Ancho total del lote (aprox.):** pasillo izq. 2.60 + casa 6.25 + franja der. 2.50
+  = **11.35 m**.
 
 ## Niveles / desnivel del terreno
 - **Base del frente / lado izquierdo:** **0.50 m** sobre el patio.
