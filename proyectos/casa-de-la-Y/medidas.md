@@ -25,11 +25,12 @@ Elementos identificados en las fotos (pendiente de acotar):
 
 ## Datos verticales / alzado
 - **Casa elevada:** base de **0.50 m** sobre el nivel del patio (escalones de acceso).
+- **Altura mínima (alero):** **2.80 m** (desde piso interior) → 3.30 m sobre patio.
+- **Altura a la cumbrera:** **4.00 m** (desde piso interior) → 4.50 m sobre patio.
 - **Ventana frente:** antepecho a **1.40 m** del piso; hoja de **1.25 m** de alto.
 - ⚠️ A confirmar: el 1.40 m del antepecho, ¿es desde el piso interior o desde el
-  nivel del patio? (Para el alzado, si es desde piso interior, sumar los 0.50 m
-  de elevación → antepecho a 1.90 m sobre el patio.)
-- Pendiente: altura libre interior (piso a techo) y altura de la puerta de entrada.
+  nivel del patio?
+- Pendiente: **alto de la puerta** de entrada.
 
 ## Interior (pendiente)
 _Aún sin cargar._
