@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 700" font-family="Arial, Helvetica, sans-serif">
+  <rect x="0" y="0" width="940" height="700" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="470" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#222">Casa de la "Y" — Fachada frontal (boceto)</text>
+  <text x="470" y="54" text-anchor="middle" font-size="13" fill="#777">Anchos a escala (medidos) · Alturas estimadas, a confirmar</text>
+
+  <!-- ===================== ROOF ===================== -->
+  <!-- gable roof spanning both volumes, ridge centered -->
+  <polygon points="163,230 471,122 779,230" fill="#b0532e" stroke="#7d3a20" stroke-width="2"/>
+  <!-- tile lines -->
+  <line x1="205" y1="230" x2="471" y2="137" stroke="#c96a44" stroke-width="1.5"/>
+  <line x1="255" y1="230" x2="471" y2="153" stroke="#c96a44" stroke-width="1.5"/>
+  <line x1="737" y1="230" x2="471" y2="137" stroke="#c96a44" stroke-width="1.5"/>
+  <line x1="687" y1="230" x2="471" y2="153" stroke="#c96a44" stroke-width="1.5"/>
+  <!-- ridge cap -->
+  <ellipse cx="471" cy="122" rx="9" ry="5" fill="#8a4023"/>
+  <!-- eave fascia -->
+  <line x1="163" y1="230" x2="779" y2="230" stroke="#6f3319" stroke-width="4"/>
+
+  <!-- ===================== WALLS ===================== -->
+  <!-- Left volume wall -->
+  <rect x="190" y="230" width="306" height="225" fill="#ece7dd" stroke="#c7c0b2" stroke-width="1.5"/>
+  <!-- deteriorated grey base band (lower ~0.9 m) -->
+  <rect x="190" y="374" width="306" height="81" fill="#bcb9b0" stroke="#c7c0b2" stroke-width="1"/>
+
+  <!-- Galeria (recessed porch, darker) -->
+  <rect x="496" y="230" width="256" height="225" fill="#d9d3c8"/>
+  <rect x="496" y="230" width="256" height="225" fill="#000000" opacity="0.16"/>
+  <!-- exposed beam under roof in porch -->
+  <line x1="496" y1="236" x2="752" y2="236" stroke="#6f4a2e" stroke-width="5"/>
+  <line x1="540" y1="241" x2="540" y2="300" stroke="#7a5334" stroke-width="2" opacity="0.5"/>
+  <line x1="600" y1="241" x2="600" y2="300" stroke="#7a5334" stroke-width="2" opacity="0.5"/>
+  <line x1="660" y1="241" x2="660" y2="300" stroke="#7a5334" stroke-width="2" opacity="0.5"/>
+  <!-- entrance door hint (inside porch, on shared wall) -->
+  <rect x="506" y="300" width="55" height="155" fill="#2c2c2c" opacity="0.8"/>
+  <text x="533" y="382" text-anchor="middle" font-size="10" fill="#eee" transform="rotate(-90 533 382)">puerta acceso</text>
+
+  <!-- Pillar (0.25 x 0.25) at right edge of galeria -->
+  <rect x="730" y="230" width="22" height="225" fill="#e6e1d6" stroke="#b8b1a2" stroke-width="1.5"/>
+
+  <!-- Window 1.60 x 1.25, sill 1.40 from ground -->
+  <rect x="271" y="261.5" width="144" height="112.5" fill="#2f3a43" stroke="#4a4a4a" stroke-width="4"/>
+  <line x1="343" y1="261.5" x2="343" y2="374" stroke="#5b6b74" stroke-width="1.5"/>
+  <!-- wall lantern (farol) above window -->
+  <circle cx="235" cy="250" r="6" fill="#d8cf7a" stroke="#8a7f3a"/>
+
+  <!-- ===================== BASE + STEPS ===================== -->
+  <!-- elevated base 0.50 m under whole front -->
+  <rect x="190" y="455" width="562" height="45" fill="#b3b0a7" stroke="#98958c" stroke-width="1.5"/>
+  <!-- two steps at galeria -->
+  <rect x="486" y="477" width="286" height="23" fill="#8f8c86" stroke="#726f69" stroke-width="1"/>
+  <rect x="470" y="489" width="318" height="16" fill="#7e7b75" stroke="#666" stroke-width="1"/>
+
+  <!-- ground line (patio) -->
+  <line x1="120" y1="500" x2="820" y2="500" stroke="#555" stroke-width="2"/>
+  <text x="812" y="497" font-size="11" fill="#777" text-anchor="end">nivel patio</text>
+
+  <!-- ===================== WIDTH DIMENSIONS ===================== -->
+  <g stroke="#444" stroke-width="1" fill="#333" font-size="12">
+    <!-- level 1: sub dims -->
+    <line x1="190" y1="530" x2="190" y2="545"/>
+    <line x1="271" y1="530" x2="271" y2="545"/>
+    <line x1="415" y1="530" x2="415" y2="545"/>
+    <line x1="496" y1="530" x2="496" y2="545"/>
+    <line x1="752" y1="530" x2="752" y2="545"/>
+    <line x1="190" y1="538" x2="271" y2="538"/>
+    <line x1="271" y1="538" x2="415" y2="538"/>
+    <line x1="415" y1="538" x2="496" y2="538"/>
+    <line x1="496" y1="538" x2="752" y2="538"/>
+    <text x="230" y="534" text-anchor="middle">0.90</text>
+    <text x="343" y="534" text-anchor="middle">1.60 (ventana)</text>
+    <text x="455" y="534" text-anchor="middle">0.90</text>
+    <text x="624" y="534" text-anchor="middle">2.85 (galería)</text>
+
+    <!-- level 2: volume totals -->
+    <line x1="190" y1="562" x2="190" y2="577"/>
+    <line x1="496" y1="562" x2="496" y2="577"/>
+    <line x1="752" y1="562" x2="752" y2="577"/>
+    <line x1="190" y1="570" x2="496" y2="570"/>
+    <line x1="496" y1="570" x2="752" y2="570"/>
+    <text x="343" y="566" text-anchor="middle" font-weight="bold">3.40 (volumen izq.)</text>
+    <text x="624" y="566" text-anchor="middle" font-weight="bold">2.85</text>
+
+    <!-- level 3: grand total -->
+    <line x1="190" y1="594" x2="190" y2="609"/>
+    <line x1="752" y1="594" x2="752" y2="609"/>
+    <line x1="190" y1="602" x2="752" y2="602"/>
+    <text x="471" y="598" text-anchor="middle" font-weight="bold" fill="#a8461f">Frente total ≈ 6.25 m</text>
+  </g>
+
+  <!-- ===================== HEIGHT DIMENSIONS ===================== -->
+  <g stroke="#444" stroke-width="1" fill="#333" font-size="12">
+    <!-- base 0.50 -->
+    <line x1="150" y1="500" x2="135" y2="500"/>
+    <line x1="150" y1="455" x2="135" y2="455"/>
+    <line x1="142" y1="500" x2="142" y2="455"/>
+    <text x="128" y="481" text-anchor="end">0.50</text>
+    <!-- wall height (est) -->
+    <line x1="150" y1="455" x2="135" y2="455"/>
+    <line x1="150" y1="230" x2="135" y2="230"/>
+    <line x1="142" y1="455" x2="142" y2="230"/>
+    <text x="128" y="345" text-anchor="end" fill="#a8461f">≈2.50*</text>
+    <!-- ridge (est) -->
+    <line x1="150" y1="230" x2="135" y2="230"/>
+    <line x1="150" y1="122" x2="135" y2="122"/>
+    <line x1="142" y1="230" x2="142" y2="122"/>
+    <text x="128" y="180" text-anchor="end" fill="#a8461f">≈1.20*</text>
+  </g>
+  <!-- window vertical: antepecho 1.40 + alto 1.25 -->
+  <g stroke="#444" stroke-width="1" fill="#333" font-size="11">
+    <line x1="430" y1="500" x2="445" y2="500"/>
+    <line x1="430" y1="374" x2="445" y2="374"/>
+    <line x1="437" y1="500" x2="437" y2="374"/>
+    <text x="452" y="442" font-size="11">1.40 (antep.)*</text>
+    <line x1="430" y1="374" x2="445" y2="374"/>
+    <line x1="430" y1="261.5" x2="445" y2="261.5"/>
+    <line x1="437" y1="374" x2="437" y2="261.5"/>
+    <text x="452" y="322" font-size="11">1.25 (vent.)</text>
+  </g>
+
+  <!-- ===================== NOTES ===================== -->
+  <g font-size="12" fill="#555">
+    <rect x="120" y="628" width="700" height="60" fill="#f6f4ef" stroke="#ddd"/>
+    <text x="132" y="647">* Estimado / a confirmar: altura de pared, altura a la cumbrera y alto de puerta.</text>
+    <text x="132" y="665">Antepecho 1.40 asumido desde nivel de patio (a confirmar si es desde piso interior).</text>
+    <text x="132" y="683">No se muestra el pasillo lateral izquierdo (2.60 m) que va al quincho: es lateral, no del frente.</text>
+  </g>
+</svg>
