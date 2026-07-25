@@ -62,6 +62,9 @@ Elementos identificados en las fotos (pendiente de acotar):
 ## Interior
 - **Sala / living:** **4.85 m (largo) × 3.00 m (ancho)**. Ubicada en el frente-izquierdo,
   donde está la ventana (coincide con el volumen izquierdo de 3.40 externos).
+- **Acceso a la casa:** puerta a la **izquierda**, entra **directo a la sala** (en la pared
+  entre la galería y la sala), a **0.25 m del filo del frente**. Ancho de hoja asumido 0.80 m
+  (a confirmar).
 - _Resto de ambientes: pendiente de relevar._
 
 ## Observaciones para propuesta (no afectan la planta)
