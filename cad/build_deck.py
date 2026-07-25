@@ -1,6 +1,4 @@
-# Builder del deck de Edificio Olmedo.
-# DXF -> line-art tenible. Muebles Plancraft (finos), puertas del arquitecto,
-# ventanas desde textos de medida, etiquetas de zona redibujadas, cama doble deduplicada.
+# Builder del deck de Edificio Olmedo (line-art tenible).
 
 import ezdxf, re, os
 import ezdxf.bbox as bb
@@ -66,7 +64,8 @@ def render_walls(crop, weight=1600, margin=0.6):
                 t=(e.dxf.text if e.dxftype()=='TEXT' else e.text).strip()
                 p=e.dxf.insert
                 if re.search(r'[A-Za-zÁÉÍÓÚÜÑáéíóúñ]{3,}', t) and x0<=p.x<=x1 and y0<=p.y<=y1:
-                    labels.append((t, p.x, p.y)); msp.delete_entity(e); continue
+                    hh=(e.dxf.height if e.dxftype()=='TEXT' else e.dxf.char_height)
+                    labels.append((t, p.x, p.y, hh)); msp.delete_entity(e); continue
             b=bb.extents([e],fast=True)
             if not b.has_data: msp.delete_entity(e); continue
             cx=(b.extmin.x+b.extmax.x)/2; cy=(b.extmin.y+b.extmax.y)/2
@@ -90,8 +89,8 @@ def render_walls(crop, weight=1600, margin=0.6):
     s=be.get_string(layout.Page(0,0,layout.Units.mm,margins=layout.Margins.all(0)),
         settings=layout.Settings(fit_page=True, fixed_stroke_width=0.2))
     s=re.sub(r'stroke-width:\s*[\d.]+', f'stroke-width: {weight}', s)
-    s=re.sub(r'fill-opacity:\s*[\d.]+', 'fill-opacity: 0.22', s)
     for c in GR: s=s.replace(c,'currentColor')
+    s=s.replace('fill: currentColor','fill: none')  # sin poché: line-art
     m=re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', s); VBW,VBH=float(m.group(1)),float(m.group(2))
     s=re.sub(r'(<svg[^>]*?)\swidth="[^"]*"\s*height="[^"]*"', r'\1', s, count=1)
     return s, K, VBW, VBH, furn, wins, labels
@@ -163,12 +162,10 @@ def overlay(furn, wins, labels, K, VBW):
                 f'<rect x="{scx-w/2:.0f}" y="{scy-h/2:.0f}" width="{w:.0f}" height="{h:.0f}" rx="4" stroke-width="0.9" vector-effect="non-scaling-stroke"/>'
                 f'<circle cx="{scx:.0f}" cy="{scy:.0f}" r="{min(w,h)*0.30:.0f}" stroke-width="0.9" vector-effect="non-scaling-stroke"/></g>')
     # etiquetas de zona (crisp, solidas)
-    fs=0.42*sx
-    for (t,x,y) in labels:
-        scx,scy=P(x,y)
+    for (t,x,y,h) in labels:
+        scx,scy=P(x,y); fs=h*sx*1.35
         els.append(f'<text x="{scx:.0f}" y="{scy:.0f}" font-size="{fs:.0f}" fill="currentColor" '
-                   f'font-family="Helvetica,Arial,sans-serif" font-weight="500" '
-                   f'style="text-transform:lowercase">{t}</text>')
+                   f'font-family="Helvetica,Arial,sans-serif" font-weight="500">{t}</text>')
     defs="".join(load_sym(t) for t in sorted(used))
     return f'<defs>{defs}</defs><g>'+"".join(els)+'</g>'
 
