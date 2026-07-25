@@ -1,6 +1,7 @@
 # Builder del deck de Edificio Olmedo (line-art tenible).
+# Puertas redibujadas bold, ventanas y cotas de abertura desde textos, etiquetas crisp.
 
-import ezdxf, re, os
+import ezdxf, re, os, math
 import ezdxf.bbox as bb
 from ezdxf.addons.drawing import Frontend, RenderContext
 from ezdxf.addons.drawing import svg, layout, config
@@ -12,7 +13,8 @@ VBd={"bed":(1400,2000),"sofa":(2000,900),"table":(1200,800),"fridge":(700,700),
 REPLACE={'Cama1p~1':'bed','Cama2plaComp3_160':'bed','sofa':'sofa','Heladpl':'fridge',
          'A$C492F21F0':'stove','bacha':'sink','1bacha3':'sink','1wc2':'toilet','Duchapl1':'shower'}
 TABLE={'MESA'}; WASHER={'LAVARROPA'}
-KEEP={'puert-080','puert-070','puerta aula','*U52','ventanna','v0.6','*U62','pil'}
+KEEP={'ventanna','v0.6','*U62','pil'}
+DOORS={'puert-080':0.80,'puert-070':0.70,'puerta aula':0.80,'*U52':0.80}
 NAT={'sink':(0.5,0.4),'toilet':(0.4,0.7),'shower':(0.9,0.9),'fridge':(0.7,0.7),'stove':(0.6,0.6)}
 BEDSZ={'Cama1p~1':(0.95,1.90),'Cama2plaComp3_160':(1.60,2.00)}
 DOORW={0.70,0.80}
@@ -31,7 +33,7 @@ def render_walls(crop, weight=1600, margin=0.6):
     doc=ezdxf.readfile(F)
     SKIP={"A-VIEWPORT","PRESENTACION","REVISION","Defpoints"}
     msp=doc.modelspace(); x0,y0,x1,y1=crop
-    furn=[]; labels=[]; wintexts=[]
+    furn=[]; labels=[]; wintexts=[]; doors=[]; apdims=[]
     TOPY=-1e9; BOTY=1e9; LEFTX=1e9; RIGHTX=-1e9
     for e in msp.query('LINE[layer=="A-MURO"]'):
         for pt in (e.dxf.start, e.dxf.end):
@@ -45,8 +47,11 @@ def render_walls(crop, weight=1600, margin=0.6):
         m=re.match(r'^(\d\.\d+)x(\d\.\d+)', t)
         if not m: continue
         w=float(m.group(1)); h=float(m.group(2))
-        if w in DOORW and abs(h-2.10)<0.2: continue
-        wintexts.append((p.x,p.y,w))
+        hgt=(e.dxf.height if e.dxftype()=='TEXT' else e.dxf.char_height)
+        apdims.append((t, p.x, p.y, hgt, e.dxf.rotation))
+        if not (w in DOORW and abs(h-2.10)<0.2):
+            wintexts.append((p.x,p.y,w))
+        msp.delete_entity(e)
     wins=[]
     for (tx,ty,w) in wintexts:
         d={'h_t':abs(TOPY-ty),'h_b':abs(ty-BOTY),'v_l':abs(tx-LEFTX),'v_r':abs(RIGHTX-tx)}
@@ -72,6 +77,10 @@ def render_walls(crop, weight=1600, margin=0.6):
             keep=(x0-margin<=cx<=x1+margin and y0-margin<=cy<=y1+margin)
             if e.dxftype()=='INSERT':
                 n=e.dxf.name
+                if n in DOORS:
+                    if keep: doors.append(dict(x=e.dxf.insert.x, y=e.dxf.insert.y,
+                        rot=e.dxf.rotation, mir=(e.dxf.xscale<0), w=DOORS[n]))
+                    msp.delete_entity(e); continue
                 if n in KEEP:
                     if not keep: msp.delete_entity(e)
                     continue
@@ -93,9 +102,9 @@ def render_walls(crop, weight=1600, margin=0.6):
     s=s.replace('fill: currentColor','fill: none')  # sin poché: line-art
     m=re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', s); VBW,VBH=float(m.group(1)),float(m.group(2))
     s=re.sub(r'(<svg[^>]*?)\swidth="[^"]*"\s*height="[^"]*"', r'\1', s, count=1)
-    return s, K, VBW, VBH, furn, wins, labels
+    return s, K, VBW, VBH, furn, wins, labels, doors, apdims
 
-def overlay(furn, wins, labels, K, VBW):
+def overlay(furn, wins, labels, doors, apdims, K, VBW):
     KX0,KY0,KX1,KY1=K; sx=VBW/(KX1-KX0)
     def P(x,y): return ((x-KX0)*sx, (KY1-y)*sx)
     def place(t,cx,cy,wm,hm,rot,mir):
@@ -103,6 +112,19 @@ def overlay(furn, wins, labels, K, VBW):
         return (f'<g transform="translate({scx:.0f},{scy:.0f}) rotate({-rot:.0f}) scale({sgn},1)">'
                 f'<use href="#pc_{t}" x="{-Wp/2:.0f}" y="{-Hp/2:.0f}" width="{Wp:.0f}" height="{Hp:.0f}"/></g>')
     els=[]; used=set()
+    # puertas (redibujadas bold, geometria del bloque del arquitecto)
+    for d in doors:
+        ins=(d['x'],d['y']); rot=d['rot']; mir=d['mir']; W=d['w']; hx,hy=0.04,0.15
+        def tp(px,py):
+            if mir: px=-px
+            a=math.radians(rot); ca=math.cos(a); sa=math.sin(a)
+            return P(ins[0]+px*ca-py*sa, ins[1]+px*sa+py*ca)
+        L0=tp(hx,hy); L1=tp(hx,hy+W)
+        arc=[tp(hx+W*math.cos(math.radians(90*k/14)), hy+W*math.sin(math.radians(90*k/14))) for k in range(15)]
+        dleaf=f'M{L0[0]:.0f},{L0[1]:.0f} L{L1[0]:.0f},{L1[1]:.0f}'
+        darc='M'+' L'.join(f'{p[0]:.0f},{p[1]:.0f}' for p in arc)
+        els.append(f'<path d="{dleaf} {darc}" fill="none" stroke="currentColor" '
+                   f'stroke-width="1.7" vector-effect="non-scaling-stroke"/>')
     # ventanas
     for (kind,X,Y,w) in wins:
         cxs,cys=P(X,Y); half=w/2*sx; th=0.06*sx
@@ -166,6 +188,11 @@ def overlay(furn, wins, labels, K, VBW):
         scx,scy=P(x,y); fs=h*sx*1.35
         els.append(f'<text x="{scx:.0f}" y="{scy:.0f}" font-size="{fs:.0f}" fill="currentColor" '
                    f'font-family="Helvetica,Arial,sans-serif" font-weight="500">{t}</text>')
+    # cotas de abertura (crisp, solidas, respetando rotacion)
+    for (t,x,y,h,rot) in apdims:
+        scx,scy=P(x,y); fs=max(h*sx*1.4, 0.16*sx)
+        els.append(f'<text transform="translate({scx:.0f},{scy:.0f}) rotate({-rot:.0f})" '
+                   f'font-size="{fs:.0f}" fill="currentColor" font-family="Helvetica,Arial,sans-serif">{t}</text>')
     defs="".join(load_sym(t) for t in sorted(used))
     return f'<defs>{defs}</defs><g>'+"".join(els)+'</g>'
 
@@ -177,8 +204,8 @@ def inner(s):
     return s
 
 def plan(crop):
-    walls,K,VBW,VBH,furn,wins,labels = render_walls(crop)
-    ov = overlay(furn,wins,labels,K,VBW)
+    walls,K,VBW,VBH,furn,wins,labels,doors,apdims = render_walls(crop)
+    ov = overlay(furn,wins,labels,doors,apdims,K,VBW)
     svg = re.sub(r'</svg>\s*$', ov+'</svg>', walls, count=1)
     return dict(svg=svg, K=K, VBW=VBW, VBH=VBH)
 
