@@ -39,7 +39,7 @@
   <!-- SALA interior partitions -->
   <g stroke="#8f8677" stroke-width="2" fill="none">
     <line x1="381" y1="251" x2="381" y2="445"/>          <!-- right partition -->
-    <line x1="261" y1="251" x2="381" y2="251"/>          <!-- back partition -->
+    <line x1="261" y1="251" x2="337" y2="251"/>          <!-- back wall solid up to murito -->
   </g>
 
   <!-- VANO: right side of galeria is OPEN (no wall) -->
@@ -58,9 +58,13 @@
   <text x="321" y="342" text-anchor="middle" font-size="15" font-weight="bold" fill="#3f5b6b">SALA</text>
   <text x="321" y="362" text-anchor="middle" font-size="12" fill="#3f5b6b">4.85 × 3.00</text>
 
-  <!-- MURITO projecting 0.60 into sala, 1.90 m from left wall -->
+  <!-- ABERTURA: opening in sala back wall, right of murito, to the space behind -->
+  <line x1="343" y1="251" x2="381" y2="251" stroke="#3f8f5a" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="362" y="243" text-anchor="middle" font-size="8.5" fill="#3f8f5a">abertura</text>
+
+  <!-- MURITO projecting 0.60 into sala, 1.90 m from left wall (left jamb of abertura) -->
   <rect x="337" y="251" width="6" height="24" fill="#b98a52" stroke="#8a5a24" stroke-width="0.8"/>
-  <text x="352" y="266" font-size="8.5" fill="#8a5a24">murito 0.60</text>
+  <text x="336" y="266" text-anchor="end" font-size="8.5" fill="#8a5a24">murito 0.60</text>
   <g stroke="#8a5a24" stroke-width="0.8" fill="#8a5a24" font-size="8">
     <line x1="261" y1="289" x2="343" y2="289"/>
     <line x1="261" y1="285" x2="261" y2="293"/>

@@ -70,6 +70,9 @@ Elementos identificados en las fotos (pendiente de acotar):
   si es del frente.)
 - **Ventana lateral de la sala:** **1.00 × 0.90**, sobre la **pared izquierda**, a **3.50 m de
   la pared del frente** (da al pasillo izquierdo). 3.50 asumido al borde más cercano al frente.
+- **Abertura al fondo de la sala:** en la pared del fondo, **a la derecha del murito**, comunica
+  con el ambiente de atrás. Va desde la derecha del murito (~2.05 desde la izq.) hasta la pared
+  derecha de la sala (~0.95 m de ancho; a confirmar).
 - _Resto de ambientes: pendiente de relevar._
 
 ## Observaciones para propuesta (no afectan la planta)
