@@ -70,9 +70,9 @@ Elementos identificados en las fotos (pendiente de acotar):
   si es del frente.)
 - **Ventana lateral de la sala:** **1.00 × 0.90**, sobre la **pared izquierda**, a **3.50 m de
   la pared del frente** (da al pasillo izquierdo). 3.50 asumido al borde más cercano al frente.
-- **Abertura al fondo de la sala:** en la pared del fondo, **a la derecha del murito**, comunica
-  con el ambiente de atrás. Va desde la derecha del murito (~2.05 desde la izq.) hasta la pared
-  derecha de la sala (~0.95 m de ancho; a confirmar).
+- **Abertura al fondo de la sala:** en la pared del fondo, **a la derecha del murito**, de
+  **0.80 m**, comunica con el **pasillo**.
+- **Todas las aberturas (sin puerta) = 0.80 m** (fondo de sala, lavadero al quincho, etc.).
 - **1er dormitorio (lado derecho):** **3.15 m (fondo) × 3.00 m (ancho)**. Ubicado a la derecha,
   detrás de la galería. **Ventana centrada en la pared derecha: 1.00 × 0.90** (da al lado del garage).
 - **Puertas de los dormitorios:** hoja de **0.80 m** cada una. Están **separadas 25 cm entre sí**
@@ -84,13 +84,15 @@ Elementos identificados en las fotos (pendiente de acotar):
   **Puerta desde el pasillo**, a 25 cm de la puerta del 1er dormitorio.
 - **Baño:** **2.00 (ancho) × 1.45 (fondo)**. Arranca desde la pared donde está el murito
   (final de la sala) y va hacia el fondo, del lado izquierdo. **Ventana en la pared izquierda:
-  0.80 × 0.40.**
+  0.80 × 0.40.** **Puerta de 0.70 m** que empieza desde la izquierda (en la pared del frente del
+  baño; a confirmar si abre a la sala o al pasillo).
 - **Pasillito:** franja que sobra entre el baño (izq.) y los dormitorios (der.):
   ancho total interior (~6.15) − dormitorio (3.00) − baño (2.00) ≈ **1.15 m**. Corre desde el
-  **final de la sala (abertura)** hasta el **lavadero**; da acceso a los dormitorios.
+  **final de la sala (abertura)** y **continúa hasta la abertura del lavadero al quincho**
+  (la circulación pasa por el lavadero). Da acceso a los dormitorios.
 - **Lavadero:** **contiguo al baño** (detrás, hacia el fondo), **1.50 m de fondo**. Su ancho
-  **va hasta el 2º dormitorio** (abarca el baño + el pasillo). **Abertura que da al quincho** en
-  la pared del fondo, **pegada al dormitorio** (lado derecho de esa pared).
+  **va hasta la pared del 2º dormitorio** (toda esa medida es lavadero; abarca baño + pasillo).
+  **Abertura de 0.80 que da al quincho** en la pared del fondo, **pegada al dormitorio**.
 
 ## Terreno / quincho
 - **Quincho:** **7.00 m de largo × 11.57 m de ancho** (ancho total del terreno), al fondo,
