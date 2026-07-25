@@ -25,8 +25,15 @@ Elementos identificados en las fotos (pendiente de acotar):
 
 ## Lados / accesos al quincho
 - **Pasillo lateral izquierdo:** ancho **2.60 m**, va directo al quincho.
-- **Pasillo lateral derecho:** también va al quincho (ancho pendiente de medir).
-- **Garage:** ubicado del **lado derecho** de la casa (medidas pendientes).
+- **Pasillo lateral derecho:** también va al quincho.
+- **Garage + entrada derecha al quincho:** franja del **lado derecho**, ancho **2.50 m**
+  (sirve de garage y de paso al quincho).
+
+### ⚠️ A confirmar: "la casa empieza en 7.25 m"
+Dos lecturas posibles (cambian la planta):
+- **(A)** Retiro frontal: 7.25 m desde el frente del terreno hasta donde arranca la
+  casa → falta aún el **fondo** de la casa.
+- **(B)** Fondo/largo de la casa = 7.25 m de profundidad → ya tengo la huella.
 
 ## Niveles / desnivel del terreno
 - **Base del frente / lado izquierdo:** **0.50 m** sobre el patio.
