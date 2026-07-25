@@ -15,7 +15,7 @@ Elementos identificados en las fotos (pendiente de acotar):
 | # | Tramo | Ancho | Alto | Notas |
 |---|-------|-------|------|-------|
 | 1 | Pasillo/entrada lateral izquierda → al quincho | **2.60 m** | — | Corre al costado izq. de la casa; murito de ladrillo visto, lleva directo al quincho |
-| 2 | Paño pared izq. (frente) | — | — | Farol colonial |
+| 2 | Paño pared izq. (frente): esquina izq. → ventana | **0.90 m** | — | Farol colonial; revoque deteriorado |
 | 3 | Ventana frente | — | — | Corrediza, marco oscuro |
 | 4 | Paño pared der. de ventana | — | — | |
 | 5 | Galería / porche | — | — | 1 columna, 2 gradas, puerta de entrada |
