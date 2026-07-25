@@ -25,6 +25,8 @@
   <rect x="390" y="384" width="123" height="68" fill="#f4efe6"/>
   <!-- SALA room fill -->
   <rect x="261" y="251" width="120" height="194" fill="#e2ebf0"/>
+  <!-- 1er DORMITORIO fill -->
+  <rect x="390" y="258" width="120" height="126" fill="#e3ede2"/>
 
   <!-- solid outer walls -->
   <g stroke="#8f8677" stroke-width="2.5" fill="none">
@@ -113,9 +115,29 @@
     <text x="367" y="368" text-anchor="middle" transform="rotate(-90 367 368)">2.95 entre puertas</text>
   </g>
 
-  <!-- first bedroom (right side) to survey -->
-  <text x="455" y="200" text-anchor="middle" font-size="12" fill="#8a7c4c">1er DORMITORIO</text>
-  <text x="455" y="216" text-anchor="middle" font-size="10" fill="#b0a894">(lado derecho · a relevar)</text>
+  <!-- FIRST BEDROOM (right side): 3.15 (fondo) x 3.00 (ancho) -->
+  <g stroke="#7a8a6f" stroke-width="2" fill="none">
+    <line x1="390" y1="258" x2="510" y2="258"/>   <!-- back wall -->
+    <line x1="510" y1="258" x2="510" y2="384"/>   <!-- right wall (inner face of ext. wall) -->
+  </g>
+  <!-- window centered on right wall, 1.00 x 0.90 -->
+  <rect x="507" y="301" width="9" height="40" fill="#cfe0e8" stroke="#7f97a3" stroke-width="1"/>
+  <line x1="507" y1="321" x2="516" y2="321" stroke="#7f97a3" stroke-width="0.8"/>
+  <text x="500" y="356" text-anchor="end" font-size="8.5" fill="#4f6b4a">vent. 1.00×0.90</text>
+  <!-- labels -->
+  <text x="450" y="316" text-anchor="middle" font-size="13" font-weight="bold" fill="#4f6b4a">1er DORM.</text>
+  <text x="450" y="333" text-anchor="middle" font-size="11" fill="#4f6b4a">3.15 × 3.00</text>
+  <!-- dims: fondo 3.15 (right side) and ancho 3.00 (top) -->
+  <g stroke="#4f6b4a" stroke-width="0.8" fill="#4f6b4a" font-size="8">
+    <line x1="524" y1="258" x2="534" y2="258"/>
+    <line x1="524" y1="384" x2="534" y2="384"/>
+    <line x1="529" y1="258" x2="529" y2="384"/>
+    <text x="537" y="321" text-anchor="middle" transform="rotate(-90 537 321)">3.15</text>
+    <line x1="390" y1="250" x2="390" y2="242"/>
+    <line x1="510" y1="250" x2="510" y2="242"/>
+    <line x1="390" y1="246" x2="510" y2="246"/>
+    <text x="450" y="240" text-anchor="middle">3.00</text>
+  </g>
 
   <!-- FRENTE label -->
   <text x="381" y="770" text-anchor="middle" font-size="13" fill="#555" font-weight="bold">FRENTE (calle) ↓</text>
