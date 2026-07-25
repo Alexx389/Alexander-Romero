@@ -1,24 +1,52 @@
-import ezdxf, re, html as H, json
+# Builder del deck de plantas de Edificio Olmedo.
+# DXF -> line-art teñible, con bloques reemplazados por Plancraft y puertas/ventanas redibujadas.
+
+import ezdxf, re, math, os
 import ezdxf.bbox as bb
 from ezdxf.addons.drawing import Frontend, RenderContext
 from ezdxf.addons.drawing import svg, layout, config
 F="/root/.claude/uploads/0f0a35b5-99e2-5d68-bef2-cda187185a16/3dc7b7c6-SALON_DPTO.OLMEDO_NUEVO.dxf"
+BLK="/home/user/Alexander-Romero/cad/blocks/default"
 GR=['#d3d3d3','#4c4c4c','#ffffff','#aeaeae','#a6a6a6','#f4f4f4']
+VBd={"bed":(1400,2000),"sofa":(2000,900),"table":(1200,800),"fridge":(700,700),
+     "stove":(600,600),"sink":(500,400),"toilet":(400,700),"shower":(900,900),"chair":(450,450)}
+MAP={'Cama1p~1':'bed','Cama2plaComp3_160':'bed','sofa':'sofa','MESA':'table',
+     'Heladpl':'fridge','A$C492F21F0':'stove','bacha':'sink','1bacha3':'sink',
+     '1wc2':'toilet','Duchapl1':'shower','blindex':'shower'}
+DOORS={'puert-080':0.80,'puert-070':0.70,'puerta aula':0.80,'*U52':0.80}
+WINDOWS={'ventanna','v0.6','*U62'}
+WASHER={'LAVARROPA'}; COLUMN={'pil'}
 
-def render(crop, weight=1100, margin=0.6):
+def load_sym(t):
+    s=open(os.path.join(BLK,t+".svg")).read()
+    inner=re.sub(r'(?is)^.*?<svg[^>]*>','',s); inner=re.sub(r'(?is)</svg>\s*$','',inner)
+    inner=re.sub(r'fill="[^"]*"','fill="none"',inner)
+    inner=re.sub(r'stroke="[^"]*"','stroke="currentColor"',inner)
+    inner=re.sub(r'stroke-width="[^"]*"','stroke-width="1.4" vector-effect="non-scaling-stroke"',inner)
+    w,h=VBd[t]
+    return f'<symbol id="pc_{t}" viewBox="0 0 {w} {h}" overflow="visible">{inner}</symbol>'
+
+def render_walls(crop, weight=1100, margin=0.6):
     doc=ezdxf.readfile(F)
     SKIP={"A-VIEWPORT","PRESENTACION","REVISION","Defpoints"}
     msp=doc.modelspace(); x0,y0,x1,y1=crop
+    inserts=[]
     for e in list(msp):
         try:
             if e.dxf.layer in SKIP: msp.delete_entity(e); continue
             b=bb.extents([e],fast=True)
             if not b.has_data: msp.delete_entity(e); continue
             cx=(b.extmin.x+b.extmax.x)/2; cy=(b.extmin.y+b.extmax.y)/2
-            if not (x0-margin<=cx<=x1+margin and y0-margin<=cy<=y1+margin): msp.delete_entity(e)
+            keep = (x0-margin<=cx<=x1+margin and y0-margin<=cy<=y1+margin)
+            if e.dxftype()=='INSERT':
+                if keep:
+                    inserts.append(dict(name=e.dxf.name, ix=e.dxf.insert.x, iy=e.dxf.insert.y,
+                        rot=e.dxf.rotation, mx=(e.dxf.xscale<0),
+                        cx=cx, cy=cy, fw=b.extmax.x-b.extmin.x, fh=b.extmax.y-b.extmin.y))
+                msp.delete_entity(e); continue
+            if not keep: msp.delete_entity(e)
         except: pass
-    kb=bb.extents(msp, fast=True)
-    KX0,KY0,KX1,KY1=kb.extmin.x,kb.extmin.y,kb.extmax.x,kb.extmax.y
+    kb=bb.extents(msp,fast=True); K=(kb.extmin.x,kb.extmin.y,kb.extmax.x,kb.extmax.y)
     ctx=RenderContext(doc); be=svg.SVGBackend()
     cfg=config.Configuration(background_policy=config.BackgroundPolicy.OFF,
         color_policy=config.ColorPolicy.MONOCHROME_DARK_BG, text_policy=config.TextPolicy.OUTLINE)
@@ -28,23 +56,77 @@ def render(crop, weight=1100, margin=0.6):
     s=re.sub(r'stroke-width:\s*[\d.]+', f'stroke-width: {weight}', s)
     s=re.sub(r'fill-opacity:\s*[\d.]+', 'fill-opacity: 0.26', s)
     for c in GR: s=s.replace(c,'currentColor')
-    m=re.search(r'viewBox="([\d.\- ]+)"', s); VBW,VBH=[float(v) for v in m.group(2 if False else 1).split()[2:]]
-    s=re.sub(r'(<svg[^>]*?)\swidth="[^"]*"\s*height="[^"]*"', r'\1', s, count=1)  # sacar width/height fijos
-    return dict(svg=s, K=(KX0,KY0,KX1,KY1), VBW=VBW, VBH=VBH)
+    m=re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', s); VBW,VBH=float(m.group(1)),float(m.group(2))
+    s=re.sub(r'(<svg[^>]*?)\swidth="[^"]*"\s*height="[^"]*"', r'\1', s, count=1)
+    return s, K, VBW, VBH, inserts
+
+def overlay(inserts, K, VBW):
+    KX0,KY0,KX1,KY1=K; sx=VBW/(KX1-KX0)
+    def P(x,y): return ((x-KX0)*sx, (KY1-y)*sx)
+    els=[]
+    used=set()
+    for it in inserts:
+        n=it['name']; cx,cy=it['cx'],it['cy']; fw,fh=it['fw'],it['fh']
+        scx,scy=P(cx,cy); rot=it['rot']; sgn=-1 if it['mx'] else 1
+        if n in MAP:
+            t=MAP[n]; used.add(t)
+            # tamaño sin rotar: si rot 90/270, la bbox está rotada
+            r=rot%360
+            if abs(r-90)<45 or abs(r-270)<45: uw,uh=fh,fw
+            else: uw,uh=fw,fh
+            Wp,Hp=uw*sx,uh*sx
+            els.append(f'<g transform="translate({scx:.0f},{scy:.0f}) rotate({-rot:.0f}) scale({sgn},1)">'
+                       f'<use href="#pc_{t}" x="{-Wp/2:.0f}" y="{-Hp/2:.0f}" width="{Wp:.0f}" height="{Hp:.0f}"/></g>')
+        elif n in DOORS:
+            W=DOORS[n]*sx
+            hx,hy=P(it['ix'],it['iy'])
+            els.append(f'<g transform="translate({hx:.0f},{hy:.0f}) rotate({-rot:.0f}) scale({sgn},1)">'
+                       f'<path d="M0,0 L0,{-W:.0f} M0,{-W:.0f} A {W:.0f} {W:.0f} 0 0 1 {W:.0f},0" '
+                       f'fill="none" stroke="currentColor" stroke-width="1.4" vector-effect="non-scaling-stroke"/></g>')
+        elif n in WINDOWS:
+            # ventana: lineas paralelas a lo largo del muro (segun aspecto de la bbox)
+            w,h=fw*sx,fh*sx
+            if fw>=fh:
+                y0v=scy; x=scx-w/2
+                els.append(f'<g fill="none" stroke="currentColor">'
+                           f'<line x1="{x:.0f}" y1="{y0v-3:.0f}" x2="{x+w:.0f}" y2="{y0v-3:.0f}" stroke-width="1.2" vector-effect="non-scaling-stroke"/>'
+                           f'<line x1="{x:.0f}" y1="{y0v+3:.0f}" x2="{x+w:.0f}" y2="{y0v+3:.0f}" stroke-width="1.2" vector-effect="non-scaling-stroke"/></g>')
+            else:
+                x=scx; y=scy-h/2
+                els.append(f'<g fill="none" stroke="currentColor">'
+                           f'<line x1="{x-3:.0f}" y1="{y:.0f}" x2="{x-3:.0f}" y2="{y+h:.0f}" stroke-width="1.2" vector-effect="non-scaling-stroke"/>'
+                           f'<line x1="{x+3:.0f}" y1="{y:.0f}" x2="{x+3:.0f}" y2="{y+h:.0f}" stroke-width="1.2" vector-effect="non-scaling-stroke"/></g>')
+        elif n in WASHER:
+            w,h=fw*sx,fh*sx
+            els.append(f'<g fill="none" stroke="currentColor" stroke-width="1.3" vector-effect="non-scaling-stroke">'
+                       f'<rect x="{scx-w/2:.0f}" y="{scy-h/2:.0f}" width="{w:.0f}" height="{h:.0f}" rx="4" stroke-width="1.3" vector-effect="non-scaling-stroke"/>'
+                       f'<circle cx="{scx:.0f}" cy="{scy:.0f}" r="{min(w,h)*0.32:.0f}" stroke-width="1.3" vector-effect="non-scaling-stroke"/></g>')
+        elif n in COLUMN:
+            w,h=fw*sx,fh*sx
+            els.append(f'<rect x="{scx-w/2:.0f}" y="{scy-h/2:.0f}" width="{w:.0f}" height="{h:.0f}" '
+                       f'fill="currentColor" fill-opacity="0.5"/>')
+    defs="".join(load_sym(t) for t in sorted(used))
+    return f'<defs>{defs}</defs><g>' + "".join(els) + '</g>'
+
+
+import re, json
 
 def inner(s):
     s=re.sub(r'<\?xml[^?]*\?>','',s).strip()
-    s=re.sub(r'^<svg[^>]*>','',s,count=1)
-    s=re.sub(r'</svg>\s*$','',s,count=1)
+    s=re.sub(r'^<svg[^>]*>','',s,count=1); s=re.sub(r'</svg>\s*$','',s,count=1)
     return s
 
-PA=render((19,65,47,85))
-PB=render((48,53,81,86))
-KX0,KY0,KX1,KY1=PA["K"]; VBW=PA["VBW"]
-sx=VBW/(KX1-KX0)
+def plan(crop):
+    walls,K,VBW,VBH,ins = render_walls(crop)
+    ov = overlay(ins,K,VBW)
+    svg = re.sub(r'</svg>\s*$', ov+'</svg>', walls, count=1)
+    return dict(svg=svg, K=K, VBW=VBW, VBH=VBH)
+
+PA=plan((19,65,47,85)); PB=plan((48,53,81,86))
+KX0,KY0,KX1,KY1=PA["K"]; VBW=PA["VBW"]; sx=VBW/(KX1-KX0)
 def vb(r):
-    rx0,ry0,rx1,ry1=r
-    return [round((rx0-KX0)*sx,1), round((KY1-ry1)*sx,1), round((rx1-rx0)*sx,1), round((ry1-ry0)*sx,1)]
+    a,b,c,d=r
+    return [round((a-KX0)*sx,1), round((KY1-d)*sx,1), round((c-a)*sx,1), round((d-b)*sx,1)]
 
 VIEWS=[
  dict(plan="PA", vbx=None, num="01", tit="Planta Alta", sub="Nivel superior · 4 departamentos",
@@ -60,13 +142,13 @@ VIEWS=[
  dict(plan="PA", vbx=vb((23.45,66.9,26.95,74.2)), num="06", tit="Dormitorio 1", sub="Principal · frente 2.78 m",
       cap="Dormitorio principal al fondo de la unidad. Espacio para cama de dos plazas y placard, con ventana de 1.50 × 2.10 m al contrafrente para luz y ventilación natural. Puerta de 0.80 m."),
  dict(plan="PA", vbx=vb((20.6,66.9,23.65,74.2)), num="07", tit="Dormitorio 2", sub="Secundario · frente 2.82 m",
-      cap="Segundo dormitorio con cama y placard. Comparte el muro de fondo y recibe luz y ventilación por ventana de 1.50 × 2.10 m al contrafrente. Puerta de 0.80 m."),
+      cap="Segundo dormitorio con dos camas y placard. Comparte el muro de fondo y recibe luz y ventilación por ventana de 1.50 × 2.10 m al contrafrente. Puerta de 0.80 m."),
  dict(plan="PB", vbx=None, num="08", tit="Planta Baja", sub="Nivel acceso · salón comercial + estacionamiento",
       cap="Dos salones comerciales con accesos independientes (entrada 1 y 2), módulos de estacionamiento y servicios existentes. Linderos acotados: 24.00 × 28.20 m."),
 ]
-for i,v in enumerate(VIEWS): v["i"]=i
 N=len(VIEWS)
 views_js=json.dumps([{k:v[k] for k in ("plan","vbx","num","tit","sub","cap")} for v in VIEWS], ensure_ascii=False)
+PAvb=f"0 0 {PA['VBW']:.0f} {PA['VBH']:.0f}"; PBvb=f"0 0 {PB['VBW']:.0f} {PB['VBH']:.0f}"
 
 deck=f'''<title>Edificio Olmedo — Plantas + secciones</title>
 <style>
@@ -75,27 +157,22 @@ deck=f'''<title>Edificio Olmedo — Plantas + secciones</title>
   .deck{{ position:relative; min-height:100svh; overflow:hidden;
     font-family:'Helvetica Neue',Helvetica,Arial,system-ui,sans-serif;
     --paper:#0c0d0f; --ink:#ECE8E0; --muted:#8A867C; --line:rgba(255,255,255,.14);
-    background:var(--paper); color:var(--ink); transition:background .4s,color .4s;
-    display:flex; flex-direction:column; }}
+    background:var(--paper); color:var(--ink); transition:background .4s,color .4s; display:flex; flex-direction:column; }}
   .deck[data-mode="light"]{{ --paper:#F4F2EC; --ink:#1A1918; --muted:#7C766B; --line:rgba(0,0,0,.16); }}
   .top{{ display:flex; align-items:center; justify-content:space-between; gap:12px;
-    padding:16px clamp(16px,3vw,34px); font-size:11px; letter-spacing:.22em;
-    text-transform:uppercase; font-weight:300; border-bottom:1px solid var(--line); }}
+    padding:16px clamp(16px,3vw,34px); font-size:11px; letter-spacing:.22em; text-transform:uppercase; font-weight:300; border-bottom:1px solid var(--line); }}
   .top .mid{{ color:var(--muted); }}
-  .stage{{ flex:1; display:grid; grid-template-columns:minmax(240px,.75fr) 1.6fr;
-    gap:clamp(16px,3vw,40px); align-items:center; padding:clamp(16px,3vw,40px); }}
+  .stage{{ flex:1; display:grid; grid-template-columns:minmax(240px,.75fr) 1.6fr; gap:clamp(16px,3vw,40px); align-items:center; padding:clamp(16px,3vw,40px); }}
   @media (max-width:820px){{ .stage{{ grid-template-columns:1fr; align-content:center; overflow:auto; }} }}
   .cap .num{{ font-weight:200; font-size:clamp(40px,7vw,84px); line-height:.85; letter-spacing:-.02em; }}
   .cap .num span{{ font-size:.28em; color:var(--muted); letter-spacing:.1em; margin-left:.3em; }}
   .cap h2{{ margin:.2em 0 .1em; font-size:clamp(22px,3.2vw,38px); font-weight:800; letter-spacing:-.02em; text-transform:uppercase; text-wrap:balance; }}
-  .cap .sub{{ font-family:ui-monospace,Menlo,monospace; font-size:12px; letter-spacing:.06em;
-    text-transform:uppercase; color:var(--acc); margin-bottom:14px; transition:color .4s; }}
+  .cap .sub{{ font-family:ui-monospace,Menlo,monospace; font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--acc); margin-bottom:14px; transition:color .4s; }}
   .cap p{{ font-size:14px; line-height:1.65; color:var(--muted); max-width:44ch; }}
   .planwrap{{ position:relative; height:78vh; display:flex; align-items:center; justify-content:center; color:var(--acc); }}
   .planwrap svg{{ max-width:100%; max-height:100%; width:auto; height:auto; display:none; }}
   .planwrap svg.on{{ display:block; }}
-  .bottom{{ display:flex; align-items:center; gap:12px; flex-wrap:wrap;
-    padding:12px clamp(16px,3vw,34px); border-top:1px solid var(--line); }}
+  .bottom{{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:12px clamp(16px,3vw,34px); border-top:1px solid var(--line); }}
   .lbl{{ font-family:ui-monospace,Menlo,monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-right:4px; }}
   .chip{{ font-family:ui-monospace,Menlo,monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase;
     color:var(--ink); background:transparent; border:1px solid var(--line); padding:6px 11px; border-radius:999px; cursor:pointer; transition:.2s; }}
@@ -103,21 +180,18 @@ deck=f'''<title>Edificio Olmedo — Plantas + secciones</title>
   .chip:hover{{ border-color:var(--acc); }}
   .sp{{ flex:1; }}
   .nav{{ display:flex; align-items:center; gap:10px; font-family:ui-monospace,Menlo,monospace; font-size:13px; }}
-  .nav button{{ width:38px; height:38px; border-radius:50%; border:1px solid var(--line);
-    background:transparent; color:var(--ink); cursor:pointer; font-size:16px; transition:.2s; }}
+  .nav button{{ width:38px; height:38px; border-radius:50%; border:1px solid var(--line); background:transparent; color:var(--ink); cursor:pointer; font-size:16px; transition:.2s; }}
   .nav button:hover{{ border-color:var(--acc); color:var(--acc); }}
   .count{{ color:var(--muted); letter-spacing:.1em; min-width:56px; text-align:center; }}
 </style>
 <div class="deck" data-mode="dark" id="deck">
   <div class="top"><span>AR STUDIO</span><span class="mid">Edificio Olmedo</span><span>アイコン 2026</span></div>
   <div class="stage">
-    <div class="cap">
-      <div class="num" id="num">01<span id="of">/ {N:02d}</span></div>
-      <h2 id="tit">—</h2><div class="sub" id="sub">—</div><p id="cap">—</p>
-    </div>
+    <div class="cap"><div class="num" id="num">01<span id="of">/ {N:02d}</span></div>
+      <h2 id="tit">—</h2><div class="sub" id="sub">—</div><p id="cap">—</p></div>
     <div class="planwrap">
-      <svg id="planPA" viewBox="0 0 {PA['VBW']:.0f} {PA['VBH']:.0f}" preserveAspectRatio="xMidYMid meet">{inner(PA['svg'])}</svg>
-      <svg id="planPB" viewBox="0 0 {PB['VBW']:.0f} {PB['VBH']:.0f}" preserveAspectRatio="xMidYMid meet">{inner(PB['svg'])}</svg>
+      <svg id="planPA" viewBox="{PAvb}" preserveAspectRatio="xMidYMid meet">{inner(PA['svg'])}</svg>
+      <svg id="planPB" viewBox="{PBvb}" preserveAspectRatio="xMidYMid meet">{inner(PB['svg'])}</svg>
     </div>
   </div>
   <div class="bottom">
@@ -134,7 +208,7 @@ deck=f'''<title>Edificio Olmedo — Plantas + secciones</title>
 </div>
 <script>
   const VIEWS={views_js}, N=VIEWS.length;
-  const PAfull="0 0 {PA['VBW']:.0f} {PA['VBH']:.0f}", PBfull="0 0 {PB['VBW']:.0f} {PB['VBH']:.0f}";
+  const PAfull="{PAvb}", PBfull="{PBvb}";
   const planPA=document.getElementById('planPA'), planPB=document.getElementById('planPB');
   let i=0;
   function show(k){{ i=(k+N)%N; const v=VIEWS[i];
@@ -145,8 +219,7 @@ deck=f'''<title>Edificio Olmedo — Plantas + secciones</title>
     document.getElementById('count').textContent=v.num+' / '+String(N).padStart(2,'0');
     const usePA=v.plan==='PA';
     planPA.classList.toggle('on',usePA); planPB.classList.toggle('on',!usePA);
-    const el=usePA?planPA:planPB;
-    el.setAttribute('viewBox', v.vbx? v.vbx.join(' ') : (usePA?PAfull:PBfull));
+    (usePA?planPA:planPB).setAttribute('viewBox', v.vbx? v.vbx.join(' ') : (usePA?PAfull:PBfull));
   }}
   document.getElementById('prev').onclick=()=>show(i-1);
   document.getElementById('next').onclick=()=>show(i+1);
@@ -161,4 +234,4 @@ deck=f'''<title>Edificio Olmedo — Plantas + secciones</title>
   show(0);
 </script>'''
 open("/home/user/Alexander-Romero/cad/deck-olmedo.html","w").write(deck)
-print("OK bytes:", len(deck), "| PA VB:", PA["VBW"],PA["VBH"], "| baño vb:", vb((20.6,72.65,22.75,76.7)))
+print("OK deck bytes:", len(deck))
