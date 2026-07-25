@@ -19,8 +19,9 @@ Elementos identificados en las fotos (pendiente de acotar):
 | 3 | Ventana frente | **1.60 m** | **1.25 m** | Corrediza, marco oscuro. Antepecho a **1.40 m** del piso |
 | 4 | Paño pared der. de ventana → quiebre galería | **0.90 m** | — | Deducido (3.40 − 0.90 − 1.60); a confirmar |
 | — | **Frente volumen izquierdo (total)** | **3.40 m** | — | 0.90 + 1.60 + 0.90 = 3.40 ✓ (ventana centrada) |
-| 5 | Galería / porche (derecha) | _midiendo_ | — | 1 columna, 2 gradas, puerta de entrada |
-| — | **Ancho total del frente** | — | — | Para chequeo de cierre (falta galería) |
+| 5 | Galería / porche (derecha) | **2.85 m** (frente) | fondo **1.70 m** hasta el pilar | 2 gradas, puerta de entrada |
+| — | Pilar de la galería | 0.25 m | 0.25 m | Sección de la columna |
+| — | **Ancho total del frente** | **≈ 6.25 m** | — | 3.40 (vol. izq.) + 2.85 (galería); a confirmar con medida total en sitio |
 
 ## Datos verticales / alzado
 - **Casa elevada:** base de **0.50 m** sobre el nivel del patio (escalones de acceso).
