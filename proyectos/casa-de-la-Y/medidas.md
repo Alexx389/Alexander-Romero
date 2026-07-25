@@ -3,6 +3,12 @@
 > Registro de medidas tomadas en sitio. Se va completando a medida que llegan.
 > Última actualización: 2026-07-25
 
+## Convenciones (vigentes)
+- **Medidas internas:** de aquí en adelante, todas las medidas de ambientes son
+  **internas (luz interior)**, hasta nuevo aviso.
+- **Muros interiores:** se asume **0.15 m** de espesor entre ambientes (los agrega el dibujo).
+- Las medidas del **exterior/fachada** cargadas antes siguen siendo externas.
+
 ## Fachada (frente) — lectura de izquierda a derecha
 Elementos identificados en las fotos (pendiente de acotar):
 1. Esquina izquierda.
