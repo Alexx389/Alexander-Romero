@@ -2,8 +2,8 @@
   <rect x="0" y="0" width="760" height="840" fill="#ffffff"/>
 
   <!-- Title -->
-  <text x="380" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#222">Casa de la "Y" — Planta de contorno (huella)</text>
-  <text x="380" y="52" text-anchor="middle" font-size="13" fill="#777">Medidas en metros · Divisiones interiores pendientes</text>
+  <text x="380" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#222">Casa de la "Y" — Planta (en desarrollo)</text>
+  <text x="380" y="52" text-anchor="middle" font-size="13" fill="#777">Medidas en metros · Interior: SALA cargada · resto pendiente</text>
 
   <text x="662" y="105" font-size="12" fill="#3a7d3a" font-weight="bold">↑ al quincho</text>
 
@@ -21,10 +21,12 @@
 
   <!-- ================= HOUSE (fill, no stroke; walls drawn explicitly) ================= -->
   <rect x="254" y="110" width="259" height="342" fill="#ece7dd"/>
-  <!-- galeria open porch floor (2.85 + corner to pillar) -->
+  <!-- galeria open porch floor -->
   <rect x="390" y="384" width="123" height="68" fill="#f4efe6"/>
+  <!-- SALA room fill -->
+  <rect x="261" y="251" width="120" height="194" fill="#e2ebf0"/>
 
-  <!-- solid walls -->
+  <!-- solid outer walls -->
   <g stroke="#8f8677" stroke-width="2.5" fill="none">
     <line x1="254" y1="110" x2="254" y2="452"/>          <!-- left -->
     <line x1="254" y1="110" x2="513" y2="110"/>          <!-- back -->
@@ -32,6 +34,12 @@
     <line x1="390" y1="384" x2="513" y2="384"/>          <!-- galeria back wall -->
     <line x1="390" y1="384" x2="390" y2="452"/>          <!-- wall room / galeria -->
     <line x1="254" y1="452" x2="390" y2="452"/>          <!-- front wall of left volume -->
+  </g>
+
+  <!-- SALA interior partitions -->
+  <g stroke="#8f8677" stroke-width="2" fill="none">
+    <line x1="381" y1="251" x2="381" y2="445"/>          <!-- right partition -->
+    <line x1="261" y1="251" x2="381" y2="251"/>          <!-- back partition -->
   </g>
 
   <!-- VANO: right side of galeria is OPEN (no wall) -->
@@ -44,16 +52,21 @@
 
   <!-- window on front wall of left volume (1.60, centered) -->
   <rect x="290" y="449" width="64" height="6" fill="#2f3a43"/>
-  <text x="322" y="440" text-anchor="middle" font-size="10" fill="#555">ventana</text>
+  <text x="322" y="466" text-anchor="middle" font-size="10" fill="#555">ventana 1.60</text>
+
+  <!-- SALA label -->
+  <text x="321" y="342" text-anchor="middle" font-size="15" font-weight="bold" fill="#3f5b6b">SALA</text>
+  <text x="321" y="362" text-anchor="middle" font-size="12" fill="#3f5b6b">4.85 × 3.00</text>
 
   <!-- galeria label + entrance -->
-  <text x="447" y="422" text-anchor="middle" font-size="11" fill="#8a8270">galería</text>
-  <text x="447" y="436" text-anchor="middle" font-size="9" fill="#a89b82">(abierta)</text>
+  <text x="451" y="422" text-anchor="middle" font-size="11" fill="#8a8270">galería</text>
+  <text x="451" y="436" text-anchor="middle" font-size="9" fill="#a89b82">(abierta)</text>
   <line x1="430" y1="384" x2="470" y2="384" stroke="#d8cfbc" stroke-width="3"/>
   <text x="450" y="376" text-anchor="middle" font-size="9" fill="#999">acceso*</text>
 
-  <text x="322" y="250" text-anchor="middle" font-size="12" fill="#8a8270">interior</text>
-  <text x="322" y="268" text-anchor="middle" font-size="11" fill="#b0a894">(a relevar)</text>
+  <!-- resto interior to survey -->
+  <text x="451" y="210" text-anchor="middle" font-size="12" fill="#8a8270">resto interior</text>
+  <text x="451" y="228" text-anchor="middle" font-size="11" fill="#b0a894">(a relevar)</text>
 
   <!-- FRENTE label -->
   <text x="381" y="770" text-anchor="middle" font-size="13" fill="#555" font-weight="bold">FRENTE (calle) ↓</text>
@@ -72,17 +85,6 @@
     <text x="563" y="74" text-anchor="middle">2.50</text>
   </g>
 
-  <!-- ================= FRENTE sub-dims (below house front) ================= -->
-  <g stroke="#444" stroke-width="1" fill="#333" font-size="11">
-    <line x1="254" y1="462" x2="254" y2="476"/>
-    <line x1="390" y1="462" x2="390" y2="476"/>
-    <line x1="504" y1="462" x2="504" y2="476"/>
-    <line x1="254" y1="469" x2="390" y2="469"/>
-    <line x1="390" y1="469" x2="504" y2="469"/>
-    <text x="322" y="489" text-anchor="middle">3.40</text>
-    <text x="447" y="489" text-anchor="middle">2.85</text>
-  </g>
-
   <!-- ================= DEPTH DIMENSIONS (left) ================= -->
   <g stroke="#444" stroke-width="1" fill="#333" font-size="12">
     <line x1="130" y1="110" x2="116" y2="110"/>
@@ -93,6 +95,21 @@
     <line x1="130" y1="742" x2="116" y2="742"/>
     <line x1="123" y1="452" x2="123" y2="742"/>
     <text x="112" y="597" text-anchor="middle" font-weight="bold" transform="rotate(-90 112 597)">7.25 (retiro)</text>
+  </g>
+
+  <!-- SALA depth dim 4.85 -->
+  <g stroke="#3f5b6b" stroke-width="1" fill="#3f5b6b" font-size="10">
+    <line x1="243" y1="251" x2="231" y2="251"/>
+    <line x1="243" y1="445" x2="231" y2="445"/>
+    <line x1="237" y1="251" x2="237" y2="445"/>
+    <text x="228" y="348" text-anchor="middle" transform="rotate(-90 228 348)">4.85</text>
+  </g>
+  <!-- SALA width dim 3.00 -->
+  <g stroke="#3f5b6b" stroke-width="1" fill="#3f5b6b" font-size="10">
+    <line x1="261" y1="238" x2="261" y2="248"/>
+    <line x1="381" y1="238" x2="381" y2="248"/>
+    <line x1="261" y1="243" x2="381" y2="243"/>
+    <text x="321" y="240" text-anchor="middle">3.00</text>
   </g>
 
   <!-- galeria depth 1.70 (right of house) -->
@@ -114,7 +131,7 @@
   <!-- notes -->
   <g font-size="12" fill="#555">
     <rect x="130" y="790" width="520" height="42" fill="#f6f4ef" stroke="#ddd"/>
-    <text x="142" y="808">Galería abierta al frente y al lateral derecho (vano tras el pilar, sin muro).</text>
-    <text x="142" y="825">Divisiones interiores pendientes de relevar. (*) acceso: posición provisoria.</text>
+    <text x="142" y="808">SALA (living) 4.85 × 3.00 en el frente-izquierdo, con la ventana. Galería abierta al lateral.</text>
+    <text x="142" y="825">Resto del interior pendiente de relevar. (*) acceso: posición provisoria.</text>
   </g>
 </svg>

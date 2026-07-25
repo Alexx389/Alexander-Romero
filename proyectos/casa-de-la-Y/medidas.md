@@ -53,8 +53,10 @@ Elementos identificados en las fotos (pendiente de acotar):
   nivel del patio?
 - Pendiente: **alto de la puerta** de entrada.
 
-## Interior (pendiente)
-_Aún sin cargar._
+## Interior
+- **Sala / living:** **4.85 m (largo) × 3.00 m (ancho)**. Ubicada en el frente-izquierdo,
+  donde está la ventana (coincide con el volumen izquierdo de 3.40 externos).
+- _Resto de ambientes: pendiente de relevar._
 
 ## Observaciones para propuesta (no afectan la planta)
 - Revoque de la parte baja deteriorado (zócalo de cemento a la vista).
