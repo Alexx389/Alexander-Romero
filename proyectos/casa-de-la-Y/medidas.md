@@ -23,8 +23,18 @@ Elementos identificados en las fotos (pendiente de acotar):
 | — | Pilar de la galería | 0.25 m | 0.25 m | Sección de la columna |
 | — | **Ancho total del frente** | **≈ 6.25 m** | — | 3.40 (vol. izq.) + 2.85 (galería); a confirmar con medida total en sitio |
 
+## Lados / accesos al quincho
+- **Pasillo lateral izquierdo:** ancho **2.60 m**, va directo al quincho.
+- **Pasillo lateral derecho:** también va al quincho (ancho pendiente de medir).
+
+## Niveles / desnivel del terreno
+- **Base del frente / lado izquierdo:** **0.50 m** sobre el patio.
+- **Base del lado derecho:** **0.70 m** (más alta).
+- Motivo: hay una **diferencia de 20 cm entre la escalera y el garage**
+  (0.50 + 0.20 = 0.70 m de ese lado). ⇒ El terreno/nivel no es parejo.
+
 ## Datos verticales / alzado
-- **Casa elevada:** base de **0.50 m** sobre el nivel del patio (escalones de acceso).
+- **Casa elevada:** base de **0.50 m** sobre el nivel del patio (frente); **0.70 m** del lado derecho.
 - **Altura mínima (alero):** **2.80 m** (desde piso interior) → 3.30 m sobre patio.
 - **Altura a la cumbrera:** **4.00 m** (desde piso interior) → 4.50 m sobre patio.
 - **Ventana frente:** antepecho a **1.40 m** del piso; hoja de **1.25 m** de alto.
