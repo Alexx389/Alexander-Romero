@@ -30,11 +30,13 @@ Elementos identificados en las fotos (pendiente de acotar):
   (sirve de garage y de paso al quincho).
 
 ### Huella / planta
-- **Frente de la casa:** 6.25 m (vol. izq. 3.40 + galería 2.85).
+- **Ancho de la casa (externo, entre los dos pasillos al quincho):** **6.47 m**.
+  - Composición del frente (luz): vol. izq. 3.40 + galería 2.85 = 6.25.
+  - Diferencia 6.47 − 6.25 = **0.22 m** → espesores de muro/estructura en los extremos.
 - **Fondo (largo) de la casa:** **8.55 m**.
 - **Retiro frontal:** **7.25 m** (frente del terreno → donde arranca la casa).
-- **Ancho total del lote (aprox.):** pasillo izq. 2.60 + casa 6.25 + franja der. 2.50
-  = **11.35 m**.
+- **Ancho total del lote (aprox.):** pasillo izq. 2.60 + casa 6.47 + franja der. 2.50
+  = **11.57 m**.
 
 ## Niveles / desnivel del terreno
 - **Base del frente / lado izquierdo:** **0.50 m** sobre el patio.
