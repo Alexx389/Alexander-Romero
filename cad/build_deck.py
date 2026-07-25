@@ -1,7 +1,8 @@
-# Builder del deck de plantas de Edificio Olmedo.
-# DXF -> line-art teñible, con bloques reemplazados por Plancraft y puertas/ventanas redibujadas.
+# Builder del deck de Edificio Olmedo.
+# DXF -> line-art tenible. Muebles reemplazados por Plancraft; puertas del arquitecto;
+# ventanas dibujadas desde los textos de medida de abertura.
 
-import ezdxf, re, math, os
+import ezdxf, re, os
 import ezdxf.bbox as bb
 from ezdxf.addons.drawing import Frontend, RenderContext
 from ezdxf.addons.drawing import svg, layout, config
@@ -10,12 +11,12 @@ BLK="/home/user/Alexander-Romero/cad/blocks/default"
 GR=['#d3d3d3','#4c4c4c','#ffffff','#aeaeae','#a6a6a6','#f4f4f4']
 VBd={"bed":(1400,2000),"sofa":(2000,900),"table":(1200,800),"fridge":(700,700),
      "stove":(600,600),"sink":(500,400),"toilet":(400,700),"shower":(900,900),"chair":(450,450)}
-MAP={'Cama1p~1':'bed','Cama2plaComp3_160':'bed','sofa':'sofa','MESA':'table',
-     'Heladpl':'fridge','A$C492F21F0':'stove','bacha':'sink','1bacha3':'sink',
-     '1wc2':'toilet','Duchapl1':'shower','blindex':'shower'}
-DOORS={'puert-080':0.80,'puert-070':0.70,'puerta aula':0.80,'*U52':0.80}
-WINDOWS={'ventanna','v0.6','*U62'}
-WASHER={'LAVARROPA'}; COLUMN={'pil'}
+REPLACE={'Cama1p~1':'bed','Cama2plaComp3_160':'bed','sofa':'sofa','Heladpl':'fridge',
+         'A$C492F21F0':'stove','bacha':'sink','1bacha3':'sink','1wc2':'toilet','Duchapl1':'shower'}
+TABLE={'MESA'}; WASHER={'LAVARROPA'}
+KEEP={'puert-080','puert-070','puerta aula','*U52','ventanna','v0.6','*U62','pil'}
+NAT={'sink':(0.5,0.4),'toilet':(0.4,0.7),'shower':(0.9,0.9),'fridge':(0.7,0.7),'stove':(0.6,0.6)}
+DOORW={0.70,0.80}
 
 def load_sym(t):
     s=open(os.path.join(BLK,t+".svg")).read()
@@ -30,19 +31,47 @@ def render_walls(crop, weight=1100, margin=0.6):
     doc=ezdxf.readfile(F)
     SKIP={"A-VIEWPORT","PRESENTACION","REVISION","Defpoints"}
     msp=doc.modelspace(); x0,y0,x1,y1=crop
-    inserts=[]
+    furn=[]; wintexts=[]
+    TOPY=-1e9; BOTY=1e9; LEFTX=1e9; RIGHTX=-1e9
+    # extremos de muro exterior (A-MURO) dentro del recorte
+    for e in msp.query('LINE[layer=="A-MURO"]'):
+        for pt in (e.dxf.start, e.dxf.end):
+            if x0<=pt.x<=x1 and y0<=pt.y<=y1:
+                TOPY=max(TOPY,pt.y); BOTY=min(BOTY,pt.y); LEFTX=min(LEFTX,pt.x); RIGHTX=max(RIGHTX,pt.x)
+    # textos de medida de abertura -> ventanas (las que no son puertas)
+    for e in list(msp.query('TEXT'))+list(msp.query('MTEXT')):
+        t=(e.dxf.text if e.dxftype()=='TEXT' else e.text).strip()
+        p=e.dxf.insert
+        if not(x0<=p.x<=x1 and y0<=p.y<=y1): continue
+        m=re.match(r'^(\d\.\d+)x(\d\.\d+)', t)
+        if not m: continue
+        w=float(m.group(1)); h=float(m.group(2))
+        if w in DOORW and abs(h-2.10)<0.2: continue   # es puerta (ya dibujada por el DXF)
+        wintexts.append((p.x,p.y,w))
+    wins=[]
+    for (tx,ty,w) in wintexts:
+        dtop=abs(TOPY-ty); dbot=abs(ty-BOTY); dleft=abs(tx-LEFTX); dright=abs(RIGHTX-tx)
+        mn=min(dtop,dbot,dleft,dright)
+        if mn==dtop:   wins.append(('h',tx,TOPY,w))
+        elif mn==dbot: wins.append(('h',tx,BOTY,w))
+        elif mn==dleft:wins.append(('v',LEFTX,ty,w))
+        else:          wins.append(('v',RIGHTX,ty,w))
+    # borrar/registrar entidades
     for e in list(msp):
         try:
             if e.dxf.layer in SKIP: msp.delete_entity(e); continue
             b=bb.extents([e],fast=True)
             if not b.has_data: msp.delete_entity(e); continue
             cx=(b.extmin.x+b.extmax.x)/2; cy=(b.extmin.y+b.extmax.y)/2
-            keep = (x0-margin<=cx<=x1+margin and y0-margin<=cy<=y1+margin)
+            keep=(x0-margin<=cx<=x1+margin and y0-margin<=cy<=y1+margin)
             if e.dxftype()=='INSERT':
-                if keep:
-                    inserts.append(dict(name=e.dxf.name, ix=e.dxf.insert.x, iy=e.dxf.insert.y,
-                        rot=e.dxf.rotation, mx=(e.dxf.xscale<0),
-                        cx=cx, cy=cy, fw=b.extmax.x-b.extmin.x, fh=b.extmax.y-b.extmin.y))
+                n=e.dxf.name
+                if n in KEEP:
+                    if not keep: msp.delete_entity(e)
+                    continue
+                if keep and (n in REPLACE or n in TABLE or n in WASHER):
+                    furn.append(dict(name=n, cx=cx, cy=cy, rot=e.dxf.rotation, mx=(e.dxf.xscale<0),
+                                     fw=b.extmax.x-b.extmin.x, fh=b.extmax.y-b.extmin.y))
                 msp.delete_entity(e); continue
             if not keep: msp.delete_entity(e)
         except: pass
@@ -58,56 +87,60 @@ def render_walls(crop, weight=1100, margin=0.6):
     for c in GR: s=s.replace(c,'currentColor')
     m=re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', s); VBW,VBH=float(m.group(1)),float(m.group(2))
     s=re.sub(r'(<svg[^>]*?)\swidth="[^"]*"\s*height="[^"]*"', r'\1', s, count=1)
-    return s, K, VBW, VBH, inserts
+    return s, K, VBW, VBH, furn, wins
 
-def overlay(inserts, K, VBW):
+def overlay(furn, wins, K, VBW):
     KX0,KY0,KX1,KY1=K; sx=VBW/(KX1-KX0)
     def P(x,y): return ((x-KX0)*sx, (KY1-y)*sx)
-    els=[]
-    used=set()
-    for it in inserts:
-        n=it['name']; cx,cy=it['cx'],it['cy']; fw,fh=it['fw'],it['fh']
-        scx,scy=P(cx,cy); rot=it['rot']; sgn=-1 if it['mx'] else 1
-        if n in MAP:
-            t=MAP[n]; used.add(t)
-            # tamaño sin rotar: si rot 90/270, la bbox está rotada
-            r=rot%360
-            if abs(r-90)<45 or abs(r-270)<45: uw,uh=fh,fw
-            else: uw,uh=fw,fh
-            Wp,Hp=uw*sx,uh*sx
-            els.append(f'<g transform="translate({scx:.0f},{scy:.0f}) rotate({-rot:.0f}) scale({sgn},1)">'
-                       f'<use href="#pc_{t}" x="{-Wp/2:.0f}" y="{-Hp/2:.0f}" width="{Wp:.0f}" height="{Hp:.0f}"/></g>')
-        elif n in DOORS:
-            W=DOORS[n]*sx
-            hx,hy=P(it['ix'],it['iy'])
-            els.append(f'<g transform="translate({hx:.0f},{hy:.0f}) rotate({-rot:.0f}) scale({sgn},1)">'
-                       f'<path d="M0,0 L0,{-W:.0f} M0,{-W:.0f} A {W:.0f} {W:.0f} 0 0 1 {W:.0f},0" '
-                       f'fill="none" stroke="currentColor" stroke-width="1.4" vector-effect="non-scaling-stroke"/></g>')
-        elif n in WINDOWS:
-            # ventana: lineas paralelas a lo largo del muro (segun aspecto de la bbox)
-            w,h=fw*sx,fh*sx
-            if fw>=fh:
-                y0v=scy; x=scx-w/2
-                els.append(f'<g fill="none" stroke="currentColor">'
-                           f'<line x1="{x:.0f}" y1="{y0v-3:.0f}" x2="{x+w:.0f}" y2="{y0v-3:.0f}" stroke-width="1.2" vector-effect="non-scaling-stroke"/>'
-                           f'<line x1="{x:.0f}" y1="{y0v+3:.0f}" x2="{x+w:.0f}" y2="{y0v+3:.0f}" stroke-width="1.2" vector-effect="non-scaling-stroke"/></g>')
-            else:
-                x=scx; y=scy-h/2
-                els.append(f'<g fill="none" stroke="currentColor">'
-                           f'<line x1="{x-3:.0f}" y1="{y:.0f}" x2="{x-3:.0f}" y2="{y+h:.0f}" stroke-width="1.2" vector-effect="non-scaling-stroke"/>'
-                           f'<line x1="{x+3:.0f}" y1="{y:.0f}" x2="{x+3:.0f}" y2="{y+h:.0f}" stroke-width="1.2" vector-effect="non-scaling-stroke"/></g>')
+    def place(t,cx,cy,wm,hm,rot,mir):
+        scx,scy=P(cx,cy); Wp=wm*sx; Hp=hm*sx; sgn=-1 if mir else 1
+        return (f'<g transform="translate({scx:.0f},{scy:.0f}) rotate({-rot:.0f}) scale({sgn},1)">'
+                f'<use href="#pc_{t}" x="{-Wp/2:.0f}" y="{-Hp/2:.0f}" width="{Wp:.0f}" height="{Hp:.0f}"/></g>')
+    els=[]; used=set()
+    # ventanas
+    for (kind,X,Y,w) in wins:
+        cxs,cys=P(X,Y); half=w/2*sx; th=0.06*sx
+        st='stroke="currentColor" stroke-width="1.2" vector-effect="non-scaling-stroke"'
+        if kind=='h':
+            els.append(f'<g fill="none">'
+                f'<line x1="{cxs-half:.0f}" y1="{cys-th:.0f}" x2="{cxs+half:.0f}" y2="{cys-th:.0f}" {st}/>'
+                f'<line x1="{cxs-half:.0f}" y1="{cys:.0f}" x2="{cxs+half:.0f}" y2="{cys:.0f}" {st}/>'
+                f'<line x1="{cxs-half:.0f}" y1="{cys+th:.0f}" x2="{cxs+half:.0f}" y2="{cys+th:.0f}" {st}/>'
+                f'<line x1="{cxs-half:.0f}" y1="{cys-th:.0f}" x2="{cxs-half:.0f}" y2="{cys+th:.0f}" {st}/>'
+                f'<line x1="{cxs+half:.0f}" y1="{cys-th:.0f}" x2="{cxs+half:.0f}" y2="{cys+th:.0f}" {st}/></g>')
+        else:
+            els.append(f'<g fill="none">'
+                f'<line x1="{cxs-th:.0f}" y1="{cys-half:.0f}" x2="{cxs-th:.0f}" y2="{cys+half:.0f}" {st}/>'
+                f'<line x1="{cxs:.0f}" y1="{cys-half:.0f}" x2="{cxs:.0f}" y2="{cys+half:.0f}" {st}/>'
+                f'<line x1="{cxs+th:.0f}" y1="{cys-half:.0f}" x2="{cxs+th:.0f}" y2="{cys+half:.0f}" {st}/>'
+                f'<line x1="{cxs-th:.0f}" y1="{cys-half:.0f}" x2="{cxs+th:.0f}" y2="{cys-half:.0f}" {st}/>'
+                f'<line x1="{cxs-th:.0f}" y1="{cys+half:.0f}" x2="{cxs+th:.0f}" y2="{cys+half:.0f}" {st}/></g>')
+    # muebles
+    for it in furn:
+        n=it['name']; cx,cy=it['cx'],it['cy']; rot=it['rot']; mir=it['mx']; fw,fh=it['fw'],it['fh']
+        r=rot%360; rotd = abs(r-90)<45 or abs(r-270)<45
+        if n in REPLACE:
+            t=REPLACE[n]; used.add(t)
+            if t in NAT: wm,hm=NAT[t]
+            else: wm,hm=(fh,fw) if rotd else (fw,fh)
+            els.append(place(t,cx,cy,wm,hm,rot,mir))
+        elif n in TABLE:
+            used.add('table'); used.add('chair')
+            scx,scy=P(cx,cy); sgn=-1 if mir else 1
+            g=[f'<g transform="translate({scx:.0f},{scy:.0f}) rotate({-rot:.0f}) scale({sgn},1)">']
+            tw,th2=1.40*sx,0.85*sx
+            g.append(f'<use href="#pc_table" x="{-tw/2:.0f}" y="{-th2/2:.0f}" width="{tw:.0f}" height="{th2:.0f}"/>')
+            cw=0.45*sx
+            for (dx,dy) in [(-0.40,-0.62),(0.40,-0.62),(-0.40,0.62),(0.40,0.62),(-0.92,0),(0.92,0)]:
+                g.append(f'<use href="#pc_chair" x="{dx*sx-cw/2:.0f}" y="{dy*sx-cw/2:.0f}" width="{cw:.0f}" height="{cw:.0f}"/>')
+            g.append('</g>'); els.append("".join(g))
         elif n in WASHER:
-            w,h=fw*sx,fh*sx
-            els.append(f'<g fill="none" stroke="currentColor" stroke-width="1.3" vector-effect="non-scaling-stroke">'
-                       f'<rect x="{scx-w/2:.0f}" y="{scy-h/2:.0f}" width="{w:.0f}" height="{h:.0f}" rx="4" stroke-width="1.3" vector-effect="non-scaling-stroke"/>'
-                       f'<circle cx="{scx:.0f}" cy="{scy:.0f}" r="{min(w,h)*0.32:.0f}" stroke-width="1.3" vector-effect="non-scaling-stroke"/></g>')
-        elif n in COLUMN:
-            w,h=fw*sx,fh*sx
-            els.append(f'<rect x="{scx-w/2:.0f}" y="{scy-h/2:.0f}" width="{w:.0f}" height="{h:.0f}" '
-                       f'fill="currentColor" fill-opacity="0.5"/>')
+            w,h=fw*sx,fh*sx; scx,scy=P(cx,cy)
+            els.append(f'<g fill="none" stroke="currentColor">'
+                f'<rect x="{scx-w/2:.0f}" y="{scy-h/2:.0f}" width="{w:.0f}" height="{h:.0f}" rx="4" stroke-width="1.3" vector-effect="non-scaling-stroke"/>'
+                f'<circle cx="{scx:.0f}" cy="{scy:.0f}" r="{min(w,h)*0.30:.0f}" stroke-width="1.3" vector-effect="non-scaling-stroke"/></g>')
     defs="".join(load_sym(t) for t in sorted(used))
-    return f'<defs>{defs}</defs><g>' + "".join(els) + '</g>'
-
+    return f'<defs>{defs}</defs><g>'+"".join(els)+'</g>'
 
 import re, json
 
@@ -117,8 +150,8 @@ def inner(s):
     return s
 
 def plan(crop):
-    walls,K,VBW,VBH,ins = render_walls(crop)
-    ov = overlay(ins,K,VBW)
+    walls,K,VBW,VBH,furn,wins = render_walls(crop)
+    ov = overlay(furn,wins,K,VBW)
     svg = re.sub(r'</svg>\s*$', ov+'</svg>', walls, count=1)
     return dict(svg=svg, K=K, VBW=VBW, VBH=VBH)
 
