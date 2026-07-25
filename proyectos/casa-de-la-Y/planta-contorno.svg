@@ -29,6 +29,9 @@
   <rect x="390" y="258" width="120" height="126" fill="#e3ede2"/>
   <!-- 2do DORMITORIO fill -->
   <rect x="390" y="132" width="120" height="126" fill="#dbe7d9"/>
+  <!-- BANO + PASILLO fills -->
+  <rect x="261" y="193" width="80" height="58" fill="#dbeaea"/>
+  <rect x="341" y="110" width="49" height="141" fill="#efe9dc"/>
 
   <!-- solid outer walls -->
   <g stroke="#8f8677" stroke-width="2.5" fill="none">
@@ -160,6 +163,25 @@
     <line x1="529" y1="132" x2="529" y2="258"/>
     <text x="537" y="195" text-anchor="middle" transform="rotate(-90 537 195)">3.15</text>
   </g>
+
+  <!-- BANO: 2.00 (ancho) x 1.45 (fondo), starts at the murito wall -->
+  <g stroke="#7a8a8a" stroke-width="2" fill="none">
+    <line x1="261" y1="193" x2="341" y2="193"/>   <!-- back wall -->
+    <line x1="341" y1="193" x2="341" y2="251"/>   <!-- right wall (murito side) -->
+  </g>
+  <rect x="257" y="206" width="7" height="32" fill="#cfe0e8" stroke="#7f97a3" stroke-width="1"/>
+  <text x="301" y="220" text-anchor="middle" font-size="12" font-weight="bold" fill="#3f6b6b">BAÑO</text>
+  <text x="301" y="234" text-anchor="middle" font-size="9" fill="#3f6b6b">2.00 × 1.45</text>
+  <text x="301" y="247" text-anchor="middle" font-size="7.5" fill="#3f6b6b">vent. 0.80×0.40 (izq.)</text>
+
+  <!-- PASILLO: from end of sala (abertura) to the back -->
+  <g stroke="#9a9482" stroke-width="2" fill="none">
+    <line x1="341" y1="110" x2="341" y2="193"/>   <!-- left wall above bano -->
+  </g>
+  <text x="366" y="180" text-anchor="middle" font-size="9.5" fill="#7a745f" transform="rotate(-90 366 180)">pasillo → al fondo</text>
+
+  <!-- space behind bano to survey -->
+  <text x="301" y="150" text-anchor="middle" font-size="8.5" fill="#b0a894">(a relevar)</text>
 
   <!-- FRENTE label -->
   <text x="381" y="770" text-anchor="middle" font-size="13" fill="#555" font-weight="bold">FRENTE (calle) ↓</text>

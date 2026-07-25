@@ -81,7 +81,13 @@ Elementos identificados en las fotos (pendiente de acotar):
   Puerta: pendiente de definir.
   ⚠️ Cierre: galería 1.70 + dorm.1 3.15 + dorm.2 3.15 ≈ 8.00 int. vs fondo 8.55 ext.: queda un
   pequeño margen (~0.4–0.5 m) a reconciliar cuando verifiquemos las profundidades del frente.
-- _Resto de ambientes: pendiente de relevar._
+- **Baño:** **2.00 (ancho) × 1.45 (fondo)**. Arranca desde la pared donde está el murito
+  (final de la sala) y va hacia el fondo, del lado izquierdo. **Ventana en la pared izquierda:
+  0.80 × 0.40.**
+- **Pasillito:** franja que sobra entre el baño (izq.) y los dormitorios (der.):
+  ancho total interior (~6.15) − dormitorio (3.00) − baño (2.00) ≈ **1.15 m**. Corre desde el
+  **final de la sala (abertura)** hasta el **fondo**; da acceso a los dormitorios.
+- _Resto de ambientes (detrás del baño): pendiente de relevar._
 
 ## Observaciones para propuesta (no afectan la planta)
 - Revoque de la parte baja deteriorado (zócalo de cemento a la vista).
