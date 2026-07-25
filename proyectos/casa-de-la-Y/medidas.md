@@ -65,9 +65,11 @@ Elementos identificados en las fotos (pendiente de acotar):
 - **Acceso a la casa:** puerta a la **izquierda**, entra **directo a la sala** (en la pared
   entre la galería y la sala), a **0.25 m del filo del frente**. Ancho de hoja asumido 0.80 m
   (a confirmar).
-- **Murito en la sala:** pared corta que sobresale, ubicada a **1.90 m de la pared izquierda**
-  (bajo una viga del techo). ⚠️ Falta: de qué pared sale (frente o fondo) y **cuánto sobresale**
-  (largo de la proyección). Espesor asumido 0.15.
+- **Murito en la sala:** pared corta que sobresale **0.60 m**, ubicada a **1.90 m de la pared
+  izquierda** (bajo una viga del techo). Espesor 0.15. (Sale del fondo de la sala — a confirmar
+  si es del frente.)
+- **Ventana lateral de la sala:** **1.00 × 0.90**, sobre la **pared izquierda**, a **3.50 m de
+  la pared del frente** (da al pasillo izquierdo). 3.50 asumido al borde más cercano al frente.
 - _Resto de ambientes: pendiente de relevar._
 
 ## Observaciones para propuesta (no afectan la planta)
