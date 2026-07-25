@@ -89,6 +89,12 @@ Elementos identificados en las fotos (pendiente de acotar):
   **va hasta el 2º dormitorio** (abarca el baño + el pasillo). **Abertura que da al quincho** en
   la pared del fondo, **pegada al dormitorio** (lado derecho de esa pared).
 
+## Terreno / quincho
+- **Quincho:** **7.00 m de largo × 11.57 m de ancho** (ancho total del terreno), al fondo,
+  detrás de la casa. La abertura del lavadero y la ventana del 2º dormitorio dan a él.
+- **Fondo total del terreno:** retiro 7.25 + casa 8.55 + quincho 7.00 = **22.80 m**.
+- Ver `planta-implantacion.svg` para la vista de conjunto.
+
 ### Cierre de profundidades (fondo 8.55) — OK
 - **Columna izquierda:** sala 4.85 + baño 1.45 + lavadero 1.50 = 7.80 + muros (~0.75) = **8.55** ✓
 - **Columna derecha:** galería 1.70 + dorm.1 3.15 + dorm.2 3.15 = 8.00 + muros (~0.55) ≈ **8.55** ✓

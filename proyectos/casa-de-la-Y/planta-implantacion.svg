@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 720" font-family="Arial, Helvetica, sans-serif">
+  <rect x="0" y="0" width="520" height="720" fill="#ffffff"/>
+
+  <text x="260" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#222">Casa de la "Y" — Planta de implantación (terreno)</text>
+  <text x="260" y="48" text-anchor="middle" font-size="12" fill="#777">Medidas en metros · escala aprox. 1:100</text>
+
+  <!-- ============ QUINCHO (back, full lot width) ============ -->
+  <rect x="110" y="90" width="289" height="175" fill="#efe7d4" stroke="#b79a5e" stroke-width="2"/>
+  <text x="254" y="172" text-anchor="middle" font-size="16" font-weight="bold" fill="#8a6d2e">QUINCHO</text>
+  <text x="254" y="192" text-anchor="middle" font-size="12" fill="#8a6d2e">7.00 × 11.57</text>
+
+  <!-- ============ SIDE PASSAGES ============ -->
+  <rect x="110" y="265" width="65" height="214" fill="#eef2ee" stroke="#bcccbc" stroke-width="1.5"/>
+  <text x="142" y="372" text-anchor="middle" font-size="10" fill="#4f7a4f" transform="rotate(-90 142 372)">pasillo 2.60</text>
+  <rect x="337" y="265" width="62" height="214" fill="#eeece2" stroke="#cbc7ac" stroke-width="1.5"/>
+  <text x="368" y="372" text-anchor="middle" font-size="10" fill="#8a7c3c" transform="rotate(-90 368 372)">garage/paso 2.50</text>
+
+  <!-- ============ HOUSE BLOCK 6.47 x 8.55 ============ -->
+  <rect x="175" y="265" width="162" height="214" fill="#ece7dd" stroke="#6f675a" stroke-width="2.5"/>
+
+  <!-- left column rooms -->
+  <rect x="177" y="267" width="76" height="39" fill="#e6ddec"/>
+  <rect x="177" y="306" width="76" height="40" fill="#dbeaea"/>
+  <rect x="177" y="346" width="76" height="131" fill="#e2ebf0"/>
+  <!-- right column rooms -->
+  <rect x="259" y="267" width="76" height="82" fill="#dbe7d9"/>
+  <rect x="259" y="349" width="76" height="84" fill="#e3ede2"/>
+  <rect x="259" y="433" width="76" height="44" fill="#f4efe6" stroke="#b3aa98" stroke-width="1" stroke-dasharray="4 3"/>
+
+  <!-- interior wall lines -->
+  <g stroke="#8f8677" stroke-width="1" fill="none">
+    <line x1="253" y1="267" x2="253" y2="477"/>
+    <line x1="177" y1="306" x2="253" y2="306"/>
+    <line x1="177" y1="346" x2="253" y2="346"/>
+    <line x1="259" y1="349" x2="335" y2="349"/>
+    <line x1="259" y1="433" x2="335" y2="433"/>
+  </g>
+
+  <!-- room labels -->
+  <g font-size="8" fill="#444" text-anchor="middle">
+    <text x="215" y="290" fill="#6b5a7a" font-weight="bold">LAVADERO</text>
+    <text x="215" y="330" fill="#3f6b6b" font-weight="bold">BAÑO</text>
+    <text x="215" y="410" fill="#3f5b6b" font-weight="bold" font-size="10">SALA</text>
+    <text x="297" y="310" fill="#4f6b4a" font-weight="bold">2º DORM.</text>
+    <text x="297" y="393" fill="#4f6b4a" font-weight="bold">1er DORM.</text>
+    <text x="297" y="459" fill="#8a8270">galería</text>
+  </g>
+  <text x="256" y="472" text-anchor="middle" font-size="7" fill="#999">(pasillo interno)</text>
+
+  <!-- lavadero opening to quincho -->
+  <line x1="215" y1="267" x2="245" y2="267" stroke="#3f8f5a" stroke-width="2" stroke-dasharray="3 2"/>
+  <!-- 2nd bedroom window to quincho -->
+  <line x1="278" y1="267" x2="316" y2="267" stroke="#7f97a3" stroke-width="2"/>
+
+  <!-- ============ FRONT PATIO (retiro) ============ -->
+  <rect x="110" y="479" width="289" height="181" fill="#ece2cf" stroke="#cdbfa3" stroke-width="1.5"/>
+  <text x="254" y="575" text-anchor="middle" font-size="12" fill="#8a7c5c">patio / retiro frontal</text>
+
+  <text x="254" y="682" text-anchor="middle" font-size="12" fill="#555" font-weight="bold">FRENTE (calle) ↓</text>
+  <line x1="110" y1="660" x2="399" y2="660" stroke="#555" stroke-width="2"/>
+
+  <!-- ============ WIDTH DIM (lot) ============ -->
+  <g stroke="#a8461f" stroke-width="1" fill="#a8461f" font-size="11">
+    <line x1="110" y1="76" x2="110" y2="62"/>
+    <line x1="399" y1="76" x2="399" y2="62"/>
+    <line x1="110" y1="69" x2="399" y2="69"/>
+    <text x="254" y="59" text-anchor="middle" font-weight="bold">ancho terreno 11.57</text>
+  </g>
+
+  <!-- ============ DEPTH DIMS (right) ============ -->
+  <g stroke="#444" stroke-width="1" fill="#333" font-size="11">
+    <line x1="415" y1="90" x2="429" y2="90"/>
+    <line x1="415" y1="265" x2="429" y2="265"/>
+    <line x1="422" y1="90" x2="422" y2="265"/>
+    <text x="440" y="177" text-anchor="middle" font-weight="bold" transform="rotate(-90 440 177)">quincho 7.00</text>
+    <line x1="415" y1="265" x2="429" y2="265"/>
+    <line x1="415" y1="479" x2="429" y2="479"/>
+    <line x1="422" y1="265" x2="422" y2="479"/>
+    <text x="440" y="372" text-anchor="middle" font-weight="bold" transform="rotate(-90 440 372)">casa 8.55</text>
+    <line x1="415" y1="479" x2="429" y2="479"/>
+    <line x1="415" y1="660" x2="429" y2="660"/>
+    <line x1="422" y1="479" x2="422" y2="660"/>
+    <text x="440" y="570" text-anchor="middle" font-weight="bold" transform="rotate(-90 440 570)">retiro 7.25</text>
+  </g>
+  <!-- total depth -->
+  <g stroke="#a8461f" stroke-width="1" fill="#a8461f" font-size="11">
+    <line x1="470" y1="90" x2="484" y2="90"/>
+    <line x1="470" y1="660" x2="484" y2="660"/>
+    <line x1="477" y1="90" x2="477" y2="660"/>
+    <text x="495" y="375" text-anchor="middle" font-weight="bold" transform="rotate(-90 495 375)">fondo total 22.80</text>
+  </g>
+
+  <!-- notes -->
+  <g font-size="10" fill="#666">
+    <rect x="110" y="694" width="300" height="20" fill="#f6f4ef" stroke="#ddd"/>
+    <text x="118" y="708">Quincho al fondo, a todo el ancho. Interior de la casa: ver planta de detalle.</text>
+  </g>
+</svg>
