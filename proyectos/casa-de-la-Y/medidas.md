@@ -26,6 +26,7 @@ Elementos identificados en las fotos (pendiente de acotar):
 ## Lados / accesos al quincho
 - **Pasillo lateral izquierdo:** ancho **2.60 m**, va directo al quincho.
 - **Pasillo lateral derecho:** también va al quincho (ancho pendiente de medir).
+- **Garage:** ubicado del **lado derecho** de la casa (medidas pendientes).
 
 ## Niveles / desnivel del terreno
 - **Base del frente / lado izquierdo:** **0.50 m** sobre el patio.
