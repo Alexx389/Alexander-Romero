@@ -16,10 +16,18 @@ Elementos identificados en las fotos (pendiente de acotar):
 |---|-------|-------|------|-------|
 | 1 | Pasillo/entrada lateral izquierda → al quincho | **2.60 m** | — | Corre al costado izq. de la casa; murito de ladrillo visto, lleva directo al quincho |
 | 2 | Paño pared izq. (frente): esquina izq. → ventana | **0.90 m** | — | Farol colonial; revoque deteriorado |
-| 3 | Ventana frente | — | — | Corrediza, marco oscuro |
+| 3 | Ventana frente | **1.60 m** | **1.25 m** | Corrediza, marco oscuro. Antepecho a **1.40 m** del piso |
 | 4 | Paño pared der. de ventana | — | — | |
 | 5 | Galería / porche | — | — | 1 columna, 2 gradas, puerta de entrada |
 | — | **Ancho total del frente** | — | — | Para chequeo de cierre |
+
+## Datos verticales / alzado
+- **Casa elevada:** base de **0.50 m** sobre el nivel del patio (escalones de acceso).
+- **Ventana frente:** antepecho a **1.40 m** del piso; hoja de **1.25 m** de alto.
+- ⚠️ A confirmar: el 1.40 m del antepecho, ¿es desde el piso interior o desde el
+  nivel del patio? (Para el alzado, si es desde piso interior, sumar los 0.50 m
+  de elevación → antepecho a 1.90 m sobre el patio.)
+- Pendiente: altura libre interior (piso a techo) y altura de la puerta de entrada.
 
 ## Interior (pendiente)
 _Aún sin cargar._
