@@ -24,7 +24,9 @@ def plan_svg(crop, weight=1100, margin=0.6):
     s=be.get_string(layout.Page(0,0,layout.Units.mm,margins=layout.Margins.all(2)),
         settings=layout.Settings(fit_page=True, fixed_stroke_width=0.2))
     s=re.sub(r'stroke-width:\s*[\d.]+', f'stroke-width: {weight}', s)
-    s=re.sub(r'fill:\s*#(?:d3d3d3|f4f4f4|ffffff|aeaeae|a6a6a6)', 'fill: none', s)
+    # texto = contorno (stroke), así que bajar la opacidad de TODOS los rellenos
+    # aclara el poché de muros y muebles SIN perder cotas ni bloques dibujados con relleno
+    s=re.sub(r'fill-opacity:\s*[\d.]+', 'fill-opacity: 0.26', s)
     for c in GRISES: s=s.replace(c,'currentColor')
     return re.sub(r'(<svg[^>]*?)width="[^"]*"\s*height="[^"]*"', r'\1width="100%"', s, count=1)
 
