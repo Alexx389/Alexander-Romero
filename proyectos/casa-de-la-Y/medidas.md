@@ -84,8 +84,8 @@ Elementos identificados en las fotos (pendiente de acotar):
   **Puerta desde el pasillo**, a 25 cm de la puerta del 1er dormitorio.
 - **Baño:** **2.00 (ancho) × 1.45 (fondo)**. Arranca desde la pared donde está el murito
   (final de la sala) y va hacia el fondo, del lado izquierdo. **Ventana en la pared izquierda:
-  0.80 × 0.40.** **Puerta de 0.70 m** que empieza desde la izquierda (en la pared del frente del
-  baño; a confirmar si abre a la sala o al pasillo).
+  0.80 × 0.40.** **Puerta de 0.70 m que abre hacia el pasillo** (en la pared del baño que da al
+  pasillo).
 - **Pasillito:** franja que sobra entre el baño (izq.) y los dormitorios (der.):
   ancho total interior (~6.15) − dormitorio (3.00) − baño (2.00) ≈ **1.15 m**. Corre desde el
   **final de la sala (abertura)** y **continúa hasta la abertura del lavadero al quincho**
