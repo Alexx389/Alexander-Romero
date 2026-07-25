@@ -78,16 +78,20 @@ Elementos identificados en las fotos (pendiente de acotar):
   **Ventana centrada en la pared derecha: 1.00 × 0.90** (da al lado del garage).
 - **2º dormitorio (contiguo al 1º, hacia el fondo):** **3.15 × 3.00** (mismas medidas).
   **Ventana en la pared del fondo, con vista al quincho: 1.80 × 1.00** (asumida centrada).
-  Puerta: pendiente de definir.
-  ⚠️ Cierre: galería 1.70 + dorm.1 3.15 + dorm.2 3.15 ≈ 8.00 int. vs fondo 8.55 ext.: queda un
-  pequeño margen (~0.4–0.5 m) a reconciliar cuando verifiquemos las profundidades del frente.
+  Puerta: pendiente de definir (probablemente desde el pasillo).
 - **Baño:** **2.00 (ancho) × 1.45 (fondo)**. Arranca desde la pared donde está el murito
   (final de la sala) y va hacia el fondo, del lado izquierdo. **Ventana en la pared izquierda:
   0.80 × 0.40.**
 - **Pasillito:** franja que sobra entre el baño (izq.) y los dormitorios (der.):
   ancho total interior (~6.15) − dormitorio (3.00) − baño (2.00) ≈ **1.15 m**. Corre desde el
-  **final de la sala (abertura)** hasta el **fondo**; da acceso a los dormitorios.
-- _Resto de ambientes (detrás del baño): pendiente de relevar._
+  **final de la sala (abertura)** hasta el **lavadero**; da acceso a los dormitorios.
+- **Lavadero:** **contiguo al baño** (detrás, hacia el fondo), **1.50 m de fondo**. Su ancho
+  **va hasta el 2º dormitorio** (abarca el baño + el pasillo). **Abertura que da al quincho** en
+  la pared del fondo, **pegada al dormitorio** (lado derecho de esa pared).
+
+### Cierre de profundidades (fondo 8.55) — OK
+- **Columna izquierda:** sala 4.85 + baño 1.45 + lavadero 1.50 = 7.80 + muros (~0.75) = **8.55** ✓
+- **Columna derecha:** galería 1.70 + dorm.1 3.15 + dorm.2 3.15 = 8.00 + muros (~0.55) ≈ **8.55** ✓
 
 ## Observaciones para propuesta (no afectan la planta)
 - Revoque de la parte baja deteriorado (zócalo de cemento a la vista).

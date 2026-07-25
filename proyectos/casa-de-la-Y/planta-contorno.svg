@@ -29,9 +29,10 @@
   <rect x="390" y="258" width="120" height="126" fill="#e3ede2"/>
   <!-- 2do DORMITORIO fill -->
   <rect x="390" y="132" width="120" height="126" fill="#dbe7d9"/>
-  <!-- BANO + PASILLO fills -->
+  <!-- BANO + PASILLO + LAVADERO fills -->
   <rect x="261" y="193" width="80" height="58" fill="#dbeaea"/>
-  <rect x="341" y="110" width="49" height="141" fill="#efe9dc"/>
+  <rect x="341" y="193" width="49" height="58" fill="#efe9dc"/>
+  <rect x="261" y="133" width="129" height="60" fill="#e6ddec"/>
 
   <!-- solid outer walls -->
   <g stroke="#8f8677" stroke-width="2.5" fill="none">
@@ -174,14 +175,19 @@
   <text x="301" y="234" text-anchor="middle" font-size="9" fill="#3f6b6b">2.00 × 1.45</text>
   <text x="301" y="247" text-anchor="middle" font-size="7.5" fill="#3f6b6b">vent. 0.80×0.40 (izq.)</text>
 
-  <!-- PASILLO: from end of sala (abertura) to the back -->
-  <g stroke="#9a9482" stroke-width="2" fill="none">
-    <line x1="341" y1="110" x2="341" y2="193"/>   <!-- left wall above bano -->
-  </g>
-  <text x="366" y="180" text-anchor="middle" font-size="9.5" fill="#7a745f" transform="rotate(-90 366 180)">pasillo → al fondo</text>
+  <!-- PASILLO label (corridor y193..251 between bano and bedrooms) -->
+  <text x="366" y="224" text-anchor="middle" font-size="9" fill="#7a745f" transform="rotate(-90 366 224)">pasillo</text>
 
-  <!-- space behind bano to survey -->
-  <text x="301" y="150" text-anchor="middle" font-size="8.5" fill="#b0a894">(a relevar)</text>
+  <!-- LAVADERO: contiguo al bano, 1.50 fondo, hasta el 2do dormitorio -->
+  <g stroke="#8a7a9a" stroke-width="2" fill="none">
+    <line x1="261" y1="133" x2="348" y2="133"/>   <!-- back wall (left part) -->
+    <line x1="388" y1="133" x2="390" y2="133"/>   <!-- back wall (right stub) -->
+  </g>
+  <!-- abertura al quincho, pegada al dormitorio -->
+  <line x1="348" y1="133" x2="388" y2="133" stroke="#3f8f5a" stroke-width="1.6" stroke-dasharray="4 3"/>
+  <text x="368" y="126" text-anchor="middle" font-size="8" fill="#3f8f5a">abertura al quincho</text>
+  <text x="322" y="162" text-anchor="middle" font-size="12" font-weight="bold" fill="#6b5a7a">LAVADERO</text>
+  <text x="322" y="176" text-anchor="middle" font-size="9" fill="#6b5a7a">1.50 fondo</text>
 
   <!-- FRENTE label -->
   <text x="381" y="770" text-anchor="middle" font-size="13" fill="#555" font-weight="bold">FRENTE (calle) ↓</text>
