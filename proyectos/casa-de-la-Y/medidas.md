@@ -75,10 +75,10 @@ Elementos identificados en las fotos (pendiente de acotar):
   derecha de la sala (~0.95 m de ancho; a confirmar).
 - **1er dormitorio (lado derecho):** **3.15 m (fondo) × 3.00 m (ancho)**. Ubicado a la derecha,
   detrás de la galería. **Ventana centrada en la pared derecha: 1.00 × 0.90** (da al lado del garage).
-- **Puertas de los dormitorios:** las dos están **juntas, separadas 25 cm**, junto a la pared que
-  divide los dormitorios (1º desde la sala, 2º desde el pasillo). ⚠️ Esto reubica la puerta del 1º
-  respecto del dato previo de "2.95 m desde el acceso" — a confirmar la distancia exacta del par
-  de puertas al frente.
+- **Puertas de los dormitorios:** hoja de **0.80 m** cada una. Están **separadas 25 cm entre sí**
+  = **5 cm + muro divisorio 0.15 + 5 cm** (cada puerta a 5 cm de la pared que divide los
+  dormitorios). Esta separación es **independiente** de la distancia **2.95 m** de la **puerta
+  principal a la puerta del 1er dormitorio** — ambas conviven, no se contradicen.
 - **2º dormitorio (contiguo al 1º, hacia el fondo):** **3.15 × 3.00** (mismas medidas).
   **Ventana en la pared del fondo, con vista al quincho: 1.80 × 1.00** (asumida centrada).
   **Puerta desde el pasillo**, a 25 cm de la puerta del 1er dormitorio.

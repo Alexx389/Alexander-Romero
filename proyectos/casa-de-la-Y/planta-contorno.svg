@@ -120,12 +120,20 @@
   <path d="M422,221 A 32 32 0 0 1 390,253" fill="none" stroke="#b3b3b3" stroke-width="1"/>
   <text x="452" y="235" text-anchor="middle" font-size="8.5" fill="#4f6b4a">puerta 2º dorm.</text>
 
-  <!-- 0.25 m between the two bedroom doors -->
+  <!-- 0.25 m between the two bedroom doors (5 + 15 wall + 5) -->
   <g stroke="#a8461f" stroke-width="0.8" fill="#a8461f" font-size="8">
     <line x1="424" y1="253" x2="436" y2="253"/>
     <line x1="424" y1="263" x2="436" y2="263"/>
     <line x1="430" y1="253" x2="430" y2="263"/>
-    <text x="440" y="261" text-anchor="start">0.25</text>
+    <text x="440" y="261" text-anchor="start">0.25 (5+15+5)</text>
+  </g>
+
+  <!-- 2.95 m from main door to 1st bedroom door (independent measure) -->
+  <g stroke="#7a5a2a" stroke-width="0.8" fill="#7a5a2a" font-size="8">
+    <line x1="356" y1="295" x2="368" y2="295"/>
+    <line x1="356" y1="410" x2="368" y2="410"/>
+    <line x1="362" y1="295" x2="362" y2="410"/>
+    <text x="362" y="353" text-anchor="middle" transform="rotate(-90 362 353)">2.95 a puerta ppal.</text>
   </g>
 
   <!-- FIRST BEDROOM (right side): 3.15 (fondo) x 3.00 (ancho) -->
