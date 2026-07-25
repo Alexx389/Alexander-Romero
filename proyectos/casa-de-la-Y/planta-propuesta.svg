@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 860" font-family="Arial, Helvetica, sans-serif">
+  <rect x="0" y="0" width="760" height="860" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="380" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#1f5f43">Casa de la "Y" — PROPUESTA (integración)</text>
+  <text x="380" y="52" text-anchor="middle" font-size="13" fill="#777">Medidas en metros · borrador de anteproyecto</text>
+
+  <text x="600" y="105" font-size="11" fill="#2b7bbf" font-weight="bold">↑ al quincho (techar paso con vidrio)</text>
+
+  <!-- ================= FRONT PATIO (retiro) ================= -->
+  <rect x="150" y="452" width="463" height="290" fill="#ece2cf" stroke="#cdbfa3" stroke-width="1.5"/>
+  <text x="381" y="600" text-anchor="middle" font-size="13" fill="#8a7c5c">patio / retiro frontal</text>
+
+  <!-- ================= LEFT PASSAGE ================= -->
+  <rect x="150" y="110" width="104" height="342" fill="#eef2ee" stroke="#bcccbc" stroke-width="1.5"/>
+  <text x="202" y="290" text-anchor="middle" font-size="12" fill="#4f7a4f" transform="rotate(-90 202 290)">pasillo 2.60 → quincho</text>
+
+  <!-- ================= RIGHT STRIP (garage + passage) ================= -->
+  <rect x="513" y="110" width="100" height="342" fill="#eeece2" stroke="#cbc7ac" stroke-width="1.5"/>
+  <text x="563" y="300" text-anchor="middle" font-size="12" fill="#8a7c3c" transform="rotate(-90 563 300)">garage + paso 2.50 → quincho</text>
+
+  <!-- ================= HOUSE fill ================= -->
+  <rect x="254" y="110" width="259" height="342" fill="#ece7dd"/>
+  <rect x="390" y="384" width="123" height="68" fill="#f4efe6"/>
+  <!-- UNIFIED ROOM fill (sala + 1er dorm + connecting gap) -->
+  <rect x="261" y="251" width="120" height="194" fill="#e2efe8"/>
+  <rect x="390" y="258" width="120" height="126" fill="#e2efe8"/>
+  <rect x="381" y="263" width="9" height="121" fill="#e2efe8"/>
+  <!-- other room fills -->
+  <rect x="390" y="132" width="120" height="126" fill="#dbe7d9"/>
+  <rect x="261" y="193" width="80" height="58" fill="#dbeaea"/>
+  <rect x="341" y="193" width="49" height="58" fill="#efe9dc"/>
+  <rect x="261" y="133" width="129" height="60" fill="#e6ddec"/>
+
+  <!-- solid outer walls -->
+  <g stroke="#8f8677" stroke-width="2.5" fill="none">
+    <line x1="254" y1="110" x2="254" y2="452"/>
+    <line x1="254" y1="110" x2="513" y2="110"/>
+    <line x1="513" y1="110" x2="513" y2="384"/>
+    <line x1="390" y1="384" x2="513" y2="384"/>
+    <line x1="390" y1="384" x2="390" y2="452"/>
+    <line x1="254" y1="452" x2="390" y2="452"/>
+  </g>
+
+  <!-- interior partitions kept -->
+  <g stroke="#8f8677" stroke-width="2" fill="none">
+    <line x1="381" y1="251" x2="381" y2="263"/>          <!-- small stub top -->
+    <line x1="381" y1="384" x2="381" y2="445"/>          <!-- sala/galeria wall (kept) -->
+    <line x1="289" y1="251" x2="337" y2="251"/>          <!-- baño front wall -->
+  </g>
+
+  <!-- WALL TO DEMOLISH → ARCO (between sala and 1er dorm) -->
+  <line x1="381" y1="263" x2="381" y2="384" stroke="#c0392b" stroke-width="2" stroke-dasharray="7 5"/>
+  <path d="M381,300 q -14 42 0 84" fill="none" stroke="#c0392b" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="405" y="326" font-size="9" fill="#c0392b" font-weight="bold" transform="rotate(-90 405 326)">romper pared → ARCO</text>
+
+  <!-- VANO galeria (kept) -->
+  <line x1="513" y1="384" x2="513" y2="442" stroke="#c0392b" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="527" y="416" font-size="11" fill="#c0392b" transform="rotate(-90 527 416)">vano (abierto)</text>
+  <rect x="503" y="442" width="10" height="10" fill="#6f675a"/>
+  <text x="527" y="452" font-size="10" fill="#6f675a">pilar</text>
+
+  <!-- front window (kept; propuesta: vidrio) -->
+  <rect x="290" y="449" width="64" height="6" fill="#2b7bbf"/>
+  <text x="322" y="466" text-anchor="middle" font-size="9" fill="#2b7bbf">ventana vidrio</text>
+
+  <!-- side window (kept) -->
+  <rect x="253" y="272" width="8" height="40" fill="#cfe0e8" stroke="#7f97a3" stroke-width="1"/>
+  <line x1="253" y1="292" x2="261" y2="292" stroke="#7f97a3" stroke-width="0.8"/>
+
+  <!-- PLACARD in the murito nook -->
+  <rect x="289" y="251" width="48" height="22" fill="#d8c39a" stroke="#a8905e" stroke-width="1"/>
+  <line x1="289" y1="251" x2="337" y2="273" stroke="#a8905e" stroke-width="0.6"/>
+  <text x="313" y="266" text-anchor="middle" font-size="8" fill="#7a6535">PLACARD</text>
+
+  <!-- MURITO (kept as placard side) -->
+  <rect x="337" y="251" width="6" height="24" fill="#b98a52" stroke="#8a5a24" stroke-width="0.8"/>
+
+  <!-- ABERTURA sala→pasillo (kept) -->
+  <line x1="343" y1="251" x2="375" y2="251" stroke="#3f8f5a" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <line x1="375" y1="251" x2="381" y2="251" stroke="#8f8677" stroke-width="2.5"/>
+
+  <!-- UNIFIED ROOM label -->
+  <text x="360" y="345" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f5f43">DORMITORIO</text>
+  <text x="360" y="362" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f5f43">+ ESTAR</text>
+  <text x="360" y="378" text-anchor="middle" font-size="10" fill="#3f8060">(sala + 1er dorm. unificados)</text>
+
+  <!-- ENTRANCE DOOR (kept) -->
+  <rect x="379" y="409" width="13" height="34" fill="#eaf0f3"/>
+  <line x1="381" y1="442" x2="349" y2="442" stroke="#5b5b5b" stroke-width="2"/>
+  <path d="M349,442 A 32 32 0 0 1 381,410" fill="none" stroke="#b3b3b3" stroke-width="1"/>
+  <text x="352" y="404" text-anchor="middle" font-size="9" fill="#555">acceso</text>
+
+  <!-- DOOR to 2nd bedroom (kept) -->
+  <rect x="384" y="221" width="12" height="32" fill="#eeede4"/>
+  <line x1="390" y1="221" x2="422" y2="221" stroke="#5b5b5b" stroke-width="2"/>
+  <path d="M422,221 A 32 32 0 0 1 390,253" fill="none" stroke="#b3b3b3" stroke-width="1"/>
+  <text x="452" y="243" text-anchor="middle" font-size="8.5" fill="#4f6b4a">puerta 2º dorm.</text>
+
+  <!-- SECOND BEDROOM (kept) -->
+  <g stroke="#7a8a6f" stroke-width="2" fill="none">
+    <line x1="390" y1="132" x2="510" y2="132"/>
+    <line x1="390" y1="132" x2="390" y2="221"/>
+    <line x1="390" y1="253" x2="390" y2="258"/>
+    <line x1="510" y1="132" x2="510" y2="258"/>
+    <line x1="390" y1="258" x2="510" y2="258"/>
+    <line x1="510" y1="258" x2="510" y2="384"/>
+  </g>
+  <rect x="414" y="128" width="72" height="8" fill="#cfe0e8" stroke="#7f97a3" stroke-width="1"/>
+  <text x="450" y="122" text-anchor="middle" font-size="8.5" fill="#4f6b4a">ventana 1.80×1.00 (al quincho)</text>
+  <text x="450" y="190" text-anchor="middle" font-size="13" font-weight="bold" fill="#4f6b4a">2º DORM.</text>
+  <text x="450" y="207" text-anchor="middle" font-size="11" fill="#4f6b4a">3.15 × 3.00</text>
+  <!-- 1er dorm window (kept, now part of unified room) -->
+  <rect x="507" y="301" width="9" height="40" fill="#cfe0e8" stroke="#7f97a3" stroke-width="1"/>
+
+  <!-- BAÑO (kept) -->
+  <g stroke="#7a8a8a" stroke-width="2" fill="none">
+    <line x1="261" y1="193" x2="341" y2="193"/>
+    <line x1="341" y1="193" x2="341" y2="251"/>
+  </g>
+  <rect x="257" y="206" width="7" height="32" fill="#cfe0e8" stroke="#7f97a3" stroke-width="1"/>
+  <rect x="261" y="249" width="28" height="4" fill="#eaf0f2"/>
+  <line x1="261" y1="251" x2="261" y2="223" stroke="#5b5b5b" stroke-width="2"/>
+  <path d="M289,251 A 28 28 0 0 1 261,223" fill="none" stroke="#b3b3b3" stroke-width="1"/>
+  <text x="301" y="222" text-anchor="middle" font-size="11" font-weight="bold" fill="#3f6b6b">BAÑO</text>
+  <text x="301" y="236" text-anchor="middle" font-size="8" fill="#3f6b6b">2.00×1.45</text>
+
+  <!-- PASILLO -->
+  <text x="366" y="224" text-anchor="middle" font-size="9" fill="#7a745f" transform="rotate(-90 366 224)">pasillo</text>
+
+  <!-- LAVADERO (kept) -->
+  <g stroke="#8a7a9a" stroke-width="2" fill="none">
+    <line x1="261" y1="133" x2="356" y2="133"/>
+    <line x1="388" y1="133" x2="390" y2="133"/>
+  </g>
+  <line x1="356" y1="133" x2="388" y2="133" stroke="#3f8f5a" stroke-width="1.6" stroke-dasharray="4 3"/>
+  <text x="322" y="162" text-anchor="middle" font-size="11" font-weight="bold" fill="#6b5a7a">LAVADERO</text>
+  <text x="322" y="176" text-anchor="middle" font-size="8" fill="#6b5a7a">1.50 fondo</text>
+
+  <!-- FRENTE label -->
+  <text x="381" y="770" text-anchor="middle" font-size="13" fill="#555" font-weight="bold">FRENTE (calle) ↓</text>
+
+  <!-- humidity note tag -->
+  <text x="228" y="430" text-anchor="middle" font-size="8" fill="#a8461f" transform="rotate(-90 228 430)">tratar humedad (paredes + techo)</text>
+
+  <!-- ================= PROPOSAL LEGEND ================= -->
+  <g font-size="11" fill="#333">
+    <rect x="120" y="792" width="520" height="58" fill="#eef5f0" stroke="#bcd8c8"/>
+    <text x="132" y="808" font-weight="bold" fill="#1f5f43">PROPUESTA:</text>
+    <text x="210" y="808">1) Unificar sala + 1er dorm. (romper muro no portante + arco).  2) Placard en el rincón del murito.</text>
+    <text x="132" y="824">3) Tratar humedad (paredes + cubierta).  4) Pisos claros y colores blancos/claros (más luz).</text>
+    <text x="132" y="840">5) Fachada renovada con vidrio.  6) Techar el paso abierto del quincho con vidrio/translúcido (luz + protección).</text>
+  </g>
+</svg>
