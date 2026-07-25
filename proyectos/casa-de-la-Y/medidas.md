@@ -73,6 +73,9 @@ Elementos identificados en las fotos (pendiente de acotar):
 - **Abertura al fondo de la sala:** en la pared del fondo, **a la derecha del murito**, comunica
   con el ambiente de atrás. Va desde la derecha del murito (~2.05 desde la izq.) hasta la pared
   derecha de la sala (~0.95 m de ancho; a confirmar).
+- **1er dormitorio (lado derecho):** su puerta está a **2.95 m de la puerta de acceso**
+  (medido en el sentido del fondo). Queda en la **pared derecha de la sala**, a ~3.60 m del
+  frente. Falta: medidas internas del dormitorio (largo × ancho), ventanas y ancho de la puerta.
 - _Resto de ambientes: pendiente de relevar._
 
 ## Observaciones para propuesta (no afectan la planta)

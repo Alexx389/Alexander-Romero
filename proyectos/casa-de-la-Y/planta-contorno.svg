@@ -38,7 +38,8 @@
 
   <!-- SALA interior partitions -->
   <g stroke="#8f8677" stroke-width="2" fill="none">
-    <line x1="381" y1="251" x2="381" y2="445"/>          <!-- right partition -->
+    <line x1="381" y1="251" x2="381" y2="292"/>          <!-- right partition (upper) -->
+    <line x1="381" y1="324" x2="381" y2="445"/>          <!-- right partition (lower) -->
     <line x1="261" y1="251" x2="337" y2="251"/>          <!-- back wall solid up to murito -->
   </g>
 
@@ -99,9 +100,22 @@
     <text x="405" y="450" text-anchor="start">0.25</text>
   </g>
 
-  <!-- resto interior to survey -->
-  <text x="451" y="210" text-anchor="middle" font-size="12" fill="#8a8270">resto interior</text>
-  <text x="451" y="228" text-anchor="middle" font-size="11" fill="#b0a894">(a relevar)</text>
+  <!-- DOOR to first bedroom (right side), 2.95 m from access door -->
+  <rect x="378" y="292" width="12" height="32" fill="#eeede4"/>
+  <line x1="381" y1="324" x2="413" y2="324" stroke="#5b5b5b" stroke-width="2"/>
+  <path d="M413,324 A 32 32 0 0 0 381,292" fill="none" stroke="#b3b3b3" stroke-width="1"/>
+  <text x="447" y="345" text-anchor="middle" font-size="9" fill="#7a5a2a">puerta 1er dorm.</text>
+  <!-- 2.95 m between access door and bedroom door (axial) -->
+  <g stroke="#7a5a2a" stroke-width="0.8" fill="#7a5a2a" font-size="8">
+    <line x1="367" y1="308" x2="367" y2="426"/>
+    <line x1="363" y1="308" x2="371" y2="308"/>
+    <line x1="363" y1="426" x2="371" y2="426"/>
+    <text x="367" y="368" text-anchor="middle" transform="rotate(-90 367 368)">2.95 entre puertas</text>
+  </g>
+
+  <!-- first bedroom (right side) to survey -->
+  <text x="455" y="200" text-anchor="middle" font-size="12" fill="#8a7c4c">1er DORMITORIO</text>
+  <text x="455" y="216" text-anchor="middle" font-size="10" fill="#b0a894">(lado derecho · a relevar)</text>
 
   <!-- FRENTE label -->
   <text x="381" y="770" text-anchor="middle" font-size="13" fill="#555" font-weight="bold">FRENTE (calle) ↓</text>
