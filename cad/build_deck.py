@@ -31,7 +31,7 @@ def plan_svg(crop, weight=1100, margin=0.6):
 SLIDES=[
  dict(num="01", tit="Planta Alta", sub="Nivel superior · 4 departamentos (2 dorm. c/u)",
       cap="Cuatro unidades espejadas de a pares. Cada departamento integra cocina, comedor y sala, con lavadero, baño y dos dormitorios. Escalera central de acceso. Envolvente 24.00 × 12.90 m.",
-      crop=(20,66,46,81)),
+      crop=(20,66,46,84.5)),
  dict(num="02", tit="Planta Baja", sub="Nivel acceso · salón comercial + estacionamiento",
       cap="Dos salones comerciales con accesos independientes (entrada 1 y 2), módulos de estacionamiento y servicios existentes (vivienda y lavadero). Linderos acotados: 24.00 × 28.20 m.",
       crop=(48,53,81,86)),
