@@ -76,6 +76,11 @@ Elementos identificados en las fotos (pendiente de acotar):
 - **1er dormitorio (lado derecho):** **3.15 m (fondo) × 3.00 m (ancho)**. Ubicado a la derecha,
   detrás de la galería. Puerta a **2.95 m de la puerta de acceso** (sentido del fondo).
   **Ventana centrada en la pared derecha: 1.00 × 0.90** (da al lado del garage).
+- **2º dormitorio (contiguo al 1º, hacia el fondo):** **3.15 × 3.00** (mismas medidas).
+  **Ventana en la pared del fondo, con vista al quincho: 1.80 × 1.00** (asumida centrada).
+  Puerta: pendiente de definir.
+  ⚠️ Cierre: galería 1.70 + dorm.1 3.15 + dorm.2 3.15 ≈ 8.00 int. vs fondo 8.55 ext.: queda un
+  pequeño margen (~0.4–0.5 m) a reconciliar cuando verifiquemos las profundidades del frente.
 - _Resto de ambientes: pendiente de relevar._
 
 ## Observaciones para propuesta (no afectan la planta)
