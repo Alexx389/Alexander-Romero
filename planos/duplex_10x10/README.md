@@ -2,8 +2,11 @@
 
 Planta acotada de un edificio de dos plantas con **dos departamentos por
 planta** (4 en total), sobre un terreno de 10,00 × 10,00 m ocupado en su
-totalidad. Cada departamento mide **5,00 × 10,00 m** y es espejo del otro
-respecto del muro divisorio.
+totalidad. Cada departamento mide **5,00 × 10,00 m**, tiene **3
+dormitorios** y es espejo del otro respecto del muro divisorio.
+
+**No hay pasillo**: el estar-comedor hace de distribuidor y todas las
+puertas abren sobre él.
 
 ## Entregables
 
@@ -17,28 +20,43 @@ respecto del muro divisorio.
 
 | Ambiente | Medidas | Superficie |
 |---|---|---|
-| Dorm. 1 | 2,25 × 3,15 | 7,09 m² |
-| Dorm. 2 | 2,40 × 3,15 | 7,56 m² |
-| Pasillo | 3,25 × 1,00 | 3,25 m² |
-| Baño | 1,40 × 2,10 | 2,94 m² |
-| Cocina – comedor – estar | 3,40 × 3,00 | 13,94 m² |
-| Balcón | 3,40 × 1,10 | 3,74 m² |
-| **Superficie cubierta** | | **34,78 m²** |
-| **Total con balcón** | | **38,52 m²** |
+| Dorm. 1 | 2,15 x 3,00 | 6,45 m² |
+| Dorm. 2 | 2,50 x 3,00 | 7,50 m² |
+| Estar - Comedor | 3,30 x 2,35 | 7,76 m² |
+| Baño | 1,35 x 2,35 | 3,17 m² |
+| Dorm. 3 | 2,15 x 2,90 | 6,24 m² |
+| Cocina | 1,35 x 2,90 | 3,91 m² |
+| Balcón | 3,60 x 1,10 | 3,96 m² |
+| **Superficie cubierta** | | **35,03 m²** |
+| **Total con balcón** | | **38,99 m²** |
 
 ## Criterios adoptados
 
-- **Dormitorios al frente**, sobre la línea municipal, que es donde hay
-  fachada disponible para ventanas.
-- **Cocina–comedor al fondo**, con puerta y ventana al balcón.
+- **Dorm. 1 y Dorm. 2 al frente**, sobre la línea municipal, con ventana
+  a la calle.
+- **Estar-comedor en la franja central**, sin muros de pasillo: reparte a
+  los tres dormitorios y al baño, y se abre a la cocina por un vano libre
+  de 1,00 m.
+- **Dorm. 3 y cocina al fondo**, con ventana y puerta al balcón. El
+  acceso al departamento entra por la cocina.
 - **Escalera común al fondo**, de dos tramos con descanso, caja de
-  2,60 × 4,25 m alineada con el muro divisorio. 16 alzadas de 0,175 m
-  (2,80 m piso a piso) y pedadas de 0,275 m.
+  2,20 × 4,15 m. El ojo de escalera coincide con el eje del muro
+  divisorio. 16 alzadas de 0,175 m (2,80 m piso a piso) y pedadas de
+  0,275 m.
 - **Balcón corredor de 1,20 m** en el fondo: es el acceso a los
   departamentos y conecta con la escalera.
-- Los muros laterales son **medianeras sin aberturas**: la iluminación y
-  ventilación entran por frente y fondo. El baño ventila a la caja de
-  escalera, que funciona como patio de aire y luz abierto.
+
+## Limitaciones conocidas
+
+- Los muros laterales son **medianeras sin aberturas**, así que sólo hay
+  fachada al frente y al fondo. Los tres dormitorios ventilan a fachada,
+  pero **el estar-comedor queda interior**: recibe luz a través de la
+  cocina y el balcón.
+- El baño ventila a la caja de escalera, que funciona como patio de aire
+  y luz abierto.
+- Meter tres dormitorios en 5,00 × 10,00 deja ambientes de mínima:
+  Dorm. 1 y Dorm. 3 rondan los 6,3 m² y la cocina es tipo galera de
+  1,35 m de ancho.
 
 ## Espesores
 
@@ -47,6 +65,7 @@ respecto del muro divisorio.
 | Muros exteriores y medianeras | 0,15 m |
 | Muro divisorio entre unidades | 0,20 m |
 | Tabiques interiores | 0,10 m |
+| Muros de la caja de escalera | 0,15 m |
 
 ## Regenerar los archivos
 

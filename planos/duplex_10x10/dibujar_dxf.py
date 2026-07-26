@@ -175,9 +175,9 @@ def dibujar_escalera(msp):
                      dxfattribs={"layer": "ESCALERA"})
     texto(msp, "SUBE", (xc, 8.75), H_MEDIDA, "ESCALERA")
     texto(msp, "ESCALERA COMUN", (5.00, 9.55), H_AMBIENTE, "ESCALERA")
-    texto(msp, "2,60 x 4,25  -  tramos de 1,20", (5.00, 9.30),
+    texto(msp, "2,20 x 4,15  -  tramos de 1,00", (5.00, 9.30),
           H_MEDIDA, "ESCALERA")
-    texto(msp, "16 alzadas de 0,175  -  pedada 0,275", (5.00, 6.20),
+    texto(msp, "16 alzadas de 0,175  -  pedada 0,275", (5.00, 6.35),
           H_MEDIDA, "ESCALERA")
 
 
@@ -281,16 +281,18 @@ def dibujar_rotulo(msp):
     y -= 0.40
     notas = [
         "1. Medidas en metros, a cara de muro terminado.",
-        "2. Muros exteriores y medianeras 0,15 - divisorio 0,20 - tabiques 0,10.",
-        "3. Altura piso a piso 2,80 m.",
-        "4. Los dos departamentos son espejo respecto del muro divisorio.",
-        "5. Acceso a planta alta por escalera comun al fondo, de dos tramos",
+        "2. Sin pasillo: el estar-comedor distribuye a los tres dormitorios",
+        "   y al bano, y se abre a la cocina por un vano libre de 1,00 m.",
+        "3. Muros exteriores y medianeras 0,15 - divisorio 0,20 - tabiques 0,10.",
+        "4. Altura piso a piso 2,80 m.",
+        "5. Los dos departamentos son espejo respecto del muro divisorio.",
+        "6. Acceso a planta alta por escalera comun al fondo, de dos tramos",
         "   con descanso, y balcon corredor de 1,20 m.",
-        "6. Muros sobre medianera sin aberturas: iluminacion y ventilacion",
-        "   por frente y por fondo.",
-        "7. El bano ventila a la caja de escalera (patio de aire y luz).",
-        "8. Verificar retiros y factor de ocupacion con la ordenanza municipal.",
-        "9. Cotas a confirmar con relevamiento en obra.",
+        "7. Muros sobre medianera sin aberturas: los tres dormitorios ventilan",
+        "   a fachada; el estar-comedor queda interior.",
+        "8. El bano ventila a la caja de escalera (patio de aire y luz).",
+        "9. Verificar retiros y factor de ocupacion con la ordenanza municipal.",
+        "10. Cotas a confirmar con relevamiento en obra.",
     ]
     for n in notas:
         texto(msp, n, (x, y), H_MEDIDA, "ROTULO", alineado="izq")

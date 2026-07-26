@@ -132,19 +132,19 @@ def dibujar_escalera(ax):
                            e["ojo"], e["y_descanso_sup"] - e["y_descanso_int"],
                            facecolor="white", edgecolor="#666666",
                            lw=0.5, zorder=8))
-    ax.add_patch(FancyArrow(4.30, 8.60, 0.0, -1.60, width=0.012,
+    ax.add_patch(FancyArrow(4.40, 8.60, 0.0, -1.60, width=0.012,
                             head_width=0.13, head_length=0.18,
                             length_includes_head=True,
                             color="#333333", zorder=9))
-    ax.text(4.30, 8.72, "SUBE", ha="center", va="bottom",
+    ax.text(4.40, 8.72, "SUBE", ha="center", va="bottom",
             fontsize=5.2, color="#333333", zorder=9)
     ax.text(5.00, 9.55, "ESCALERA COMÚN", ha="center", va="center",
             fontsize=6.8, fontweight="bold", color=C_TEXTO, zorder=10)
-    ax.text(5.00, 9.30, "2,60 x 4,25  ·  tramos de 1,20",
+    ax.text(5.00, 9.30, "2,20 x 4,15  ·  tramos de 1,00",
             ha="center", va="center", fontsize=5.6, color="#444444", zorder=10)
-    ax.text(5.00, 6.25, "16 alzadas de 0,175", ha="center", va="center",
+    ax.text(5.00, 6.45, "16 alzadas de 0,175", ha="center", va="center",
             fontsize=5.4, color="#444444", zorder=10)
-    ax.text(5.00, 6.02, "pedada 0,275", ha="center", va="center",
+    ax.text(5.00, 6.22, "pedada 0,275", ha="center", va="center",
             fontsize=5.4, color="#444444", zorder=10)
 
 
@@ -255,19 +255,25 @@ def escala_grafica(ax, x, y, largo=5.0):
 NOTAS = [
     "1.  Medidas en metros, tomadas a cara de muro",
     "     terminado.",
-    "2.  Los dos departamentos son espejo respecto",
+    "2.  Sin pasillo: el estar-comedor es el",
+    "     distribuidor y todas las puertas abren",
+    "     sobre él. Se abre a la cocina por un vano",
+    "     libre de 1,00 m.",
+    "3.  Los dos departamentos son espejo respecto",
     "     del muro divisorio.",
-    "3.  Acceso a la planta alta por escalera común",
+    "4.  Acceso a la planta alta por escalera común",
     "     al fondo, de dos tramos con descanso, y",
     "     balcón corredor de 1,20 m.",
-    "4.  Muros laterales sobre medianera: sin",
-    "     aberturas. Iluminación y ventilación por",
-    "     frente y por fondo.",
-    "5.  El baño ventila a la caja de escalera, que",
+    "5.  Muros laterales sobre medianera: sin",
+    "     aberturas. Los tres dormitorios ventilan a",
+    "     fachada (dos al frente, uno al balcón).",
+    "6.  El estar-comedor queda interior: recibe luz",
+    "     a través de la cocina y el balcón.",
+    "7.  El baño ventila a la caja de escalera, que",
     "     funciona como patio de aire y luz.",
-    "6.  Verificar retiros, altura y factor de",
+    "8.  Verificar retiros, altura y factor de",
     "     ocupación con la ordenanza municipal.",
-    "7.  Cotas a confirmar con relevamiento en obra.",
+    "9.  Cotas a confirmar con relevamiento en obra.",
 ]
 
 
@@ -278,7 +284,7 @@ def _contenido_rotulo():
         ("sub", ("Terreno de 10,00 x 10,00 m", 7, "#444444"), 1.00),
         ("regla", None, 0.35),
         ("titulo", ("PLANTA ACOTADA", 8.5, "bold"), 1.30),
-        ("sub", ("Planta baja y planta alta (distribución idéntica)",
+        ("sub", ("3 dormitorios por unidad  ·  planta baja y alta idénticas",
                  6, "#444444"), 0.95),
         ("regla", None, 0.35),
     ]
@@ -289,7 +295,7 @@ def _contenido_rotulo():
                  ("Tabiques interiores", "0,10 m"),
                  ("Altura piso a piso", "2,80 m"),
                  ("Balcón corredor (fondo)", "1,20 m"),
-                 ("Escalera común", "2,60 x 4,25 m")):
+                 ("Escalera común", "2,20 x 4,15 m")):
         b.append(("par", (k, v, 6.0), 1.00))
     b += [
         ("regla", None, 0.55),
