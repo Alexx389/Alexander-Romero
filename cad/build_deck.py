@@ -1,5 +1,6 @@
 # Builder del deck de Edificio Olmedo (line-art tenible).
 # Puertas redibujadas bold, ventanas y cotas de abertura desde textos, etiquetas crisp.
+# Simbolos de ducha/heladera propios; ventanas ubicadas sobre el muro mas cercano al vano.
 
 import ezdxf, re, os, math
 import ezdxf.bbox as bb
@@ -11,16 +12,29 @@ GR=['#d3d3d3','#4c4c4c','#ffffff','#aeaeae','#a6a6a6','#f4f4f4']
 VBd={"bed":(1400,2000),"sofa":(2000,900),"table":(1200,800),"fridge":(700,700),
      "stove":(600,600),"sink":(500,400),"toilet":(400,700),"shower":(900,900),"chair":(450,450)}
 REPLACE={'Cama1p~1':'bed','Cama2plaComp3_160':'bed','sofa':'sofa','Heladpl':'fridge',
-         'A$C492F21F0':'stove','bacha':'sink','1bacha3':'sink','1wc2':'toilet','Duchapl1':'shower'}
+         'A$C492F21F0':'stove','1bacha3':'sink','1wc2':'toilet','Duchapl1':'shower'}
+# 'bacha' (bacha de cocina) NO se reemplaza: el DXF ya trae un dibujo limpio de la pileta.
 TABLE={'MESA'}; WASHER={'LAVARROPA'}
 KEEP={'ventanna','v0.6','*U62','pil'}
 DOORS={'puert-080':0.80,'puert-070':0.70,'puerta aula':0.80,'*U52':0.80}
-NAT={'sink':(0.5,0.4),'toilet':(0.4,0.7),'shower':(0.9,0.9),'fridge':(0.7,0.7),'stove':(0.6,0.6)}
+NAT={'sink':(0.5,0.4),'toilet':(0.4,0.7),'shower':(0.85,0.85),'fridge':(0.7,0.7),'stove':(0.6,0.6)}
 BEDSZ={'Cama1p~1':(0.95,1.90),'Cama2plaComp3_160':(1.60,2.00)}
 DOORW={0.70,0.80}
 FSTROKE="0.9"   # grosor de muebles (px, no escala)
+_VE='vector-effect="non-scaling-stroke"'
+CUSTOM={
+ 'shower': f'<symbol id="pc_shower" viewBox="0 0 900 900" overflow="visible">'
+   f'<rect x="30" y="30" width="840" height="840" fill="none" stroke="currentColor" stroke-width="{FSTROKE}" {_VE}/>'
+   f'<line x1="30" y1="30" x2="870" y2="870" stroke="currentColor" stroke-width="{FSTROKE}" {_VE}/>'
+   f'<circle cx="450" cy="450" r="55" fill="none" stroke="currentColor" stroke-width="{FSTROKE}" {_VE}/></symbol>',
+ 'fridge': f'<symbol id="pc_fridge" viewBox="0 0 700 700" overflow="visible">'
+   f'<rect x="30" y="30" width="640" height="640" fill="none" stroke="currentColor" stroke-width="{FSTROKE}" {_VE}/>'
+   f'<line x1="30" y1="210" x2="670" y2="210" stroke="currentColor" stroke-width="{FSTROKE}" {_VE}/>'
+   f'<line x1="560" y1="90" x2="560" y2="160" stroke="currentColor" stroke-width="{FSTROKE}" {_VE}/></symbol>',
+}
 
 def load_sym(t):
+    if t in CUSTOM: return CUSTOM[t]
     s=open(os.path.join(BLK,t+".svg")).read()
     inner=re.sub(r'(?is)^.*?<svg[^>]*>','',s); inner=re.sub(r'(?is)</svg>\s*$','',inner)
     inner=re.sub(r'fill="[^"]*"','fill="none"',inner)
@@ -34,11 +48,16 @@ def render_walls(crop, weight=1600, margin=0.6):
     SKIP={"A-VIEWPORT","PRESENTACION","REVISION","Defpoints"}
     msp=doc.modelspace(); x0,y0,x1,y1=crop
     furn=[]; labels=[]; wintexts=[]; doors=[]; apdims=[]
-    TOPY=-1e9; BOTY=1e9; LEFTX=1e9; RIGHTX=-1e9
+    WALLS=[]
     for e in msp.query('LINE[layer=="A-MURO"]'):
-        for pt in (e.dxf.start, e.dxf.end):
-            if x0<=pt.x<=x1 and y0<=pt.y<=y1:
-                TOPY=max(TOPY,pt.y); BOTY=min(BOTY,pt.y); LEFTX=min(LEFTX,pt.x); RIGHTX=max(RIGHTX,pt.x)
+        a,b=e.dxf.start,e.dxf.end
+        if (x0-2<=a.x<=x1+2 and y0-2<=a.y<=y1+2): WALLS.append((a.x,a.y,b.x,b.y))
+    for e in msp.query('LWPOLYLINE[layer=="A-MURO"]'):
+        pts=[(p[0],p[1]) for p in e.get_points()]
+        if getattr(e,'closed',False) and len(pts)>2: pts=pts+[pts[0]]
+        for i in range(len(pts)-1):
+            a,b=pts[i],pts[i+1]
+            if (x0-2<=a[0]<=x1+2 and y0-2<=a[1]<=y1+2): WALLS.append((a[0],a[1],b[0],b[1]))
     # ventanas desde textos de medida
     for e in list(msp.query('TEXT'))+list(msp.query('MTEXT')):
         t=(e.dxf.text if e.dxftype()=='TEXT' else e.text).strip()
@@ -52,14 +71,36 @@ def render_walls(crop, weight=1600, margin=0.6):
         if not (w in DOORW and abs(h-2.10)<0.2):
             wintexts.append((p.x,p.y,w))
         msp.delete_entity(e)
+    # Una abertura es un HUECO en el muro, asi que no sirve el segmento mas cercano
+    # (puede ganar un muro perpendicular). Clasifico segmentos por orientacion y
+    # ubico la ventana sobre la LINEA de muro (horizontal o vertical) mas cercana en
+    # perpendicular, tolerando el hueco con una ventana de +/-4 m a lo largo del muro.
+    HSEGS=[]; VSEGS=[]
+    for (ax,ay,bx,by) in WALLS:
+        dx=bx-ax; dy=by-ay
+        if abs(dx)>=abs(dy): HSEGS.append((min(ax,bx),max(ax,bx),(ay+by)/2))
+        else:                VSEGS.append((min(ay,by),max(ay,by),(ax+bx)/2))
+    def near_h(tx,ty):
+        best=None; bd=1e18
+        for (a,b,y) in HSEGS:
+            if a-4<=tx<=b+4:
+                d=abs(ty-y)
+                if d<bd: bd=d; best=y
+        return best,bd
+    def near_v(tx,ty):
+        best=None; bd=1e18
+        for (a,b,x) in VSEGS:
+            if a-4<=ty<=b+4:
+                d=abs(tx-x)
+                if d<bd: bd=d; best=x
+        return best,bd
     wins=[]
     for (tx,ty,w) in wintexts:
-        d={'h_t':abs(TOPY-ty),'h_b':abs(ty-BOTY),'v_l':abs(tx-LEFTX),'v_r':abs(RIGHTX-tx)}
-        k=min(d,key=d.get)
-        if k=='h_t': wins.append(('h',tx,TOPY,w))
-        elif k=='h_b': wins.append(('h',tx,BOTY,w))
-        elif k=='v_l': wins.append(('v',LEFTX,ty,w))
-        else: wins.append(('v',RIGHTX,ty,w))
+        hy,dh=near_h(tx,ty); vx,dv=near_v(tx,ty)
+        if hy is not None and (vx is None or dh<=dv):
+            wins.append((tx,hy,1.0,0.0,w))   # sobre muro horizontal
+        elif vx is not None:
+            wins.append((vx,ty,0.0,1.0,w))   # sobre muro vertical
     # borrar/registrar
     for e in list(msp):
         try:
@@ -93,7 +134,8 @@ def render_walls(crop, weight=1600, margin=0.6):
     kb=bb.extents(msp,fast=True); K=(kb.extmin.x,kb.extmin.y,kb.extmax.x,kb.extmax.y)
     ctx=RenderContext(doc); be=svg.SVGBackend()
     cfg=config.Configuration(background_policy=config.BackgroundPolicy.OFF,
-        color_policy=config.ColorPolicy.MONOCHROME_DARK_BG, text_policy=config.TextPolicy.OUTLINE)
+        color_policy=config.ColorPolicy.MONOCHROME_DARK_BG, text_policy=config.TextPolicy.OUTLINE,
+        hatch_policy=config.HatchPolicy.SHOW_OUTLINE)
     Frontend(ctx,be,config=cfg).draw_layout(msp)
     s=be.get_string(layout.Page(0,0,layout.Units.mm,margins=layout.Margins.all(0)),
         settings=layout.Settings(fit_page=True, fixed_stroke_width=0.2))
@@ -125,22 +167,21 @@ def overlay(furn, wins, labels, doors, apdims, K, VBW):
         darc='M'+' L'.join(f'{p[0]:.0f},{p[1]:.0f}' for p in arc)
         els.append(f'<path d="{dleaf} {darc}" fill="none" stroke="currentColor" '
                    f'stroke-width="1.7" vector-effect="non-scaling-stroke"/>')
-    # ventanas
-    for (kind,X,Y,w) in wins:
-        cxs,cys=P(X,Y); half=w/2*sx; th=0.06*sx
-        st='stroke="currentColor" stroke-width="0.9" vector-effect="non-scaling-stroke"'
-        if kind=='h':
-            els.append(f'<g fill="none"><line x1="{cxs-half:.0f}" y1="{cys-th:.0f}" x2="{cxs+half:.0f}" y2="{cys-th:.0f}" {st}/>'
-                f'<line x1="{cxs-half:.0f}" y1="{cys:.0f}" x2="{cxs+half:.0f}" y2="{cys:.0f}" {st}/>'
-                f'<line x1="{cxs-half:.0f}" y1="{cys+th:.0f}" x2="{cxs+half:.0f}" y2="{cys+th:.0f}" {st}/>'
-                f'<line x1="{cxs-half:.0f}" y1="{cys-th:.0f}" x2="{cxs-half:.0f}" y2="{cys+th:.0f}" {st}/>'
-                f'<line x1="{cxs+half:.0f}" y1="{cys-th:.0f}" x2="{cxs+half:.0f}" y2="{cys+th:.0f}" {st}/></g>')
-        else:
-            els.append(f'<g fill="none"><line x1="{cxs-th:.0f}" y1="{cys-half:.0f}" x2="{cxs-th:.0f}" y2="{cys+half:.0f}" {st}/>'
-                f'<line x1="{cxs:.0f}" y1="{cys-half:.0f}" x2="{cxs:.0f}" y2="{cys+half:.0f}" {st}/>'
-                f'<line x1="{cxs+th:.0f}" y1="{cys-half:.0f}" x2="{cxs+th:.0f}" y2="{cys+half:.0f}" {st}/>'
-                f'<line x1="{cxs-th:.0f}" y1="{cys-half:.0f}" x2="{cxs+th:.0f}" y2="{cys-half:.0f}" {st}/>'
-                f'<line x1="{cxs-th:.0f}" y1="{cys+half:.0f}" x2="{cxs+th:.0f}" y2="{cys+half:.0f}" {st}/></g>')
+    # ventanas: sobre el muro (segun direccion), en la posicion del vano
+    st='stroke="currentColor" stroke-width="0.9" vector-effect="non-scaling-stroke"'
+    for (cx,cy,ux,uy,w) in wins:
+        thm=0.055
+        ax,ay=cx-ux*w/2, cy-uy*w/2; bx,by=cx+ux*w/2, cy+uy*w/2
+        px,py=-uy,ux
+        def L(x1,y1,x2,y2):
+            p1=P(x1,y1); p2=P(x2,y2)
+            return f'<line x1="{p1[0]:.0f}" y1="{p1[1]:.0f}" x2="{p2[0]:.0f}" y2="{p2[1]:.0f}" {st}/>'
+        seg=[L(ax+px*thm,ay+py*thm, bx+px*thm,by+py*thm),
+             L(ax,ay, bx,by),
+             L(ax-px*thm,ay-py*thm, bx-px*thm,by-py*thm),
+             L(ax+px*thm,ay+py*thm, ax-px*thm,ay-py*thm),
+             L(bx+px*thm,by+py*thm, bx-px*thm,by-py*thm)]
+        els.append('<g fill="none">'+"".join(seg)+'</g>')
     # muebles: separar camas y deduplicar la cama doble (dos mitades)
     beds=[it for it in furn if REPLACE.get(it['name'])=='bed']
     rest=[it for it in furn if REPLACE.get(it['name'])!='bed']
@@ -196,7 +237,7 @@ def overlay(furn, wins, labels, doors, apdims, K, VBW):
     defs="".join(load_sym(t) for t in sorted(used))
     return f'<defs>{defs}</defs><g>'+"".join(els)+'</g>'
 
-import re, json
+import json
 
 def inner(s):
     s=re.sub(r'<\?xml[^?]*\?>','',s).strip()
