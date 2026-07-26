@@ -160,25 +160,40 @@ def dibujar_puertas(msp):
 
 
 def dibujar_escalera(msp):
+    """Tramo unico recto de 1,20 m, sin descanso intermedio."""
     e = G.ESC
     rect(msp, (e["x0"], e["y0"], e["x1"], e["y1"]), "ESCALERA")
     for (x0, y, x1, _) in G.escalones():
         msp.add_line((x0, y), (x1, y), dxfattribs={"layer": "ESCALERA"})
-    rect(msp, (e["x0"] + e["ancho_tramo"], e["y_descanso_int"],
-               e["x0"] + e["ancho_tramo"] + e["ojo"], e["y_descanso_sup"]),
-         "ESCALERA")
-    # flecha de subida
-    xc = e["x0"] + e["ancho_tramo"] / 2
-    msp.add_line((xc, 8.60), (xc, 7.00), dxfattribs={"layer": "ESCALERA"})
+    msp.add_line((e["x0"], e["y_llegada"]), (e["x1"], e["y_llegada"]),
+                 dxfattribs={"layer": "ESCALERA"})
+
+    xc = 4.66
+    msp.add_line((xc, 9.35), (xc, 6.45), dxfattribs={"layer": "ESCALERA"})
     for dx in (-0.09, 0.09):
-        msp.add_line((xc, 7.00), (xc + dx, 7.18),
+        msp.add_line((xc, 6.45), (xc + dx, 6.63),
                      dxfattribs={"layer": "ESCALERA"})
-    texto(msp, "SUBE", (xc, 8.75), H_MEDIDA, "ESCALERA")
-    texto(msp, "ESCALERA COMUN", (5.00, 9.55), H_AMBIENTE, "ESCALERA")
-    texto(msp, "2,20 x 4,15  -  tramos de 1,00", (5.00, 9.30),
-          H_MEDIDA, "ESCALERA")
-    texto(msp, "16 alzadas de 0,175  -  pedada 0,275", (5.00, 6.35),
-          H_MEDIDA, "ESCALERA")
+    texto(msp, "SUBE", (xc, 9.50), H_MEDIDA, "ESCALERA")
+    texto(msp, "ESCALERA COMUN  -  1,20 x 4,13", (5.26, 7.80),
+          H_MEDIDA, "ESCALERA", rot=90)
+    texto(msp, "DESCANSO P. ALTA", (5.00, 5.25), H_MEDIDA, "ESCALERA")
+    texto(msp, "1,20 x 1,23", (5.00, 5.00), H_MEDIDA, "ESCALERA")
+
+
+def dibujar_conductos(msp):
+    """Conducto de ventilacion del bano (ambiente interior)."""
+    for (x0, y0, x1, y1) in G.CONDUCTOS:
+        rect(msp, (x0, y0, x1, y1), "ABERTURAS")
+        msp.add_line((x0, y0), (x1, y1), dxfattribs={"layer": "ABERTURAS"})
+        msp.add_line((x0, y1), (x1, y0), dxfattribs={"layer": "ABERTURAS"})
+        texto(msp, "C.V.", ((x0 + x1) / 2, y0 - 0.16), H_MEDIDA, "ABERTURAS")
+
+
+def etiquetas_accesos(msp):
+    for x in (3.60, 6.40):
+        texto(msp, "ACCESO P. BAJA", (x, 9.12), H_MEDIDA, "TEXTOS")
+    for x in (3.55, 6.45):
+        texto(msp, "ACCESO P. ALTA", (x, 5.10), H_MEDIDA, "TEXTOS")
 
 
 # ------------------------------------------------------------- cotas -------
@@ -281,18 +296,22 @@ def dibujar_rotulo(msp):
     y -= 0.40
     notas = [
         "1. Medidas en metros, a cara de muro terminado.",
-        "2. Sin pasillo: el estar-comedor distribuye a los tres dormitorios",
-        "   y al bano, y se abre a la cocina por un vano libre de 1,00 m.",
-        "3. Muros exteriores y medianeras 0,15 - divisorio 0,20 - tabiques 0,10.",
-        "4. Altura piso a piso 2,80 m.",
-        "5. Los dos departamentos son espejo respecto del muro divisorio.",
-        "6. Acceso a planta alta por escalera comun al fondo, de dos tramos",
-        "   con descanso, y balcon corredor de 1,20 m.",
-        "7. Muros sobre medianera sin aberturas: los tres dormitorios ventilan",
+        "2. Escalera comun de un solo tramo recto de 1,20 m, sin descanso",
+        "   intermedio, con descanso de llegada de 1,20 x 1,23 m.",
+        "3. Dos puertas de acceso por departamento: en planta baja desde el",
+        "   balcon del fondo (a la cocina); en planta alta desde el descanso",
+        "   de la escalera (al estar).",
+        "4. Sin pasillo: el estar-comedor distribuye a los tres dormitorios",
+        "   y al bano, y se abre a la cocina por un vano libre de 1,10 m.",
+        "5. Muros exteriores y medianeras 0,15 - divisorio 0,20 - tabiques 0,10.",
+        "6. Altura piso a piso 2,80 m.",
+        "7. Los dos departamentos son espejo respecto del muro divisorio.",
+        "8. Muros sobre medianera sin aberturas: los tres dormitorios ventilan",
         "   a fachada; el estar-comedor queda interior.",
-        "8. El bano ventila a la caja de escalera (patio de aire y luz).",
-        "9. Verificar retiros y factor de ocupacion con la ordenanza municipal.",
-        "10. Cotas a confirmar con relevamiento en obra.",
+        "9. El bano ventila por conducto de 0,40 x 0,40 con extractor.",
+        "10. En planta baja, el espacio bajo el tramo queda como deposito.",
+        "11. Verificar retiros y factor de ocupacion con la ordenanza municipal.",
+        "12. Cotas a confirmar con relevamiento en obra.",
     ]
     for n in notas:
         texto(msp, n, (x, y), H_MEDIDA, "ROTULO", alineado="izq")
@@ -315,6 +334,8 @@ def construir():
     dibujar_muros(msp)
     dibujar_ventanas(msp)
     dibujar_puertas(msp)
+    dibujar_conductos(msp)
+    etiquetas_accesos(msp)
     dibujar_cotas(msp)
     dibujar_rotulo(msp)
     return doc

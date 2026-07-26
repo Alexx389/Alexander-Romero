@@ -5,8 +5,10 @@ planta** (4 en total), sobre un terreno de 10,00 × 10,00 m ocupado en su
 totalidad. Cada departamento mide **5,00 × 10,00 m**, tiene **3
 dormitorios** y es espejo del otro respecto del muro divisorio.
 
-**No hay pasillo**: el estar-comedor hace de distribuidor y todas las
-puertas abren sobre él.
+- **Sin pasillo**: el estar-comedor hace de distribuidor y todas las
+  puertas abren sobre él.
+- **Escalera común de un solo tramo recto** de 1,20 m de ancho, **sin
+  descanso intermedio**.
 
 ## Entregables
 
@@ -20,15 +22,38 @@ puertas abren sobre él.
 
 | Ambiente | Medidas | Superficie |
 |---|---|---|
-| Dorm. 1 | 2,15 x 3,00 | 6,45 m² |
-| Dorm. 2 | 2,50 x 3,00 | 7,50 m² |
-| Estar - Comedor | 3,30 x 2,35 | 7,76 m² |
-| Baño | 1,35 x 2,35 | 3,17 m² |
-| Dorm. 3 | 2,15 x 2,90 | 6,24 m² |
-| Cocina | 1,35 x 2,90 | 3,91 m² |
-| Balcón | 3,60 x 1,10 | 3,96 m² |
-| **Superficie cubierta** | | **35,03 m²** |
-| **Total con balcón** | | **38,99 m²** |
+| Dorm. 1 | 2,40 x 2,90 | 6,96 m² |
+| Dorm. 2 | 2,25 x 2,90 | 6,53 m² |
+| Baño | 1,40 x 2,45 | 3,43 m² |
+| Estar - Comedor | 3,25 x 2,45 | 7,18 m² |
+| Dorm. 3 | 2,60 x 2,90 | 7,54 m² |
+| Cocina | 1,40 x 2,90 | 4,06 m² |
+| Balcón | 4,10 x 1,10 | 4,51 m² |
+| **Superficie cubierta** | | **35,70 m²** |
+| **Total con balcón** | | **40,21 m²** |
+
+## Escalera
+
+Un solo tramo recto, sin descanso intermedio:
+
+| | |
+|---|---|
+| Ancho útil | 1,20 m |
+| Desarrollo | 4,125 m (15 pedadas de 0,275) |
+| Alzadas | 16 de 0,175 m (2,80 m piso a piso) |
+| Descanso de llegada | 1,20 × 1,23 m, en planta alta |
+
+La caja está centrada sobre el eje del muro divisorio y arranca al nivel
+del balcón del fondo (y = 9,90), subiendo hacia el frente.
+
+## Accesos
+
+Con un tramo recto la escalera llega a media profundidad del edificio, no
+al fondo, así que **cada unidad tiene dos puertas de acceso** según la
+planta:
+
+- **Planta baja**: desde el balcón del fondo, a la cocina.
+- **Planta alta**: desde el descanso de la escalera, al estar-comedor.
 
 ## Criterios adoptados
 
@@ -36,15 +61,10 @@ puertas abren sobre él.
   a la calle.
 - **Estar-comedor en la franja central**, sin muros de pasillo: reparte a
   los tres dormitorios y al baño, y se abre a la cocina por un vano libre
-  de 1,00 m.
-- **Dorm. 3 y cocina al fondo**, con ventana y puerta al balcón. El
-  acceso al departamento entra por la cocina.
-- **Escalera común al fondo**, de dos tramos con descanso, caja de
-  2,20 × 4,15 m. El ojo de escalera coincide con el eje del muro
-  divisorio. 16 alzadas de 0,175 m (2,80 m piso a piso) y pedadas de
-  0,275 m.
-- **Balcón corredor de 1,20 m** en el fondo: es el acceso a los
-  departamentos y conecta con la escalera.
+  de 1,10 m.
+- **Dorm. 3 y cocina al fondo**, con ventana y puerta al balcón.
+- **Balcón corredor de 1,20 m** en el fondo, que conecta con el pie de la
+  escalera.
 
 ## Limitaciones conocidas
 
@@ -52,11 +72,12 @@ puertas abren sobre él.
   fachada al frente y al fondo. Los tres dormitorios ventilan a fachada,
   pero **el estar-comedor queda interior**: recibe luz a través de la
   cocina y el balcón.
-- El baño ventila a la caja de escalera, que funciona como patio de aire
-  y luz abierto.
-- Meter tres dormitorios en 5,00 × 10,00 deja ambientes de mínima:
-  Dorm. 1 y Dorm. 3 rondan los 6,3 m² y la cocina es tipo galera de
-  1,35 m de ancho.
+- **El baño queda interior** y ventila por conducto de 0,40 × 0,40 con
+  extractor mecánico. Con la escalera en U, el baño podía ventilar al
+  hueco de escalera; con el tramo recto ese frente lo ocupa la puerta de
+  acceso de planta alta.
+- En planta baja, el espacio bajo el tramo queda como depósito, sin uso
+  de paso.
 
 ## Espesores
 

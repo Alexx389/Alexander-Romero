@@ -122,30 +122,55 @@ def dibujar_ventanas(ax):
 
 
 def dibujar_escalera(ax):
+    """Tramo unico recto de 1,20 m, sin descanso intermedio."""
     e = G.ESC
     ax.add_patch(Rectangle((e["x0"], e["y0"]), e["x1"] - e["x0"],
                            e["y1"] - e["y0"],
                            facecolor=C_ESCALERA, edgecolor="none", zorder=1))
     for (x0, y, x1, _) in G.escalones():
         ax.plot([x0, x1], [y, y], color="#666666", lw=0.6, zorder=8)
-    ax.add_patch(Rectangle((e["x0"] + e["ancho_tramo"], e["y_descanso_int"]),
-                           e["ojo"], e["y_descanso_sup"] - e["y_descanso_int"],
-                           facecolor="white", edgecolor="#666666",
-                           lw=0.5, zorder=8))
-    ax.add_patch(FancyArrow(4.40, 8.60, 0.0, -1.60, width=0.012,
-                            head_width=0.13, head_length=0.18,
+    # linea de corte del tramo, al llegar a planta alta
+    ax.plot([e["x0"], e["x1"]], [e["y_llegada"], e["y_llegada"]],
+            color="#444444", lw=0.9, zorder=8)
+
+    ax.add_patch(FancyArrow(4.66, 9.35, 0.0, -2.90, width=0.012,
+                            head_width=0.12, head_length=0.17,
                             length_includes_head=True,
                             color="#333333", zorder=9))
-    ax.text(4.40, 8.72, "SUBE", ha="center", va="bottom",
+    ax.text(4.66, 9.52, "SUBE", ha="center", va="bottom",
             fontsize=5.2, color="#333333", zorder=9)
-    ax.text(5.00, 9.55, "ESCALERA COMÚN", ha="center", va="center",
-            fontsize=6.8, fontweight="bold", color=C_TEXTO, zorder=10)
-    ax.text(5.00, 9.30, "2,20 x 4,15  ·  tramos de 1,00",
-            ha="center", va="center", fontsize=5.6, color="#444444", zorder=10)
-    ax.text(5.00, 6.45, "16 alzadas de 0,175", ha="center", va="center",
-            fontsize=5.4, color="#444444", zorder=10)
-    ax.text(5.00, 6.22, "pedada 0,275", ha="center", va="center",
-            fontsize=5.4, color="#444444", zorder=10)
+    ax.text(5.26, 7.80, "ESCALERA COMÚN  ·  1,20 x 4,13",
+            ha="center", va="center", rotation=90,
+            fontsize=6.0, fontweight="bold", color=C_TEXTO, zorder=10)
+    ax.text(5.00, 5.32, "DESCANSO", ha="center", va="center",
+            fontsize=5.4, fontweight="bold", color=C_TEXTO, zorder=10)
+    ax.text(5.00, 5.10, "llegada P. ALTA", ha="center", va="center",
+            fontsize=4.8, color="#444444", zorder=10)
+    ax.text(5.00, 4.88, "1,20 x 1,23", ha="center", va="center",
+            fontsize=4.8, color="#444444", zorder=10)
+
+
+def dibujar_conductos(ax):
+    """Conducto de ventilacion del bano (ambiente interior)."""
+    for (x0, y0, x1, y1) in G.CONDUCTOS:
+        ax.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0,
+                               facecolor="white", edgecolor="#555555",
+                               lw=0.6, zorder=9))
+        ax.plot([x0, x1], [y0, y1], color="#555555", lw=0.5, zorder=9)
+        ax.plot([x0, x1], [y1, y0], color="#555555", lw=0.5, zorder=9)
+        ax.text((x0 + x1) / 2, y0 - 0.14, "C.V.", ha="center", va="top",
+                fontsize=4.6, color="#555555", zorder=9)
+
+
+def etiquetas_accesos(ax):
+    """Marca las dos puertas de acceso de cada unidad."""
+    col = "#8a4b00"
+    for x in (3.60, 6.40):
+        ax.text(x, 9.12, "ACCESO P. BAJA", ha="center", va="center",
+                fontsize=4.8, color=col, zorder=11)
+    for x in (3.55, 6.45):
+        ax.text(x, 5.10, "ACCESO P. ALTA", ha="center", va="center",
+                fontsize=4.8, color=col, zorder=11)
 
 
 # ----------------------------------------------------------------- cotas ---
@@ -255,25 +280,29 @@ def escala_grafica(ax, x, y, largo=5.0):
 NOTAS = [
     "1.  Medidas en metros, tomadas a cara de muro",
     "     terminado.",
-    "2.  Sin pasillo: el estar-comedor es el",
-    "     distribuidor y todas las puertas abren",
-    "     sobre él. Se abre a la cocina por un vano",
-    "     libre de 1,00 m.",
-    "3.  Los dos departamentos son espejo respecto",
+    "2.  Escalera común de un solo tramo recto de",
+    "     1,20 m, sin descanso intermedio, con",
+    "     descanso de llegada de 1,20 x 1,23 m.",
+    "3.  Dos puertas de acceso por departamento:",
+    "     en planta baja desde el balcón del fondo",
+    "     (a la cocina); en planta alta desde el",
+    "     descanso de la escalera (al estar).",
+    "4.  Sin pasillo: el estar-comedor distribuye a",
+    "     los tres dormitorios y al baño, y se abre",
+    "     a la cocina por un vano libre de 1,10 m.",
+    "5.  Los dos departamentos son espejo respecto",
     "     del muro divisorio.",
-    "4.  Acceso a la planta alta por escalera común",
-    "     al fondo, de dos tramos con descanso, y",
-    "     balcón corredor de 1,20 m.",
-    "5.  Muros laterales sobre medianera: sin",
+    "6.  Muros laterales sobre medianera: sin",
     "     aberturas. Los tres dormitorios ventilan a",
     "     fachada (dos al frente, uno al balcón).",
-    "6.  El estar-comedor queda interior: recibe luz",
-    "     a través de la cocina y el balcón.",
-    "7.  El baño ventila a la caja de escalera, que",
-    "     funciona como patio de aire y luz.",
-    "8.  Verificar retiros, altura y factor de",
+    "7.  En planta baja, el espacio bajo el tramo",
+    "     queda como depósito, sin uso de paso.",
+    "8.  El estar-comedor queda interior. El baño",
+    "     ventila por conducto de 0,40 x 0,40 con",
+    "     extractor mecánico.",
+    "9.  Verificar retiros, altura y factor de",
     "     ocupación con la ordenanza municipal.",
-    "9.  Cotas a confirmar con relevamiento en obra.",
+    "10. Cotas a confirmar con relevamiento en obra.",
 ]
 
 
@@ -295,7 +324,8 @@ def _contenido_rotulo():
                  ("Tabiques interiores", "0,10 m"),
                  ("Altura piso a piso", "2,80 m"),
                  ("Balcón corredor (fondo)", "1,20 m"),
-                 ("Escalera común", "2,20 x 4,15 m")):
+                 ("Tramo de escalera", "único, sin descanso"),
+                 ("Escalera común", "1,20 x 4,13 m")):
         b.append(("par", (k, v, 6.0), 1.00))
     b += [
         ("regla", None, 0.55),
@@ -402,7 +432,9 @@ def construir():
     dibujar_ventanas(ax)
     dibujar_puertas(ax)
     dibujar_vanos(ax)
+    dibujar_conductos(ax)
     dibujar_cotas(ax)
+    etiquetas_accesos(ax)
     anotaciones(ax)
     norte(ax, 11.60, 8.60)
     escala_grafica(ax, -3.45, 11.45)
