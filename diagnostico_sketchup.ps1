@@ -101,7 +101,9 @@ foreach ($v in $versiones) {
 if (-not $policyEncontrada) {
     Warn 'No se pudo leer la politica desde el registro (varia segun version).'
 }
-Warn 'REVISAR A MANO: Ventana > Extension Manager > engranaje (abajo a la derecha) > Loading Policy.'
+Warn 'REVISAR A MANO: menu Extensiones > Extension Manager > engranaje > Loading Policy.'
+Info 'OJO: en SketchUp 2021 y posteriores el Extension Manager esta en el menu EXTENSIONES,'
+Info 'no en Ventana. En versiones anteriores a 2021 si estaba en Ventana.'
 Info 'Debe estar en "Unrestricted". Si dice "Identified Extensions Only", ese es el problema.'
 Info 'Cambiarlo NO carga los plugins al instante: hay que cerrar y reabrir SketchUp.'
 [void]$problemas.Add('Verificar Loading Policy en Extension Manager (ver arriba)')
@@ -298,12 +300,16 @@ L '---'
 L ''
 L '## Orden recomendado para resolverlo'
 L ''
-L '1. **Loading Policy en Unrestricted** (Extension Manager > engranaje) y reiniciar SketchUp.'
-L '2. **Borrar el web cache**: correr este script con `-RepararCache`.'
-L '3. **Instalar WebView2** si el punto 4 dio FALLA.'
-L '4. **Ruby Console** (Ventana > Ruby Console): abrila al arrancar SketchUp y copiame'
-L '   los errores en rojo que aparezcan. Ahi se ve exactamente que plugin falla y por que.'
-L '5. Si el ejecutable no tiene firma de Trimble, reinstalar SketchUp desde el instalador oficial.'
+L '1. **Loading Policy en Unrestricted**: menu `Extensiones > Extension Manager > engranaje`'
+L '   (en SketchUp anterior a 2021: `Ventana > Extension Manager`). Reiniciar SketchUp despues.'
+L '2. **Biblioteca de texturas**: `Ventana > Bandeja predeterminada > Materiales`. Si la bandeja'
+L '   esta destildada el panel no aparece, y no es una falla del programa.'
+L '3. **Borrar el web cache**: correr este script con `-RepararCache`.'
+L '4. **Instalar WebView2** si el punto 4 dio FALLA.'
+L '5. **Ruby Console**: `Extensiones > Developer > Ruby Console` (2021+) o `Ventana > Consola Ruby`'
+L '   (anteriores). Abrila al arrancar SketchUp y copiar los errores en rojo:'
+L '   ahi se ve exactamente que plugin falla y por que.'
+L '6. Si el ejecutable no tiene firma de Trimble, reinstalar SketchUp desde el instalador oficial.'
 
 Set-Content -Path $out -Value $sb.ToString() -Encoding UTF8
 Write-Host "`nReporte guardado en: $out`n" -ForegroundColor Cyan
