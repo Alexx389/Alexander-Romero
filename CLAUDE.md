@@ -1,116 +1,83 @@
-# FUGA: contexto para Claude
+# FUGA: publicaciones (contexto para Claude)
 
-Este archivo se lee al arrancar cada sesión. Es la memoria del proyecto: si algo
-cambia (una decisión, un cliente, una regla), se actualiza acá.
+Este archivo se lee al arrancar cada sesión y es la memoria del proyecto.
+Alcance: **solo las publicaciones de FUGA** (Instagram @fuga.py y el sistema editorial).
+Si algo cambia (una decisión, un post publicado, una regla), se actualiza acá y en `work/publicaciones/`.
 
-Dueño: Alexander Romero (Alex), Asunción, Paraguay. Se habla en español rioplatense/paraguayo, de vos.
+Dueño: Alexander Romero (Alex), Asunción, Paraguay. Se habla de vos.
 
-> Lo marcado **[FALTA]** todavía no está confirmado. Completar con Alex.
+> Lo marcado **[FALTA]** no está confirmado. Completar con Alex.
 
 ---
 
 ## 1. Qué es FUGA
-
-Estudio creativo + archivo urbano + plataforma editorial. Une cultura, espacio,
-diseño y tecnología desde una misma mirada: curiosa, técnica y con criterio propio.
-Instagram: **@fuga.py**. Lema de pie: "PENSAMOS CIUDAD. HACEMOS COSAS."
-
+Estudio creativo + archivo urbano + plataforma editorial. Mira la ciudad (Asunción)
+y la cuenta desde la cultura, el espacio, el diseño y la técnica.
 "FUGA ve algo que todavía no viste y sabe cómo mostrártelo."
+Pie de marca: **PENSAMOS CIUDAD. HACEMOS COSAS. @FUGA.PY**
 
-### Cuatro ramas (no son marcas independientes)
-Comparten logo, grilla, tipografía y voz; el nombre y el color indican el territorio.
-
-| Rama | Color | Territorio |
+### Ramas = secciones del feed (se distinguen por color, no son marcas aparte)
+| Rama | Color | De qué habla |
 |---|---|---|
-| FUGA / CULTURAL | Rojo `#FF0402` | ciudad, archivo, revista, fotografía, cultura visual |
-| FUGA / ESPACIO | Verde `#70C83B` | arquitectura, refacción, proyecto, documentación, obra |
-| FUGA / TECH | Azul `#004ED8` | CAD, código, automatización, infraestructura, procesos |
-| FUGA / DISEÑO | Amarillo `#FFD500` | branding, gráfico, editorial, packaging, comunicación |
+| CULTURAL | Rojo `#FF0402` | ciudad, archivo, barrios, fotografía, historia urbana |
+| ESPACIO | Verde `#70C83B` | arquitectura, casas, tenders, proyecto, obra |
+| TECH | Azul `#004ED8` | código, CAD, automatización, procesos |
+| DISEÑO | Amarillo `#FFD500` | branding, editorial, gráfico, objetos |
 
-Amarillo = firma de la marca madre. Ink `#0A0A0A`, Paper `#F4F2ED`.
-(En el kit del Tender 001 se usó papel `#FBF5EC`, texto `#1D1B18`, verde `#73C83E`.)
+Amarillo = firma de la marca madre. Ink `#0A0A0A` · Paper `#F4F2ED`.
 
-### Reglas de marca (del mini manual, sep 2026)
-- Una pieza = un color dominante. Cuatro colores solo en piezas de conjunto (en chico: códigos, barras, etiquetas).
+## 2. Sistema visual (mini manual, sep 2026)
+- **Una pieza = una rama = un color dominante.** Los cuatro colores solo en piezas de conjunto y en chico (códigos, barras, etiquetas).
 - Negro y papel sostienen la grilla. Sin degradados ni pasteles. Validar contraste.
-- Logo: principal por defecto; Apoyo A (sobrio/monocromo), Apoyo B (digital/tech/alto contraste). No inventar combinaciones, no alternar versiones en una pieza.
-- Mínimo 120 px digital / 28 mm impreso. Resguardo: 1/4 de la altura del símbolo.
-- Dos cubos = marca de agua (5–12 % de opacidad, o blanco sobre negro en portada). Nunca reemplazan al logo.
-- Tipografía: títulos **Archivo ExtraBold** mayúsculas interletrado apretado; cuerpo **Manrope**; etiquetas Archivo Bold 12–13 px mayúsculas interletrado amplio.
-- Feed: una rama, una idea, una grilla, una firma. Formatos: feed 1080×1350, historia 1080×1920.
+- Tipografía: títulos **Archivo ExtraBold** en mayúsculas con interletrado apretado; cuerpo **Manrope** Regular/Bold; etiquetas Archivo Bold 12–13 px en mayúsculas con interletrado amplio.
+- Logo: principal por defecto; Apoyo A (sobrio/monocromo) y Apoyo B (digital/alto contraste). No inventar combinaciones ni alternar versiones dentro de un carrusel. Mínimo 120 px. Resguardo: 1/4 de la altura del símbolo.
+- Dos cubos = marca de agua (5–12 % de opacidad, o blanco sobre negro en portada o separador). Nunca reemplazan al logo. Logo o watermark, nunca los dos compitiendo.
+- Formatos: feed **1080×1350** (4:5), historia **1080×1920**.
+- Cabecera tipo: logo arriba a la izquierda y `■ RAMA · SERIE NNN · ASUNCIÓN` arriba a la derecha.
+  Pie: línea fina + dato técnico a la izquierda (`AXONOMETRÍA · SIN ESCALA`) + lema.
+- Checklist antes de publicar: rama visible, contraste correcto, voz FUGA, una sola versión de logo, watermark secundario, aire suficiente.
 
-### Voz
+## 3. Voz
 Juvenil, urbana, editorial, inteligente, directa, cool. Curiosa, segura, magnética.
-Frases cortas y con ritmo; conocimiento real sin tono académico; humor seco.
-Ej.: "Mirá esto." · "Esto parece un detalle. No lo es." · "La ciudad también se lee."
-Evitar: infantilizar, exagerar, vender humo, sonar solemne o corporativo.
+- Titular corto con tensión editorial, casi siempre terminado en punto. Bajada que da vuelta la idea.
+- Conocimiento real sin tono académico; humor seco; invita a mirar, no da cátedra.
+- Ejemplos propios: "La ciudad también se lee." · "El azul no se eligió. Se encontró." · "Un patio, pero arriba." · "Una cuadra termina pareciendo una colección, no un catálogo."
+- Evitar: infantilizar, exagerar, vender humo, sonar solemne o corporativo, copiar tendencias sin criterio.
 
-### Contenido publicado / en curso
-- CULTURAL 001: "Sajonia. La gracia de no combinar." (historia + carrusel)
-- ESPACIO · TENDER 001: "Una casa posible de Asunción." Axonometría con la puerta azul
-  (fotos IMG_1556 e IMG_1574, ilustraciones con Magnific). Versiones v2 y v3; kit para Canva.
-- Implantación 1574 (antes/después, fotorrealista); "reversión" (axonometría + render).
+## 4. Series y numeración
+Cada pieza lleva **RAMA + SERIE + número de 3 cifras**. Ej.: `CULTURAL 001`, `ESPACIO · TENDER 001`, `ARCHIVO / 017`.
+Las slides internas se etiquetan con su tipo y número: `DETALLE 02`, `VISTA 03`, `ARCHIVO 04`.
 
----
+## 5. Publicaciones
+Detalle de cada una en `work/publicaciones/`.
 
-## 2. FUGA / TECH
+| Código | Título | Rama | Formato | Estado |
+|---|---|---|---|---|
+| CULTURAL 001 | Sajonia. La gracia de no combinar. | Cultural | carrusel + historia | armado, en Drive (POST FEED FUGA) · **[FALTA]** ¿publicado? |
+| ESPACIO · TENDER 001 | Una casa posible de Asunción. | Espacio | carrusel de 4 | kit Canva listo · **[FALTA]** ¿publicado? |
+| — | Una avenida que apunta al río (Carlos A. López, "avenida del solsticio") | Cultural | slide | aparece en POST FEED FUGA · **[FALTA]** ¿es parte de otro post? |
+| — | Implantación 1574 / Reversión | Espacio | antes/después, render | en proceso (V4–V7, FINAL REVERSION) |
 
-**[FALTA]** Modelo de negocio: ¿servicio, producto, herramienta interna? Precios, oferta, a quién se vende.
+## 6. Cómo se produce
+- Foto propia caminando la ciudad → idea → brief → ilustración/diseño → carrusel.
+- Ilustraciones con **Magnific** (Nano Banana Pro) a partir del brief y de fotos del archivo (ej. IMG_1556 puerta azul, IMG_1574 planta alta con balaustres).
+- Armado final en **Canva** (kits con slides armadas, imágenes sin texto y logo).
+- Los briefs los escribe alguien que se dirige a Alex ("Importante para Alex"). **[FALTA]** ¿Quién? ¿Qué hace cada uno?
 
-### Lo que existe hoy: digitalización de tramos de fibra óptica
-Del KML de relevamiento (Google Earth) al plano en AutoCAD 2026 ES, sin dibujar a mano.
+## 7. Dónde está cada cosa (Google Drive, ale.romero389@gmail.com)
+- `FUGA_ESTUDIO/`
+  - `FUGA LOGO RUB BRANDING`: logo y piezas del branding
+  - `POST FEED FUGA`: carrusel Sajonia y otros
+  - `TENDER AXONOMETRICO`: V2 a V7, FINAL REVERSION, kit Canva, `_inspo`, MAGNIFIC
+- `FUGA-mini-manual-identidad-visual.pdf`, `brief_tender_fuga_inspiracion_axonometrica.pdf`
+- Historias: `FUGA_historia_sajonia_1080x1920.png` y `FUGA_historia_plantilla_limpia_1080x1920.png`
+- Inspiración: `Inspo para Fuga`, `_miniaturas_inspo`
 
-- Entrada: KML/KMZ con el recorrido de la FO y los postes de ANDE.
-- Proceso (Python, sin dependencias externas):
-  - WGS84 → UTM 21S, proyecta cada poste sobre el recorrido.
-  - Interpreta el tipo de poste, herraje, alumbrado, transformador, ganancia y notas.
-  - Coloca las etiquetas sin que se pisen.
-- Salida: archivos `.lsp` (capas, recorrido, postes, textos, cotas) + `.scr` para correrlos en AutoCAD.
-  - Los LISP de más de 150 KB se parten porque AutoCAD los ejecuta a medias.
-  - Después `TEC_LAMINAS.lsp` arma las láminas A0 a partir de la plantilla `01CMO_CERRO_MORADO.dwg`.
-- Entregable: DWG + láminas A0 + PDF, con cronómetro por tramo.
+Imágenes, zips y renders se quedan en Drive; acá van los textos, las decisiones y el calendario.
 
-Código en `work/fuga-tech/` (copiado de la carpeta `fuga` de Google Drive).
-
-### Clientes / perfiles
-| Perfil | Cliente | Particularidad |
-|---|---|---|
-| HTE | HTE / NUBICOM | el dato del poste viene en atributos del KML; vanos como cotas |
-| TECMONT | Tecmont (norma ANDE) | el dato viene en el `<name>` del punto, ej. `12/300 rhr transformador` |
-
-Contactos Tecmont: **Angel** y **Diego Peña** (relevamientos). **[FALTA]** Roles y contactos de HTE.
-
-### Reglas confirmadas por el cliente (no cambiar sin preguntar)
-- `*` en el nombre = el poste tiene alumbrado → se rotula `AP` junto al herraje (Angel, 24/09/2026).
-- 12/309, 12/390, 12/30/ → 12/300; 12/20 → 12/200. **Solo esos casos.** El resto queda `REVISAR`.
-- Alturas válidas: 7, 7.5, 9, 10.5, 11, 12, 15. Resistencias: 150, 200, 300, 500, 800.
-- Etiquetas siempre a la izquierda del sentido de avance; paralelas de MANZANAS (3 m y 15 m) a la derecha.
-- Las MANZANAS y los nombres de calle no salen del relevamiento: se trazan aparte.
-
-### Tramos trabajados
-Cerro Morado (plantilla de láminas), Santa María (312 postes), Justicia Electoral (lámina de referencia),
-Itapúa/Misiones (23/09/2026). **[FALTA]** lista completa y estado.
-
----
-
-## 3. Otras líneas de trabajo de Alex
-- Arquitectura / refacción para clientes (intake por WhatsApp, cómputo métrico y presupuesto en Gs/m²).
-  Hay skills para esto: `client-intake-arquitectura`, `computo-metrico-planos`, `presentacion-computo-metrico`.
-- Skills de FO: `hte-fo-tramo`, `tecmont-fo-tramo`.
-
-## 4. Dónde está cada cosa
-- **Este repo**: código, contexto, notas. `work/` es la mesa de trabajo (ver `work/README.md`).
-- **Google Drive** (ale.romero389@gmail.com): lo pesado.
-  - `FUGA_ESTUDIO/`: logo/branding, POST FEED FUGA, TENDER AXONOMETRICO (kit Canva)
-  - `fuga/`: código Python y LISP de FUGA Tech
-  - `fuga-cad/1.0.0`
-  - `FUGA-mini-manual-identidad-visual.pdf`
-  - `brief_tender_fuga_inspiracion_axonometrica.pdf`
-- No subir al repo: DWG, KMZ de clientes, renders, zips, fotos. Se quedan en Drive; acá solo se anota dónde están.
-
-## 5. Pendientes de contexto [FALTA]
-- [ ] FUGA Tech: oferta, precios, clientes objetivo, próximos productos
-- [ ] Equipo / socios y quién hace qué
-- [ ] Estado de cada tramo y de cada cliente
-- [ ] Planes para CULTURAL / ESPACIO / DISEÑO que no están en el manual
-- [ ] Material que no está en Drive (ver `work/_entrada/`)
+## 8. Pendientes de contexto [FALTA]
+- [ ] Qué está publicado y con qué fecha; qué funcionó (métricas)
+- [ ] Próximas publicaciones / calendario / frecuencia
+- [ ] Equipo: quién escribe, quién diseña, quién aprueba
+- [ ] Captions (texto del post) usados hasta ahora
+- [ ] Series previstas para TECH y DISEÑO
