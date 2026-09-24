@@ -51,12 +51,18 @@ Las slides internas se etiquetan con su tipo y número: `DETALLE 02`, `VISTA 03`
 ## 5. Publicaciones
 Detalle de cada una en `work/publicaciones/`.
 
+Cuenta al 24/09/2026: 283 seguidores, 2 posts. Métricas y análisis en `work/metricas/`.
+
 | Código | Título | Rama | Formato | Estado |
 |---|---|---|---|---|
-| CULTURAL 001 | Sajonia. La gracia de no combinar. | Cultural | carrusel + historia | armado, en Drive (POST FEED FUGA) · **[FALTA]** ¿publicado? |
-| ESPACIO · TENDER 001 | Una casa posible de Asunción. | Espacio | carrusel de 4 | kit Canva listo · **[FALTA]** ¿publicado? |
-| — | Una avenida que apunta al río (Carlos A. López, "avenida del solsticio") | Cultural | slide | aparece en POST FEED FUGA · **[FALTA]** ¿es parte de otro post? |
-| — | Implantación 1574 / Reversión | Espacio | antes/después, render | en proceso (V4–V7, FINAL REVERSION) |
+| CULTURAL 001 | Sajonia. | Cultural | carrusel de 10 | **publicado 22/09** · 470 likes, 3 coment. ("Mi barrio") · [post](https://www.instagram.com/p/Ddm16hVieO5/) |
+| ESPACIO | Dos fachadas. Dos momentos del barrio. (Casa Cattaneo, reversión) | Espacio | carrusel de 8 | **publicado 23/09** · 13 likes, 1 coment. · [post](https://www.instagram.com/p/DdpiGKXCe95/) |
+| ESPACIO · TENDER 001 | Una casa posible de Asunción. | Espacio | carrusel de 4 | kit Canva listo · sin publicar |
+
+### Lo aprendido hasta ahora
+- Nombrar un lugar real en el título funciona: Sajonia sumó más likes que seguidores y la gente comentó "Mi barrio". Un render sin lugar no despegó.
+- El caption **no puede pasar de 2200 caracteres**: los dos primeros se cortaron a mitad de palabra (flujo n8n). Apuntar a 600–900, con el lugar en la primera línea y un CTA para compartir.
+- La publicación la hace un bot de n8n ("n8n-fuga-bot") conectado a la página de Facebook "FUGA Estudio".
 
 ## 6. Cómo se produce
 - Foto propia caminando la ciudad → idea → brief → ilustración/diseño → carrusel.
@@ -76,7 +82,8 @@ Detalle de cada una en `work/publicaciones/`.
 Imágenes, zips y renders se quedan en Drive; acá van los textos, las decisiones y el calendario.
 
 ## 8. Pendientes de contexto [FALTA]
-- [ ] Qué está publicado y con qué fecha; qué funcionó (métricas)
+- [ ] Métricas de alcance, guardados y compartidos (el token actual no tiene `instagram_manage_insights`)
+- [ ] Remedir los dos posts el 29/09
 - [ ] Próximas publicaciones / calendario / frecuencia
 - [ ] Equipo: quién escribe, quién diseña, quién aprueba
 - [ ] Captions (texto del post) usados hasta ahora
