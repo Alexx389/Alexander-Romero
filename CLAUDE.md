@@ -59,6 +59,11 @@ Cuenta al 24/09/2026: 283 seguidores, 2 posts. Métricas y análisis en `work/me
 | ESPACIO | Dos fachadas. Dos momentos del barrio. (Casa Cattaneo, reversión) | Espacio | carrusel de 8 | **publicado 23/09** · alcance 115, 0 compartidos, 0 guardados · [post](https://www.instagram.com/p/DdpiGKXCe95/) |
 | ESPACIO · TENDER 001 | Una casa posible de Asunción. | Espacio | carrusel de 4 | kit Canva listo · sin publicar |
 
+### Próximas (en este orden) · ver `work/notas/calendario.md`
+1. **TECH 001**: Del mapa al plano (automatización CAD de postes). Propuesta en `work/publicaciones/tech-001.md`.
+2. **DISEÑO 001**: Así se hizo FUGA (la marca). Propuesta en `work/publicaciones/diseno-001.md`.
+3. **CULTURAL 002**: Barrio San Vicente. Salida de fotos planeada; investigación en `work/publicaciones/cultural-002-san-vicente-investigacion.md`.
+
 ### Lo aprendido hasta ahora
 - Nombrar un lugar real en el título funciona: Sajonia llegó a 13 veces los seguidores, 96 % no seguidores, empujado por los compartidos ("Mi barrio"). Un render sin lugar no salió de la cuenta.
 - La audiencia es del Gran Asunción (Asunción, Luque, Lambaré, San Lorenzo, FdM), de 25 a 44 años.
