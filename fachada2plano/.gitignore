@@ -1,0 +1,5 @@
+# fotos y salidas: pesan y pueden mostrar casas reales, quedan en Drive
+input/*
+!input/.gitkeep
+output/**/*
+!output/**/.gitkeep
