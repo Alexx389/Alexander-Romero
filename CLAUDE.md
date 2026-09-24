@@ -55,12 +55,13 @@ Cuenta al 24/09/2026: 283 seguidores, 2 posts. Métricas y análisis en `work/me
 
 | Código | Título | Rama | Formato | Estado |
 |---|---|---|---|---|
-| CULTURAL 001 | Sajonia. | Cultural | carrusel de 10 | **publicado 22/09** · 470 likes, 3 coment. ("Mi barrio") · [post](https://www.instagram.com/p/Ddm16hVieO5/) |
-| ESPACIO | Dos fachadas. Dos momentos del barrio. (Casa Cattaneo, reversión) | Espacio | carrusel de 8 | **publicado 23/09** · 13 likes, 1 coment. · [post](https://www.instagram.com/p/DdpiGKXCe95/) |
+| CULTURAL 001 | Sajonia. | Cultural | carrusel de 10 | **publicado 22/09** · alcance 3840, 116 compartidos, 50 guardados, +52 seguidores · [post](https://www.instagram.com/p/Ddm16hVieO5/) |
+| ESPACIO | Dos fachadas. Dos momentos del barrio. (Casa Cattaneo, reversión) | Espacio | carrusel de 8 | **publicado 23/09** · alcance 115, 0 compartidos, 0 guardados · [post](https://www.instagram.com/p/DdpiGKXCe95/) |
 | ESPACIO · TENDER 001 | Una casa posible de Asunción. | Espacio | carrusel de 4 | kit Canva listo · sin publicar |
 
 ### Lo aprendido hasta ahora
-- Nombrar un lugar real en el título funciona: Sajonia sumó más likes que seguidores y la gente comentó "Mi barrio". Un render sin lugar no despegó.
+- Nombrar un lugar real en el título funciona: Sajonia llegó a 13 veces los seguidores, 96 % no seguidores, empujado por los compartidos ("Mi barrio"). Un render sin lugar no salió de la cuenta.
+- La audiencia es del Gran Asunción (Asunción, Luque, Lambaré, San Lorenzo, FdM), de 25 a 44 años.
 - El caption **no puede pasar de 2200 caracteres**: los dos primeros se cortaron a mitad de palabra (flujo n8n). Apuntar a 600–900, con el lugar en la primera línea y un CTA para compartir.
 - La publicación la hace un bot de n8n ("n8n-fuga-bot") conectado a la página de Facebook "FUGA Estudio".
 
@@ -82,7 +83,6 @@ Cuenta al 24/09/2026: 283 seguidores, 2 posts. Métricas y análisis en `work/me
 Imágenes, zips y renders se quedan en Drive; acá van los textos, las decisiones y el calendario.
 
 ## 8. Pendientes de contexto [FALTA]
-- [ ] Métricas de alcance, guardados y compartidos (el token actual no tiene `instagram_manage_insights`)
 - [ ] Remedir los dos posts el 29/09
 - [ ] Próximas publicaciones / calendario / frecuencia
 - [ ] Equipo: quién escribe, quién diseña, quién aprueba
