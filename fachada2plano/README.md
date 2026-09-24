@@ -8,43 +8,46 @@ paleta de colores y piezas para Instagram. Es un relevamiento fotográfico (±5�
 |---|---|---|
 | 01 rectificar | homografía con 4 esquinas (`--esquinas` o `--clic`) | ✅ |
 | 02 escalar | px/m desde `refs.csv`; con ancho + alto corrige la proporción | ✅ |
-| 03 detectar | elementos con Claude (visión) → JSON | fase 2 |
+| 03 detectar | Claude (visión, `claude-opus-5`) marca los elementos → JSON validado | ✅ probado con respuesta simulada, falta con API real |
 | 04 dibujar DXF | capas FACH-*, bloques puerta/ventana, cotas, foto de fondo apagada | ✅ |
-| 05 alzado de calle | fachadas en fila | fase 3 |
-| 06 paleta | k-means, 5 colores | fase 3 |
-| 07 export IG | 1080×1350 foto \| dibujo + paleta | fase 3 |
+| 05 alzado de calle | fachadas en fila sobre la vereda, cota por casa y total | ✅ |
+| 06 paleta | k-means, 5 colores por fachada (PNG + json) | ✅ |
+| 07 export IG | 1080×1350: foto \| dibujo a la misma escala + paleta; portada con el alzado | ✅ |
 
-## Uso (fase 1)
+## Uso
 ```bash
 pip install -r requirements.txt
+export ANTHROPIC_API_KEY=...        # para 03_detectar; sin clave usar --sin-ia y cargar los elementos a mano
 
-# 1. Foto en input/ con número de orden: input/01_casa.jpg
-# 2. Medida de referencia en refs.csv (puede haber una de ancho y una de alto por foto):
+# 1. Fotos en input/ con número de orden: input/01_casa.jpg, input/02_casa.jpg...
+#    (el número manda el orden en el alzado; no pongas la dirección en el nombre)
+# 2. Medidas de referencia en refs.csv (una de ancho y/o una de alto por foto):
 #      foto,medida_ref_m,tipo_ref
 #      01_casa.jpg,0.90,ancho_puerta
 #      01_casa.jpg,2.10,alto_puerta
-# 3. Esquinas de la fachada (arriba-izq, arriba-der, abajo-der, abajo-izq):
-python run.py input/01_casa.jpg --clic                 # con el mouse
-python run.py input/01_casa.jpg --esquinas "x,y;x,y;x,y;x,y"
-# 4. Cargar a mano output/json/01_casa_elementos.json (bbox en px de la rectificada):
-#      {"contorno": [x0,y0,x1,y1],
-#       "elementos": [{"tipo": "puerta", "bbox": [x0,y0,x1,y1]}, ...]}
-#    tipos: puerta ventana porton baranda cornisa zocalo pilar reja alero otro
-# 5. Volver a correr: ya no pide nada, todo quedó en output/json/01_casa.json
-python run.py
+# 3. Todo junto:
+python run.py --calle "SAJONIA" --clic   # la primera vez pide las 4 esquinas de cada foto
+python run.py --calle "SAJONIA"          # las siguientes ya no pide nada
 ```
-Si la referencia es de puerta y no marcás los puntos, toma el bbox de la primera puerta del json.
-Sin `refs.csv` asume puerta de 2,10 m de alto.
+Salidas en `output/`: `rectificadas/`, `json/`, `dxf/` (una por fachada + `alzado_calle.dxf`), `paletas/`, `ig/`.
 
-El DXF lleva la foto rectificada en la capa **FACH-FOTO** (apagada) para calcar detalle a mano. La imagen
-va con ruta relativa: mover la carpeta `output/` entera.
+- **Corregir la detección:** editá `output/json/<nombre>_elementos.json` (bbox en px de la rectificada) y volvé a correr: no se pisa. Para volver a detectar: `python src/03_detectar.py input/01_casa.jpg --forzar`.
+- **Escala:** si la referencia es de puerta y no marcás los puntos, toma el recuadro de la puerta peatonal (nunca el portón). Si hay más de una puerta avisa, y conviene marcar con `--clic` la que mediste. Sin `refs.csv` asume puerta de 2,10 m de alto.
+- **Marca:** poné las fuentes en `fuentes/` (ver `fuentes/LEEME.txt`) y el logo en `marca/logo.png`. Sin eso usa DejaVu y "FUGA" en texto.
+- La foto rectificada va dentro del DXF en la capa **FACH-FOTO** (apagada), con ruta relativa: mové la carpeta `output/` entera.
 
 ## Prueba
 ```bash
 python herramientas/fachada_prueba.py
-python run.py input/00_prueba.jpg --esquinas "300,180;1650,330;1620,1150;330,1280"
+python run.py --calle "PRUEBA"
 ```
-Fachada sintética de 8,40 × 5,60 m fotografiada en perspectiva. Resultado actual: DXF de 8,45 × 5,60 m (error 0,6 %).
+Tres fachadas sintéticas fotografiadas en perspectiva. Resultado actual:
+
+| Fachada | Real | DXF | Error |
+|---|---|---|---|
+| 91 | 8,40 × 5,60 | 8,45 × 5,60 | 0,6 % |
+| 92 | 6,00 × 4,20 | 6,00 × 4,20 | 0 % |
+| 93 | 10,00 × 6,50 | 9,99 × 6,50 | 0,1 % |
 
 ## Reglas
 - No inventar elementos que no se ven en la foto.

@@ -80,22 +80,8 @@ def _rotulo_defecto(nom):
     return 'FACHADA %s' % (m.group(1) if m else '')
 
 
-def dibujar(foto, rotulo=None):
-    nom = comun.nombre(foto)
-    est = comun.estado(nom)
-    if 'px_por_m_x' not in est:
-        raise SystemExit('%s: primero correr 01_rectificar y 02_escalar' % nom)
-    ej = comun.leer_json(comun.ruta_elementos(nom))
-    if not ej:
-        raise SystemExit('%s: falta %s' % (nom, os.path.relpath(comun.ruta_elementos(nom), comun.RAIZ)))
-
-    W, H = est['ancho_px'], est['alto_px']
-    sx, sy = est['px_por_m_x'], est['px_por_m_y']
-    cx0, cy0, cx1, cy1 = ej.get('contorno') or [0, 0, W, H]
-
-    def m(x, y):  # píxel de la rectificada -> metros, origen abajo-izquierda del contorno
-        return ((x - cx0) / sx, (cy1 - y) / sy)
-
+def nuevo_doc():
+    """DXF R2018 en metros con las capas, estilos y bloques de FUGA."""
     doc = ezdxf.new('R2018', setup=True)
     doc.units = ezdxf.units.M
     doc.header['$MEASUREMENT'] = 1
@@ -105,21 +91,17 @@ def dibujar(foto, rotulo=None):
     doc.layers.get('FACH-FOTO').off()
     _estilos(doc)
     _bloques(doc)
-    msp = doc.modelspace()
+    return doc
 
-    ancho_m, alto_m = m(cx1, cy0)
-    msp.add_lwpolyline([(0, 0), (ancho_m, 0), (ancho_m, alto_m), (0, alto_m)], close=True,
+
+def dibujar_fachada(msp, geo, dx=0.0, cotas=True):
+    """Dibuja una fachada con su esquina abajo-izquierda en (dx, 0). Devuelve las aberturas."""
+    ancho, alto = geo['ancho'], geo['alto']
+    msp.add_lwpolyline([(dx, 0), (dx + ancho, 0), (dx + ancho, alto), (dx, alto)], close=True,
                        dxfattribs={'layer': 'FACH-CONTORNO'})
-    msp.add_line((-0.5, 0), (ancho_m + 0.5, 0), dxfattribs={'layer': 'FACH-CONTORNO'})  # vereda
-
-    fuera, aberturas = 0, []
-    for e in ej.get('elementos', []):
-        tipo = e.get('tipo', 'otro')
-        x0, y0, x1, y1 = e['bbox']
-        if x1 < cx0 or x0 > cx1 or y1 < cy0 or y0 > cy1:
-            fuera += 1
-            continue
-        (a, b), (c, d) = m(min(x0, x1), max(y0, y1)), m(max(x0, x1), min(y0, y1))
+    aberturas = []
+    for tipo, a, b, c, d, _ in geo['elementos']:
+        a, c = a + dx, c + dx
         capa = CAPA_DE.get(tipo, 'FACH-DETALLE')
         w, h = c - a, d - b
         if tipo in ('puerta', 'porton'):
@@ -135,32 +117,51 @@ def dibujar(foto, rotulo=None):
                     msp.add_line((x, b), (x, d), dxfattribs={'layer': capa})
         if tipo in ABERTURAS:
             aberturas.append((a, b, c, d))
+    if cotas:
+        cota = {'dimstyle': 'FUGA', 'dxfattribs': {'layer': 'FACH-COTAS'}}
+        msp.add_linear_dim(base=(dx, -SEP_COTA), p1=(dx, 0), p2=(dx + ancho, 0), **cota).render()
+        msp.add_linear_dim(base=(dx - SEP_COTA, 0), p1=(dx, 0), p2=(dx, alto), angle=90, **cota).render()
+        for a, b, c, d in aberturas:
+            msp.add_linear_dim(base=(c + 0.15, b), p1=(c, b), p2=(c, d), angle=90, **cota).render()
+    return aberturas
 
-    cota = {'dimstyle': 'FUGA', 'dxfattribs': {'layer': 'FACH-COTAS'}}
-    msp.add_linear_dim(base=(0, -SEP_COTA), p1=(0, 0), p2=(ancho_m, 0), **cota).render()
-    msp.add_linear_dim(base=(-SEP_COTA, 0), p1=(0, 0), p2=(0, alto_m), angle=90, **cota).render()
-    for a, b, c, d in aberturas:
-        msp.add_linear_dim(base=(c + 0.15, b), p1=(c, b), p2=(c, d), angle=90, **cota).render()
 
-    rot = rotulo or _rotulo_defecto(nom)
+def rotulo(msp, titulo, detalle, y):
     t = {'layer': 'FACH-TEXTO', 'style': 'FUGA'}
-    msp.add_text('%s · ELEVACIÓN · RELEVAMIENTO FOTOGRÁFICO · FUGA TECH 001' % rot.upper(),
-                 height=H_TEXTO, dxfattribs=t).set_placement((0, -SEP_COTA - 0.45), align=TextEntityAlignment.LEFT)
-    msp.add_text('Medidas en metros · precisión esperada ±5-10 cm · escala desde %s'
-                 % ', '.join(est.get('escala_origen', [])),
-                 height=H_TEXTO * 0.6, dxfattribs=t).set_placement((0, -SEP_COTA - 0.72), align=TextEntityAlignment.LEFT)
+    msp.add_text(titulo, height=H_TEXTO, dxfattribs=t).set_placement((0, y), align=TextEntityAlignment.LEFT)
+    msp.add_text(detalle, height=H_TEXTO * 0.6, dxfattribs=t).set_placement(
+        (0, y - 0.27), align=TextEntityAlignment.LEFT)
+
+
+def foto_de_fondo(doc, msp, geo, dx=0.0):
+    """La rectificada en FACH-FOTO (apagada), calzada sobre el dibujo, para calcar."""
+    est = geo['estado']
+    W, H = est['ancho_px'], est['alto_px']
+    rect = os.path.join(comun.RAIZ, est['rectificada'])
+    idef = doc.add_image_def(filename=os.path.relpath(rect, comun.DXF).replace(os.sep, '/'), size_in_pixel=(W, H))
+    ox, oy = geo['px_a_m'](0, H)
+    msp.add_image(idef, insert=(ox + dx, oy), size_in_units=(W / est['px_por_m_x'], H / est['px_por_m_y']),
+                  dxfattribs={'layer': 'FACH-FOTO'})
+
+
+def dibujar(foto, rot=None):
+    nom = comun.nombre(foto)
+    geo = comun.geometria(nom)
+    doc = nuevo_doc()
+    msp = doc.modelspace()
+    msp.add_line((-0.5, 0), (geo['ancho'] + 0.5, 0), dxfattribs={'layer': 'FACH-CONTORNO'})  # vereda
+    aberturas = dibujar_fachada(msp, geo)
+    rotulo(msp, '%s · ELEVACIÓN · RELEVAMIENTO FOTOGRÁFICO · FUGA TECH 001' % (rot or _rotulo_defecto(nom)).upper(),
+           'Medidas en metros · precisión esperada ±5-10 cm · escala desde %s'
+           % ', '.join(geo['estado'].get('escala_origen', [])), -SEP_COTA - 0.45)
+    foto_de_fondo(doc, msp, geo)
 
     salida = os.path.join(comun.DXF, nom + '.dxf')
     os.makedirs(comun.DXF, exist_ok=True)
-    rect = os.path.join(comun.RAIZ, est['rectificada'])
-    idef = doc.add_image_def(filename=os.path.relpath(rect, comun.DXF).replace(os.sep, '/'), size_in_pixel=(W, H))
-    ox, oy = m(0, H)
-    msp.add_image(idef, insert=(ox, oy), size_in_units=(W / sx, H / sy), dxfattribs={'layer': 'FACH-FOTO'})
-
     doc.saveas(salida)
-    aviso = '  (%d elemento(s) fuera del contorno, no dibujados)' % fuera if fuera else ''
+    aviso = '  (%d elemento(s) fuera del contorno, no dibujados)' % geo['fuera'] if geo['fuera'] else ''
     print('%s: DXF %.2f x %.2f m, %d elementos, %d aberturas acotadas -> %s%s'
-          % (nom, ancho_m, alto_m, len(ej.get('elementos', [])) - fuera, len(aberturas),
+          % (nom, geo['ancho'], geo['alto'], len(geo['elementos']), len(aberturas),
              os.path.relpath(salida, comun.RAIZ), aviso))
     return salida
 

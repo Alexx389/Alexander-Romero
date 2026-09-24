@@ -31,11 +31,17 @@ VERT = ('alto_puerta',)
 
 
 def _puerta(nom):
+    """La puerta peatonal que sirve de referencia. Un portón no: no mide 2,10.
+
+    Si hay más de una, se toma la de la izquierda y se avisa: conviene marcar
+    los puntos de la puerta que realmente se midió.
+    """
     els = comun.leer_json(comun.ruta_elementos(nom)).get('elementos', [])
-    for e in els:
-        if e.get('tipo') in ('puerta', 'porton'):
-            return e['bbox']
-    return None
+    puertas = sorted((e['bbox'] for e in els if e.get('tipo') == 'puerta'), key=lambda b: b[0])
+    if len(puertas) > 1:
+        print('%s: OJO, hay %d puertas; la escala sale de la de la izquierda. '
+              'Si mediste otra, marcá sus puntos con --puntos o --clic.' % (nom, len(puertas)))
+    return puertas[0] if puertas else None
 
 
 def escalar(foto, puntos_cli=None, usar_clic=False):

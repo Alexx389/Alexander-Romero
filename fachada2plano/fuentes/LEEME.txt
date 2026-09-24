@@ -1,0 +1,4 @@
+Poné acá las fuentes de marca (Google Fonts, licencia OFL):
+  Archivo-ExtraBold.ttf, Archivo-Bold.ttf  -> títulos y etiquetas
+  Manrope-Regular.ttf                     -> cuerpo
+Sin ellas, 07_export_ig usa DejaVu Sans.

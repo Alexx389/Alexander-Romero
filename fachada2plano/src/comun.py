@@ -124,3 +124,60 @@ def clic(img, n, titulo):
             raise SystemExit('cancelado')
     cv2.destroyAllWindows()
     return pts
+
+
+def geometria(nom):
+    """La fachada en metros, lista para dibujar en CAD o en imagen.
+
+    Origen abajo-izquierda del contorno, Y hacia arriba. Devuelve
+    {'ancho', 'alto', 'elementos': [(tipo, x0, y0, x1, y1, nota)], 'fuera',
+     'estado', 'px_a_m'} donde px_a_m convierte un píxel de la rectificada.
+    """
+    est = estado(nom)
+    if 'px_por_m_x' not in est:
+        raise SystemExit('%s: primero correr 01_rectificar y 02_escalar' % nom)
+    ej = leer_json(ruta_elementos(nom))
+    if not ej:
+        raise SystemExit('%s: falta %s' % (nom, os.path.relpath(ruta_elementos(nom), RAIZ)))
+    W, H = est['ancho_px'], est['alto_px']
+    sx, sy = est['px_por_m_x'], est['px_por_m_y']
+    cx0, cy0, cx1, cy1 = ej.get('contorno') or [0, 0, W, H]
+
+    def px_a_m(x, y):
+        return ((x - cx0) / sx, (cy1 - y) / sy)
+
+    els, fuera = [], 0
+    for e in ej.get('elementos', []):
+        x0, y0, x1, y1 = e['bbox']
+        if x1 < cx0 or x0 > cx1 or y1 < cy0 or y0 > cy1:
+            fuera += 1
+            continue
+        (a, b), (c, d) = px_a_m(min(x0, x1), max(y0, y1)), px_a_m(max(x0, x1), min(y0, y1))
+        els.append((e.get('tipo', 'otro'), a, b, c, d, e.get('nota', '')))
+    ancho, alto = px_a_m(cx1, cy0)
+    return {'ancho': ancho, 'alto': alto, 'elementos': els, 'fuera': fuera,
+            'estado': est, 'px_a_m': px_a_m, 'contorno_px': (cx0, cy0, cx1, cy1)}
+
+
+FUENTES = os.path.join(RAIZ, 'fuentes')
+# Las de marca van en fuentes/ (no vienen en el repo). Si no están, se usa
+# una del sistema para que el export no se frene.
+_FUENTE = {
+    'titulo': (['Archivo-ExtraBold.ttf', 'Archivo-Bold.ttf'],
+               ['/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 'DejaVuSans-Bold.ttf', 'arialbd.ttf']),
+    'etiqueta': (['Archivo-Bold.ttf', 'Archivo-ExtraBold.ttf'],
+                 ['/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 'DejaVuSans-Bold.ttf', 'arialbd.ttf']),
+    'cuerpo': (['Manrope-Regular.ttf', 'Manrope-Medium.ttf'],
+               ['/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 'DejaVuSans.ttf', 'arial.ttf']),
+}
+
+
+def fuente(tipo, tam):
+    from PIL import ImageFont
+    marca, sistema = _FUENTE[tipo]
+    for f in [os.path.join(FUENTES, n) for n in marca] + sistema:
+        try:
+            return ImageFont.truetype(f, tam)
+        except OSError:
+            continue
+    return ImageFont.load_default()

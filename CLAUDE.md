@@ -60,7 +60,7 @@ Cuenta al 24/09/2026: 283 seguidores, 2 posts. Métricas y análisis en `work/me
 | ESPACIO · TENDER 001 | Una casa posible de Asunción. | Espacio | carrusel de 4 | kit Canva listo · sin publicar |
 
 ### Próximas (en este orden) · ver `work/notas/calendario.md`
-1. **TECH 001**: Fachada → plano. Herramienta en `fachada2plano/` (fase 1 lista); ficha en `work/publicaciones/tech-001.md`.
+1. **TECH 001**: Fachada → plano. Herramienta `fachada2plano/` completa (7 pasos, probada con fachadas sintéticas; falta una calle real); ficha en `work/publicaciones/tech-001.md`.
 2. **DISEÑO 001**: Así se hizo FUGA (la marca). Propuesta en `work/publicaciones/diseno-001.md`.
 3. **CULTURAL 002**: Barrio San Vicente. Salida de fotos planeada; investigación en `work/publicaciones/cultural-002-san-vicente-investigacion.md`.
 

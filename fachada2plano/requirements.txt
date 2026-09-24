@@ -3,3 +3,4 @@ numpy
 ezdxf
 Pillow
 scikit-learn
+anthropic
