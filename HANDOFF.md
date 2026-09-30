@@ -18,3 +18,9 @@
      nueva hay que repetir `codex login --device-auth`.
    - Para que Codex funcione además hay que permitir `chatgpt.com` en la red
      del entorno. Probado con `codex exec "Respondé solo: OK"` → OK.
+
+## 2026-09-30 — [claude] Kit de trabajo conjunto
+- Agregados `AGENTS.md` (reglas comunes), `CLAUDE.md`, `.claude/settings.json`
+  (permisos de Claude) y `PERMISOS.md` (cómo ajustar permisos de ambos).
+- Pendiente (Alex): copiar estos archivos a la carpeta FUGA de la PC, instalar
+  Claude Code ahí y elegir el nivel de permisos de Codex.
