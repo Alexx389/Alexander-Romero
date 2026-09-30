@@ -8,9 +8,11 @@
    `git init` ni el commit "base: motor 01-05 + kit Claude/Codex".
    Ojo: este repo solo tiene `generar_reporte_pc.ps1`; no están el `.gitignore`,
    el motor 01-05 ni el kit Claude/Codex (probablemente viven en la PC local).
-4. `codex login` → **pendiente**. La política de red del entorno cloud bloquea
-   `auth.openai.com` (403 del proxy), tanto el login por navegador como
-   `codex login --device-auth`. Para destrabarlo hay que agregar
-   `auth.openai.com` y `api.openai.com` a los dominios permitidos del entorno
-   (o subir el nivel de acceso a red) y volver a correr
-   `codex login --device-auth`.
+4. `codex login` → ✅ `Logged in using ChatGPT` (cuenta personal).
+   - Se usó `codex login --device-auth` (el login por navegador no sirve en el
+     entorno cloud porque redirige a localhost).
+   - Hizo falta habilitar `auth.openai.com` / `api.openai.com` en la red del
+     entorno y activar "código de dispositivo para Codex" en ChatGPT →
+     Configuración → Seguridad (versión web; la app de iPhone no lo muestra).
+   - Ojo: el login vive en `~/.codex/` de este contenedor; en una sesión cloud
+     nueva hay que repetir `codex login --device-auth`.
