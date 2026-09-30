@@ -16,3 +16,5 @@
      Configuración → Seguridad (versión web; la app de iPhone no lo muestra).
    - Ojo: el login vive en `~/.codex/` de este contenedor; en una sesión cloud
      nueva hay que repetir `codex login --device-auth`.
+   - Para que Codex funcione además hay que permitir `chatgpt.com` en la red
+     del entorno. Probado con `codex exec "Respondé solo: OK"` → OK.
